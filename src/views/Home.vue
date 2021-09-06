@@ -1,11 +1,42 @@
 <template>
-  <div class="home">
+  <nav-bar/>
+  <div class="view-home">
     <img alt="JuriDoc" src="../assets/images/logo.png">
+
+    <h1>{{t("welcome")}}</h1>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component';
+import { useI18n } from 'vue-i18n';
+import { defineComponent } from 'vue';
+import NavBar from '@/components/NavBar/index.vue';
 
-export default class Home extends Vue {}
+export default defineComponent({
+  components: {
+    NavBar,
+  },
+  setup() {
+    const { t } = useI18n();
+
+    return {
+      t,
+    };
+  },
+});
 </script>
+
+<style lang="scss" scoped>
+.view-home{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+
+  margin-top: 32px;
+
+  img {
+    max-width: 128px;
+  }
+}
+</style>
