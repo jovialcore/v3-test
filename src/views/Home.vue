@@ -3,7 +3,7 @@
   <div class="view-home">
     <img alt="JuriDoc" src="../assets/images/logo.png">
 
-    <h1>{{t("welcome")}}</h1>
+    <h1>{{t("Home.welcome")}}</h1>
   </div>
 </template>
 

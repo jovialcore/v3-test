@@ -8,7 +8,6 @@ import SetupI18n from './configs/i18n';
 
 const app = createApp(App);
 SetupI18n(app);
-
 app.use(store);
 app.use(router);
 app.mount('#app');

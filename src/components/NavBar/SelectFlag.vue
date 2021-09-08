@@ -6,7 +6,7 @@
       :value="option['value']"
       :key="`${i}`"
     >
-      {{ t(option['name']) }}
+      {{ t(`NavBar.${option['name']}`) }}
     </option>
   </select>
 
@@ -30,14 +30,14 @@ export default defineComponent({
     const { t } = useI18n();
 
     const options = reactive([
-      { name: 'portugueseBrazil', value: 'br' },
-      { name: 'french', value: 'fr' },
-      { name: 'englishUS', value: 'us' },
-      { name: 'spanish', value: 'es' },
+      { name: 'ptBr', value: 'br' },
+      { name: 'fr', value: 'fr' },
+      { name: 'us', value: 'us' },
+      { name: 'es', value: 'es' },
     ]);
 
-    function changeSelect(event: any) {
-      emit('update:modelValue', event.target.value);
+    function changeSelect(event: Event) {
+      emit('update:modelValue', (event.target as HTMLSelectElement).value);
     }
 
     return {

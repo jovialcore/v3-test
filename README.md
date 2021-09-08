@@ -1,24 +1,19 @@
-# juridoc
+<div align="center">
+  <img alt="JuriDoc" src="./.gitlab/cover.png" >
+</div>
 
-## Project setup
-```
-yarn install
-```
+## **Variáveis de ambiente**
 
-### Compiles and hot-reloads for development
-```
-yarn serve
+```bash
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## **Scripts**
 
-### Lints and fixes files
-```
-yarn lint
-```
+  Rodar em desenvolvimento:\
+  `yarn dev`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+  Rodar o build:\
+  `yarn build`
+
+  Rodar o lint:\
+  `yarn lint`
