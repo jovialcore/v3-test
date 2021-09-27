@@ -1,0 +1,13 @@
+{
+    "description": {
+        "main": "Check your email",
+        "sub": "We've sent an email with a link to active your account to {email}",
+        "has_account": "Already have an account?",
+        "has_account_link": "Sign in."
+    },
+    "form": {
+        "email": "Recovery email",
+        "email_placeholder": "Email",
+        "send_mail_button": "Send code"
+    }
+}

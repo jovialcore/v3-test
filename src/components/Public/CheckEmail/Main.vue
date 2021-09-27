@@ -3,14 +3,14 @@
     <div class="form-content">
       <div class="inputs">
         <base-input
-          :label="t(`ForgotPassword.form.email`)"
-          :placeholder="t(`ForgotPassword.form.email_placeholder`)"
+          :label="t(`CheckEmail.form.email`)"
+          :placeholder="t(`CheckEmail.form.email_placeholder`)"
         />
       </div>
       <div class="buttons">
         <div>
           <base-button block neutral>{{
-            t(`ForgotPassword.form.send_mail_button`)
+            t(`CheckEmail.form.send_mail_button`)
           }}</base-button>
         </div>
       </div>
@@ -31,11 +31,11 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-form.form{
+form.form {
   padding-top: 130px;
 }
 @media screen and (max-width: 1060px) {
-  form.form{
+  form.form {
     padding-top: 0px;
   }
 }

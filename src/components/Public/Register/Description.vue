@@ -4,7 +4,7 @@
     <p>{{ t(`Register.description.sub`) }}</p>
     <img
       class="descriptive"
-      v-lazy="{src: './images/login/registration-step1.png'}"
+      v-lazy="{ src: '/images/login/registration-step1.png' }"
       alt="registration-step1"
     />
   </div>

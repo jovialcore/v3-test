@@ -4,7 +4,7 @@
     <p>{{ t(`ForgotPassword.description.sub`) }}</p>
     <img
       class="descriptive"
-      v-lazy="{src: './images/login/forgot-password.png'}"
+      v-lazy="{ src: '/images/login/forgot-password.png' }"
       alt="gold fish figure"
     />
     <div class="description-footer">

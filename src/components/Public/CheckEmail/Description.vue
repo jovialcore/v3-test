@@ -1,11 +1,11 @@
 <template>
   <div class="description">
     <h1>{{ t(`CheckEmail.description.main`) }}</h1>
-    <p>{{ t(`CheckEmail.description.sub`) }}: {{email}}</p>
+    <p>{{ t(`CheckEmail.description.sub`, { email }) }}</p>
     <img
       class="descriptive"
-      v-lazy="{src: './images/login/forgot-password.png'}"
-      alt="gold fish figure"
+      v-lazy="{ src: '/images/login/check-email.png' }"
+      alt="check email figure"
     />
     <div class="description-footer">
       <p>
@@ -33,7 +33,7 @@ export default defineComponent({
       i18n.locale.value = newValue;
     });
 
-    return { currentLang, t: i18n.t };
+    return { currentLang, email: 'flyingtotees@gmail.com', t: i18n.t };
   },
 });
 </script>

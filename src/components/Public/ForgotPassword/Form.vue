@@ -31,11 +31,11 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-form.form{
+form.form {
   padding-top: 130px;
 }
 @media screen and (max-width: 1060px) {
-  form.form{
+  form.form {
     padding-top: 0px;
   }
 }

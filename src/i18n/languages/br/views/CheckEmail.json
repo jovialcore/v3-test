@@ -1,0 +1,13 @@
+{
+    "description": {
+        "main": "Verifique seu email",
+        "sub": "Nós enviamos um email com um link de ativação da sua conta para {email}",
+        "has_account": "Já tem uma conta?",
+        "has_account_link": "Faça login."
+    },
+    "form": {
+        "email": "Email de recuperação",
+        "email_placeholder": "Email",
+        "send_mail_button": "Enviar código"
+    }
+}

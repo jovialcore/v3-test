@@ -23,9 +23,14 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/layouts/Public.vue'),
     children: [
       {
-        path: '',
+        path: 'step/1',
         name: 'RegisterStep1',
         component: () => import('@/views/Public/Register.vue'),
+      },
+      {
+        path: 'step/2',
+        name: 'RegisterStep2',
+        component: () => import('@/views/Public/Step2.vue'),
       },
     ],
   },
@@ -39,6 +44,18 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Public/ForgotPassword.vue'),
       },
     ],
+  },
+  {
+    path: '/check-email',
+    component: () => import('@/layouts/Public.vue'),
+    children: [
+      {
+        name: 'CheckEmail',
+        path: '',
+        component: () => import('@/views/Public/CheckEmail.vue'),
+      },
+    ],
+
   },
 ];
 

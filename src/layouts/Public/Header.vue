@@ -1,9 +1,11 @@
 <template>
   <div class="header">
     <div>
-      <img class="logo"
+      <img
+        class="logo"
         alt="Juridoc Logo"
-        v-lazy="{src: './images/logo.png'}"/>
+        v-lazy="{ src: '/images/logo.png' }"
+      />
     </div>
     <div class="selector">
       <SelectLang v-model="currentLang" />
@@ -45,14 +47,14 @@ export default defineComponent({
   padding-top: 27px;
   padding-left: 90px;
 
-  &:first-child{
+  &:first-child {
     background-color: $neutral-bg;
     img {
       width: 83px;
       height: 23px;
     }
   }
-  div.selector{
+  div.selector {
     background-color: $white;
     justify-content: flex-end;
     display: flex;
@@ -76,5 +78,4 @@ export default defineComponent({
     justify-content: space-between;
   }
 }
-
 </style>
