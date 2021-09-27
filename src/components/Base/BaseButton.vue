@@ -72,5 +72,9 @@ button, .btn {
     background-color: $primary-button;
     color: $neutral-1;
   }
+
+  &:disabled{
+    cursor: not-allowed;
+  }
 }
 </style>
