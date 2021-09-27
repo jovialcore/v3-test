@@ -1,0 +1,41 @@
+div.description {
+  border-radius: 0px 0px 0px 5px;
+  width: 100%;
+  background-color: $neutral-bg;
+  padding: 30px 90px 50px 90px;
+  display: flex;
+  flex-direction: column;
+  h1 {
+    font-size: 25px;
+    font-weight: normal;
+    margin-bottom: 25px;
+  }
+  p {
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 3rem;
+  }
+  img.descriptive {
+    width: 100%;
+  }
+  .description-footer {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: flex-end;
+  }
+}
+
+@media (orientation: portrait) {
+  div.description {
+    border-radius: 0px;
+    padding: 27px 30px 50px 30px;
+    height: fit-content;
+    img.descriptive {
+      display: none;
+    }
+    p {
+      margin-bottom: 1rem;
+    }
+  }
+}

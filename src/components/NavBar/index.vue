@@ -1,17 +1,17 @@
 <template>
   <nav class="navbar">
-    <select-flag v-model="currentLang"/>
+    <SelectLang v-model="currentLang" />
   </nav>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import SelectFlag from './SelectFlag.vue';
+import SelectLang from '../SelectLang/index.vue';
 
 export default defineComponent({
   components: {
-    SelectFlag,
+    SelectLang,
   },
   setup() {
     const langStorage = localStorage.getItem('lang');
