@@ -32,7 +32,7 @@
             </base-link>
           </div>
         </div>
-        <base-button block neutral>
+        <base-button @click="handleGoogleAuth" block neutral>
           <img
             class="descriptive"
             alt="Google G icon"
@@ -45,11 +45,17 @@
   </form>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
+  methods: {
+    async handleGoogleAuth() {
+      const user = await this.$gAuth.signIn();
+      console.log(user);
+    },
+  },
   setup() {
     const i18n = useI18n();
 
