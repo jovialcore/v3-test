@@ -1,0 +1,18 @@
+{
+    "description": {
+        "main": "Bienvenido de nuevo",
+        "sub": "Para mantenerse en contacto con nosotros, inicie sesión con sus datos personales (dirección de correo electrónico y contraseña)."
+    },
+    "form": {
+        "title": "Inicio de sesión",
+        "subtitle": "¿Eres nuevo aquí? ",
+        "subtitle_link": "Inscribirse",
+        "email": "E-mail",
+        "password": "Contraseña",
+        "email_placeholder": "name{'@'}email.com",
+        "password_placeholder": "Introduzca su contraseña",
+        "login_button": "Acceder",
+        "login_with_google": "Iniciar sesión con Google",
+        "forgot_password": "¿Ha olvidado su contraseña?"
+    }
+}

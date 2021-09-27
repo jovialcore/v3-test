@@ -6,14 +6,15 @@
       :value="option['value']"
       :key="`${i}`"
     >
-      {{ t(`NavBar.${option['name']}`) }}
+      {{ t(`SelectLang.${option['name']}`) }}
     </option>
   </select>
-
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import {
+  defineComponent, reactive,
+} from 'vue';
 import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
@@ -39,7 +40,6 @@ export default defineComponent({
     function changeSelect(event: Event) {
       emit('update:modelValue', (event.target as HTMLSelectElement).value);
     }
-
     return {
       t,
       options,
@@ -50,29 +50,20 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.select-flags{
-  display: flex;
-  color: #000000;
-
-  font-weight: 800;
-
-  display: flex;
-  flex-direction: column;
-
-  .current-flag{
-    background: $neutral-1;
-    padding: 4px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-  }
-  .options {
-    background: $neutral-1;
-    display: flex;
-    flex-direction: column;
+select {
+  outline: none !important;
+  appearance: unset;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  padding-right: 2rem;
+  text-align: right;
+  background: url('../../assets/icons/select_icon.svg') no-repeat 98% !important;
+  height: 23px;
+  // margin-bottom: 3rem;
+  &::-ms-expand {
+    display: none;
   }
 }
 </style>

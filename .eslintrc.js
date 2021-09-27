@@ -14,7 +14,9 @@ module.exports = {
   rules: {
     'no-explicit-any': 'off',
     'import/no-unresolved': 'off',
+    'import/no-dynamic-require': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    "linebreak-style": 0
   },
 };
