@@ -52,7 +52,7 @@ export default defineComponent({
     font-size: 32px;
   }
   a {
-    color: #1f78de;
+    color: $link-color;
   }
   .description-footer p {
     margin-bottom: 0;

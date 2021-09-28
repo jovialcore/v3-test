@@ -51,7 +51,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 .inputs .names {
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
+  div {
+    min-width: 0;
+  }
 }
 </style>
