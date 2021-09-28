@@ -1,19 +1,19 @@
 {
   "description": {
-      "main": "Bienvenue sur Juridoc - Autopilote pour vos documents juridiques",
-      "sub": "Utilisez notre plateforme pour gérer l'ensemble du cycle de vie de vos contrats en un seul flux."
+    "main": "Bienvenue sur Juridoc - Autopilote pour vos documents juridiques",
+    "sub": "Utilisez notre plateforme pour gérer l'ensemble du cycle de vie de vos contrats en un seul flux."
   },
   "form": {
-      "prelude": "Commencez gratuitement",
-      "title": "S'inscrire sur Juridoc",
-      "subtitle": "Vous êtes déjà membre ? ",
-      "subtitle_link": "Connectez-vous",
-      "email": "E-mail",
-      "password": "Mot de passe",
-      "email_placeholder": "name{'@'}email.com",
-      "password_placeholder": "6+ caractères, 1 lettre majuscule",
-      "register_button": "Créer un compte",
-      "register_with_google": "S'inscrire avec Google",
-      "confirm_terms": "Je confirme que j'ai lu, consenti et accepté les conditions d'utilisation et la politique de confidentialité de Juridoc, et que je suis majeur."
+    "prelude": "Commencez gratuitement",
+    "title": "S'inscrire sur Juridoc",
+    "subtitle": "Vous êtes déjà membre ? ",
+    "subtitle_link": "Connectez-vous",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "email_placeholder": "name{'@'}email.com",
+    "password_placeholder": "6+ caractères, 1 lettre majuscule",
+    "register_button": "Créer un compte",
+    "register_with_google": "S'inscrire avec Google",
+    "confirm_terms": "Je confirme que j'ai lu, consenti et accepté les conditions d'utilisation et la politique de confidentialité de Juridoc, et que je suis majeur."
   }
 }

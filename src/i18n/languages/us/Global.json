@@ -1,0 +1,8 @@
+{
+  "errors": {
+    "required": "This field is required",
+    "email": "Invalid email",
+    "minLength": "This field needs more characters",
+    "maxLength": "This field needs less characters"
+  }
+}

@@ -1,3 +1,5 @@
+import { createI18n } from 'vue-i18n';
+
 const files: __WebpackModuleApi.RequireContext = require.context('./languages', true, /\.json$/);
 
 type MessagesType = {
@@ -26,8 +28,7 @@ files.keys().forEach((filePath) => {
   }
 });
 
-export const Messages = messages;
-
-export default {
-  Messages: messages,
-};
+export default createI18n({
+  locale: window.localStorage.getItem('lang') || 'br',
+  messages,
+});

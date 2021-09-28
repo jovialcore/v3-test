@@ -36,6 +36,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const classes = computed(() => ({
       block: props.block,
+      error: props.error,
     }));
 
     function updateValue(event: Event) {
@@ -73,6 +74,14 @@ export default defineComponent({
     height: 3rem;
     outline: none !important;
     border-radius: 5px;
+    &.error{ /* Microsoft Edge */
+      border-color: $error;
+    }
+
+    &:focus{ /* Microsoft Edge */
+      border-color: $primary-button;
+    }
+
     &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
       color: $text-soft-grey;
       opacity: 1; /* Firefox */
@@ -96,16 +105,8 @@ export default defineComponent({
 
     // border: 1px solid #cecece;
 
-    // &:focus{
-    //   outline: none;
-    // }
-
     // &.block {
     //   width: 100%;
-    // }
-
-    // &.error {
-    //   border: 2px solid $error;
     // }
   }
 

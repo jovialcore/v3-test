@@ -1,18 +1,18 @@
 {
-    "description": {
-        "main": "Welcome back",
-        "sub": "To keep connected with us, please login with your personal information by email address and password."
-    },
-    "form": {
-        "title": "Login",
-        "subtitle": "New here? ",
-        "subtitle_link": "Sign up",
-        "email": "E-mail",
-        "password": "Password",
-        "email_placeholder": "name{'@'}email.com",
-        "password_placeholder": "Enter your password",
-        "login_button": "Login",
-        "login_with_google": "Signin with Google",  
-        "forgot_password": "Forgot password?"
-    }
+  "description": {
+    "main": "Welcome back",
+    "sub": "To keep connected with us, please login with your personal information by email address and password."
+  },
+  "form": {
+    "title": "Login",
+    "subtitle": "New here? ",
+    "subtitle_link": "Sign up",
+    "email": "E-mail",
+    "password": "Password",
+    "email_placeholder": "name{'@'}email.com",
+    "password_placeholder": "Enter your password",
+    "login_button": "Login",
+    "login_with_google": "Signin with Google",
+    "forgot_password": "Forgot password?"
+  }
 }

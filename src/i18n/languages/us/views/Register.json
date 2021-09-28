@@ -1,19 +1,19 @@
 {
   "description": {
-      "main": "Welcome to Juridoc - Autopilot for your legal document",
-      "sub": "Use our digital platform to manage the entire lifecycle of your contracts in one flow."
+    "main": "Welcome to Juridoc - Autopilot for your legal document",
+    "sub": "Use our digital platform to manage the entire lifecycle of your contracts in one flow."
   },
   "form": {
-      "prelude": "Start for free",
-      "title": "Sign up to Juridoc",
-      "subtitle": "Already a member? ",
-      "subtitle_link": "Log in",
-      "email": "E-mail",
-      "password": "Password",
-      "email_placeholder": "name{'@'}email.com",
-      "password_placeholder": "6+ characters, 1 Capital letter",
-      "register_button": "Create an account",
-      "register_with_google": "Signup with Google",
-      "confirm_terms": "I confirm that I have read, consent and agree to Juridoc’s Term of Use and Privacy Policy, and I am of legal age."
+    "prelude": "Start for free",
+    "title": "Sign up to Juridoc",
+    "subtitle": "Already a member? ",
+    "subtitle_link": "Log in",
+    "email": "E-mail",
+    "password": "Password",
+    "email_placeholder": "name{'@'}email.com",
+    "password_placeholder": "6+ characters, 1 Capital letter",
+    "register_button": "Create an account",
+    "register_with_google": "Signup with Google",
+    "confirm_terms": "I confirm that I have read, consent and agree to Juridoc’s Term of Use and Privacy Policy, and I am of legal age."
   }
 }
