@@ -4,8 +4,8 @@
 </template>
 
 <script lang="ts">
-import Description from '@/components/Public/ForgotPassword/Description.vue';
-import Main from '@/components/Public/ForgotPassword/Main.vue';
+import Description from '@/components/Public/CheckEmail/Description.vue';
+import Main from '@/components/Public/CheckEmail/Main.vue';
 
 export default {
   components: { Main, Description },
