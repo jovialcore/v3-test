@@ -13,7 +13,7 @@ import store from './store';
 import i18n from './i18n';
 
 const gAuthOptions = {
-  clientId: '279866144341-4cd5e7rkjm41sll9p1iic8pqvpqh7jj7.apps.googleusercontent.com',
+  clientId: '832258936984-mcq1cubb16f8q8ke0gaj2ujuv3puq5n1.apps.googleusercontent.com',
   scope: 'email',
   prompt: 'consent',
   fetch_basic_profile: false,

@@ -13,24 +13,34 @@
       </div>
       <div class="inputs">
         <base-input
+          v-model="v$.email.$model"
+          :error="v$.email.$errors[0]?.$message"
           :label="t(`Register.form.email`)"
           :placeholder="t(`Register.form.email_placeholder`)"
         />
         <base-input
+          v-model="v$.password.$model"
+          :error="v$.password.$errors[0]?.$message"
           type="password"
           :label="t(`Register.form.password`)"
           :placeholder="t(`Register.form.password_placeholder`)"
         />
         <base-checkbox
+          v-model="isConfirmedTerms"
           id="confirm_terms"
           :label="t(`Register.form.confirm_terms`)"
         />
       </div>
       <div class="buttons">
         <div>
-          <base-button block primary>{{
-            t(`Register.form.register_button`)
-          }}</base-button>
+          <base-button
+            @click="handleRegister"
+            :disabled="v$.$invalid && isConfirmedTerms"
+            block
+            primary
+          >
+            {{ t(`Register.form.register_button`) }}
+          </base-button>
         </div>
         <base-button block neutral>
           <img
@@ -46,13 +56,52 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import useVuelidate from '@vuelidate/core';
+import { defineComponent, reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+import {
+  required, email, minLength, upperCase,
+} from '@/utils/I18nValidators';
+import { RulesType } from '@/types/Vuelidate';
 
 export default defineComponent({
   setup() {
-    const i18n = useI18n();
-    return { t: i18n.t };
+    const { t } = useI18n();
+    const store = useStore();
+    const router = useRouter();
+
+    const isConfirmedTerms = ref(false);
+
+    const form = reactive({
+      email: '',
+      password: '',
+    });
+
+    const rules = {
+      email: { required, email },
+      password: { required, minLength: minLength(6), upperCase },
+    } as RulesType;
+
+    const v$ = useVuelidate(rules, form);
+
+    async function handleRegister() {
+      const isValidate = await v$.value.$validate();
+
+      if (isValidate && isConfirmedTerms.value) {
+        store.dispatch('auth/setLoginData', form);
+        console.log(form);
+        const response = await store.dispatch('auth/submitRegister', form);
+
+        if (response.data) {
+          router.push({ name: 'Home' });
+        }
+      }
+    }
+    return {
+      isConfirmedTerms, v$, t, handleRegister,
+    };
   },
 });
 </script>

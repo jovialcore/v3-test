@@ -3,6 +3,7 @@
     "required": "Ce champ est obligatoire",
     "email": "Email invalide",
     "minLength": "Ce champ a besoin de plus de caractères",
-    "maxLength": "Ce champ a besoin de moins de caractères"
+    "maxLength": "Ce champ a besoin de moins de caractères",
+    "upperCase": "Ce champ doit contenir au moins une majuscule."
   }
 }

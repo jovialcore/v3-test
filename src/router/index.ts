@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import beforeEachRoute from '@/middlewares/beforeEachRoute';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -46,5 +47,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+router.beforeEach(beforeEachRoute);
 
 export default router;

@@ -15,6 +15,8 @@ module.exports = {
     'no-explicit-any': 'off',
     'import/no-unresolved': 'off',
     'import/no-dynamic-require': 'off',
+    'no-shadow': 'off',
+    'import/prefer-default-export': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     "linebreak-style": 0

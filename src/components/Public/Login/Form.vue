@@ -28,6 +28,7 @@
       <div class="buttons">
         <div>
           <base-button
+            @click="handleLogin"
             :disabled="v$.$invalid"
             block
             primary
@@ -60,6 +61,8 @@
 import { defineComponent, reactive } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useVuelidate, ValidationArgs } from '@vuelidate/core';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 import {
   required, email, maxLength, minLength,
 } from '@/utils/I18nValidators';
@@ -67,8 +70,10 @@ import {
 export default defineComponent({
   setup() {
     const { t } = useI18n();
+    const store = useStore();
+    const router = useRouter();
 
-    const login = reactive({
+    const form = reactive({
       email: '',
       password: '',
     });
@@ -82,9 +87,23 @@ export default defineComponent({
       password: { required, minLength: minLength(6), maxLength: maxLength(16) },
     } as RulesType;
 
-    const v$ = useVuelidate(rules, login);
+    const v$ = useVuelidate(rules, form);
 
-    return { t, v$ };
+    async function handleLogin() {
+      const isValidate = await v$.value.$validate();
+
+      if (isValidate) {
+        store.dispatch('auth/setLoginData', form);
+        const response = await store.dispatch('auth/submitLogin', form);
+
+        if (response.data) {
+          store.dispatch('user/setUser', response.data);
+          router.push({ name: 'Home' });
+        }
+      }
+    }
+
+    return { v$, t, handleLogin };
   },
 });
 </script>

@@ -3,6 +3,7 @@
     "required": "Este campo é necessário",
     "email": "Email inválido",
     "minLength": "Este campo tem que possuir mais caracteres",
-    "maxLength": "Este campo tem que possuir menos caracteres"
+    "maxLength": "Este campo tem que possuir menos caracteres",
+    "upperCase": "Este campo deve conter pelo menos uma letra maiúscula"
   }
 }
