@@ -1,41 +1,52 @@
 <template>
-  <form @submit.prevent class="form">
+  <form class="form" v-if="!state.completed">
     <div class="form-content">
       <div class="inputs">
         <base-input
-          :label="t(`ForgotPassword.form.email`)"
-          :placeholder="t(`ForgotPassword.form.email_placeholder`)"
+          :label="t(`CheckEmail.form.email`)"
+          :placeholder="t(`CheckEmail.form.email_placeholder`)"
         />
       </div>
       <div class="buttons">
         <div>
-          <base-button block neutral>{{
-            t(`ForgotPassword.form.send_mail_button`)
+          <base-button block neutral @click="sendEmail">{{
+            t(`CheckEmail.form.send_mail_button`)
           }}</base-button>
         </div>
       </div>
     </div>
   </form>
+  <completed v-else />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { useI18n } from 'vue-i18n';
+import Completed from './Completed.vue';
 
 export default defineComponent({
+  components: { Completed },
   setup() {
     const i18n = useI18n();
 
-    return { t: i18n.t };
+    const state = reactive({
+      completed: false,
+    });
+
+    function sendEmail() {
+      state.completed = true;
+    }
+
+    return { t: i18n.t, state, sendEmail };
   },
 });
 </script>
 <style lang="scss" scoped>
-form.form{
+form.form {
   padding-top: 130px;
 }
 @media screen and (max-width: 1060px) {
-  form.form{
+  form.form {
     padding-top: 0px;
   }
 }

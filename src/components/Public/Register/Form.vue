@@ -46,7 +46,7 @@
           <img
             class="descriptive"
             alt="Google G icon"
-            v-lazy="{src: './images/login/g-icon.png'}"
+            v-lazy="{ src: '/images/login/g-icon.png' }"
           />
           {{ t(`Register.form.register_with_google`) }}
         </base-button>

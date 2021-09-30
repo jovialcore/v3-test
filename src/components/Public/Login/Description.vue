@@ -5,7 +5,7 @@
     <img
       class="descriptive"
       alt="Four people celebrating"
-      v-lazy="{src: './images/login/login.png'}"
+      v-lazy="{ src: '/images/login/login.png' }"
     />
   </div>
 </template>

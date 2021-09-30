@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="input-container"
-    :class="classes"
-  >
+  <div class="input-container" :class="classes">
     <label v-if="label">{{ label }}</label>
     <input
       :class="classes"
@@ -10,7 +7,7 @@
       :value="modelValue"
       :placeholder="placeholder"
       @input="updateValue"
-    >
+    />
     <span>
       {{ error }}
     </span>
@@ -58,7 +55,6 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   gap: 4px;
-
   &.block {
     width: 100%;
   }
@@ -87,11 +83,13 @@ export default defineComponent({
       opacity: 1; /* Firefox */
     }
 
-    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    &:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
       color: $text-soft-grey;
     }
 
-    &::-ms-input-placeholder { /* Microsoft Edge */
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
       color: $text-soft-grey;
     }
     // font-size: 24px;
