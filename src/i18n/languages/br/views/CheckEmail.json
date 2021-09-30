@@ -1,24 +1,24 @@
 {
     "description": {
         "main": "Verifique seu email",
-        "sub": "Nós enviamos um email com um link de ativação da sua conta para {email}",
+        "sub": "Acabamos de lhe enviar um e-mail com um link para ativar sua conta em {email}",
         "has_account": "Já tem uma conta?",
-        "has_account_link": "Faça login."
+        "has_account_link": "Entre agora"
     },
     "form": {
-        "email": "Email de recuperação",
-        "email_placeholder": "Email",
-        "send_mail_button": "Enviar código"
+        "email": "Email",
+        "email_placeholder": "name{'a'}email.com",
+        "send_mail_button": "Enviar"
     },
     "completed": {
-        "title": "Didn't get an email?",
-        "sub": "If you don't see an email from uus within an few minutes, a few things could have happened:",
+        "title": "Não recebeu o e-mail?",
+        "sub": "Se você não receber um e-mail nosso em poucos minutos, há verifique se:",
         "items": {
-            "spam_folder": "The email is on your spam folder.",
-            "mistake_email": "The email address you entered had a mistake or typo.",
-            "another_email": "You accidentally gave us another email address.",
-            "cant_deliver": "We can't deliver the email on this address."
+            "spam_folder": "O e-mail está em sua pasta de spam.",
+            "mistake_email": "O e-mail que você entrou contém um erro ou um erro de digitação.",
+            "another_email": "Você nos deu acidentalmente outro e-mail.",
+            "cant_deliver": "Não podemos entregar o e-mail para este endereço."
         },
-        "reenter_email": "Re-enter your email and try again"
+        "reenter_email": "Digite seu endereço de e-mail novamente e tente novamente"
     }
 }
