@@ -6,6 +6,7 @@
     <input
       type="checkbox"
       :id="id"
+      @input="updateValue"
     >
     <label :for="id" v-if="label">{{ label }}</label>
     <span>
@@ -24,7 +25,7 @@ export default defineComponent({
   props: {
     id: { type: String, required: true },
     label: { type: String, required: false, default: '' },
-    modelValue: { type: [Number, String], default: '' },
+    modelValue: { type: Boolean, default: false },
     error: { type: String, default: '' },
     block: { type: Boolean },
   },
@@ -35,9 +36,9 @@ export default defineComponent({
     }));
 
     function updateValue(event: Event) {
-      const { value } = event.target as HTMLInputElement;
+      const { checked } = event.target as HTMLInputElement;
 
-      emit('update:modelValue', value);
+      emit('update:modelValue', checked);
     }
 
     return {
