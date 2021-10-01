@@ -21,9 +21,10 @@
           :label="t(`Step2.form.job_title`)"
           :placeholder="t(`Step2.form.job_title_placeholder`)"
         />
-        <base-input
+        <base-select
           :label="t(`Step2.form.what_brought_to_juridoc`)"
           :placeholder="t(`Step2.form.what_brought_to_juridoc_placeholder`)"
+          :options="state.whatBroughtOptions"
         />
         <base-input
           :label="t(`Step2.form.phone`)"
@@ -36,14 +37,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup() {
     const i18n = useI18n();
-
-    return { t: i18n.t };
+    const state = reactive({
+      whatBroughtOptions: [
+        'Proposal',
+        'Contracts',
+        'Quotes',
+        'Sales / Marketing Collaboration',
+        'Tool consolidation',
+        'eSignatures',
+        'API',
+        'Tracking / Analytics',
+        'Document Storage',
+        'HR Docs',
+        'Partner / Reseller',
+        'Other',
+      ],
+    });
+    return { t: i18n.t, state };
   },
 });
 </script>
