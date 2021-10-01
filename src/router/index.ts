@@ -33,6 +33,11 @@ const routes: Array<RouteRecordRaw> = [
         name: 'RegisterStep2',
         component: () => import('@/views/Public/Step2.vue'),
       },
+      {
+        path: 'step/3',
+        name: 'RegisterStep3',
+        component: () => import('@/views/Public/Step3.vue'),
+      },
     ],
   },
   {
