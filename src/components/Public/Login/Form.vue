@@ -42,6 +42,7 @@
           </div>
         </div>
         <base-button
+          @click="teste"
           block
           neutral
         >
@@ -66,12 +67,14 @@ import { useRouter } from 'vue-router';
 import {
   required, email, maxLength, minLength,
 } from '@/utils/I18nValidators';
+import useToast from '@/hooks/useToast';
 
 export default defineComponent({
   setup() {
     const { t } = useI18n();
     const store = useStore();
     const router = useRouter();
+    const toast = useToast();
 
     const form = reactive({
       email: '',
@@ -103,7 +106,13 @@ export default defineComponent({
       }
     }
 
-    return { v$, t, handleSubmit };
+    function teste() {
+      toast.open({ mesage: 'Hi Toast' });
+    }
+
+    return {
+      v$, t, handleSubmit, teste,
+    };
   },
 });
 </script>
