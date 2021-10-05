@@ -57,7 +57,7 @@ select {
   -moz-appearance: none;
   appearance: none;
   border: none;
-  padding-right: 2rem;
+  padding-right: 20px;
   text-align: right;
   background: url('../../assets/icons/select_icon.svg') no-repeat 98% !important;
   height: 23px;

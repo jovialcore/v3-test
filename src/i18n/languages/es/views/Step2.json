@@ -5,6 +5,7 @@
         "lawyer_sub": "Abogado"
     },
     "form": {
+        "prelude": "Paso 2 de 3",
         "title": "Cree su perfil",
         "first_name": "Nombre",
         "last_name": "Apellido",

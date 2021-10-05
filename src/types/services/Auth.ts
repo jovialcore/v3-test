@@ -13,20 +13,21 @@ export type ServiceReturnMsgAndUser = {
 
 export type RegisterParams = {
   email: string;
-  password: RequestError;
-  language: RequestError;
+  password: string;
+  language: string;
 }
 
 export type ActivationParams = {
   activationToken: string;
   firstName: string;
   lastName: string;
+  job: string;
   whatBringsYouHere: string;
   phone: string;
   company: string;
-  size: number;
+  size: string;
   industry: string;
-  CRM: string;
+  crm: string;
 }
 
 export type GoogleRegisterParams = {
@@ -38,7 +39,7 @@ export type GoogleRegisterParams = {
   company: string;
   size: number;
   industry: string;
-  CRM: string;
+  crm: string;
 }
 
 export type LoginParams = {
@@ -60,7 +61,11 @@ export type ResetPasswordParams = {
 export interface AuthServiceInterface {
   register({ email, password, language }:RegisterParams): Promise<ServiceBasicReturn>;
   activation({
-    activationToken, firstName, lastName, whatBringsYouHere, phone, company, size, industry, CRM,
+    activationToken, firstName,
+    lastName, job,
+    whatBringsYouHere,
+    phone, company,
+    size, industry, crm,
   }:ActivationParams): Promise<ServiceReturnMsgAndUser>;
   login({ email, password }:LoginParams): Promise<ServiceReturnUser>;
   currentUser(): Promise<ServiceReturnUser>;
@@ -71,6 +76,6 @@ export interface AuthServiceInterface {
   logout(): Promise<ServiceBasicReturn>;
   googleLogin(tokenId: string): Promise<ServiceReturnUser>;
   googleRegister({
-    tokenId, firstName, lastName, whatBringsYouHere, phone, company, size, industry, CRM,
+    tokenId, firstName, lastName, whatBringsYouHere, phone, company, size, industry, crm,
   }:GoogleRegisterParams): Promise<ServiceReturnMsgAndUser>;
 }

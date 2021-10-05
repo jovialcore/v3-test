@@ -2,112 +2,136 @@
   <form @submit.prevent class="form">
     <div class="form-content">
       <div class="form-title">
+        <span>{{ t(`Step3.form.prelude`) }}</span>
         <h1>{{ t(`Step3.form.title`) }}</h1>
       </div>
       <div class="inputs">
         <base-input
+          v-model="v$.company.$model"
+          :error="v$.company.$errors[0]?.$message"
           :label="t(`Step3.form.company_name`)"
           :placeholder="t(`Step3.form.company_name_placeholder`)"
         />
         <base-select
+          v-model="v$.size.$model"
+          :error="v$.size.$errors[0]?.$message"
           :label="t(`Step3.form.company_size`)"
           :placeholder="t(`Step3.form.default_select_placeholder`)"
-          :options="state.options.industrySize"
+          :options="options.industrySize"
         ></base-select>
         <base-select
+          v-model="v$.industry.$model"
+          :error="v$.industry.$errors[0]?.$message"
           :label="t(`Step3.form.industry`)"
           :placeholder="t(`Step3.form.default_select_placeholder`)"
-          :options="state.options.industry"
+          :options="options.industry"
         ></base-select>
         <base-select
+          v-model="v$.crm.$model"
+          :error="v$.crm.$errors[0]?.$message"
           :label="t(`Step3.form.crm`)"
           :placeholder="t(`Step3.form.default_select_placeholder`)"
-          :options="state.options.crm"
+          :options="options.crm"
         ></base-select>
+        <base-checkbox
+          v-model="isConfirmedTerms"
+          id="confirm_terms"
+          :label="t(`Register.form.confirm_terms`)"
+        />
       </div>
       <div class="buttons">
-        <base-button transparent>{{
-          t(`Step3.form.return_button`)
-        }}</base-button>
-        <base-button block primary>{{
-          t(`Step3.form.next_button`)
-        }}</base-button>
+        <base-button
+          @click="toBack"
+          transparent
+        >
+          {{t(`Step3.form.return_button`)}}
+        </base-button>
+        <base-button
+          @click="handleSubmit"
+          block
+          :disabled="!isConfirmedTerms"
+          primary
+        >
+          {{t(`Step3.form.next_button`)}}
+        </base-button>
       </div>
     </div>
   </form>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import useVuelidate from '@vuelidate/core';
+import {
+  defineComponent, reactive, computed, onBeforeMount, ref,
+} from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+import { required } from '@/utils/I18nValidators';
+import { RulesType } from '@/types/Vuelidate';
+import { RegisterActivationType } from '@/store/modules/auth';
+import { CompanySizeOptions, CRMOptions, IndustryOptions } from '@/utils/options/Register';
+
+type OptionType = {
+  [key: string]: string | number;
+}
+
+type OptionsType = {
+  industrySize: OptionType[] | undefined;
+  industry: OptionType[] | undefined;
+  crm: OptionType[] | undefined;
+}
 
 export default defineComponent({
   setup() {
+    const store = useStore();
+    const router = useRouter();
     const { t } = useI18n();
-    const state = reactive({
-      options: {
-        industrySize: [
-          'Solo',
-          '2 - 5',
-          '6 - 10',
-          '11 - 25',
-          '26 - 50',
-          '51 - 200',
-          '201 - 1.000',
-          '1.001 - 10.000',
-          '10.000 +',
-        ],
-        industry: [
-          'Administrative Services',
-          'Advocacy',
-          'Architecture',
-          'Arts',
-          'Bloggers/Youtube',
-          'Business Consulting',
-          'Cinematographic Studio',
-          'Commercial Representation',
-          'Dentist',
-          'Design in General',
-          'Digital Marketing Agency',
-          'Doctors',
-          'General Education',
-          'Graphic Design',
-          'Human Resources',
-          'Insurance Brokerage',
-          'Interior Design',
-          'Intermediation',
-          'IT Services',
-          'Journalism and Advisory',
-          'Marketing',
-          'Marketing and Propaganda',
-          'Marketplace',
-          'Music',
-          'Nutrition',
-          'Organization of Events',
-          'Photo',
-          'Physical Education',
-          'Physiotherapy',
-          'Psychology',
-          'Real Estate Brokerage',
-          'Technology Consulting',
-          'Tourism',
-          'Translation',
-          'Veterinary',
-          'Web Development',
-          'Other',
-        ],
-        crm: [
-          'Hubspot',
-          'Insightly',
-          'Pipedrive',
-          'Salesforce',
-          'SugarCRM',
-          'ZohoCRM',
-          'None',
-        ],
-      },
+    const options: OptionsType = reactive({
+      industrySize: [],
+      industry: [],
+      crm: [],
     });
-    return { t, state };
+
+    const form = computed<RegisterActivationType>(() => store.getters['auth/getRegisterActivationData']);
+
+    const rules = {
+      company: { required },
+      size: { required },
+      industry: { required },
+      crm: { required },
+    } as RulesType;
+    const isConfirmedTerms = ref(false);
+    const v$ = useVuelidate(rules, form);
+
+    function toBack() {
+      router.back();
+    }
+
+    async function handleSubmit() {
+      const isValidate = await v$.value.$validate();
+
+      if (isValidate) {
+        store.dispatch('auth/setRegisterActivationStep3', form.value);
+        store.dispatch('auth/submitActivation');
+        router.push({ name: 'RegisterFinished' });
+      }
+    }
+
+    onBeforeMount(() => {
+      options.industrySize = CompanySizeOptions();
+      options.industry = IndustryOptions();
+      options.crm = CRMOptions();
+    });
+
+    return {
+      v$,
+      options,
+      t,
+      toBack,
+      handleSubmit,
+      isConfirmedTerms,
+    };
   },
 });
 </script>

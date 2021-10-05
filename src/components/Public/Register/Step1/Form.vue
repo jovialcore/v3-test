@@ -25,17 +25,12 @@
           :label="t(`Register.form.password`)"
           :placeholder="t(`Register.form.password_placeholder`)"
         />
-        <base-checkbox
-          v-model="isConfirmedTerms"
-          id="confirm_terms"
-          :label="t(`Register.form.confirm_terms`)"
-        />
       </div>
       <div class="buttons">
         <div>
           <base-button
-            @click="handleRegister"
-            :disabled="v$.$invalid && isConfirmedTerms"
+            @click="handleSubmit"
+            :disabled="!(!v$.$invalid)"
             block
             primary
           >
@@ -57,7 +52,7 @@
 
 <script lang="ts">
 import useVuelidate from '@vuelidate/core';
-import { defineComponent, reactive, ref } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
@@ -72,11 +67,10 @@ export default defineComponent({
     const store = useStore();
     const router = useRouter();
 
-    const isConfirmedTerms = ref(false);
-
     const form = reactive({
       email: '',
       password: '',
+      language: '',
     });
 
     const rules = {
@@ -86,21 +80,23 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, form);
 
-    async function handleRegister() {
+    async function handleSubmit() {
       const isValidate = await v$.value.$validate();
 
-      if (isValidate && isConfirmedTerms.value) {
-        store.dispatch('auth/setLoginData', form);
-        console.log(form);
+      if (isValidate) {
+        form.language = window.localStorage.getItem('lang') || 'us';
+        store.dispatch('user/setUser', { email: form.email });
+        store.dispatch('auth/setRegisterAccessData', form);
+
         const response = await store.dispatch('auth/submitRegister', form);
 
         if (response.data) {
-          router.push({ name: 'Home' });
+          router.push({ name: 'CheckEmail' });
         }
       }
     }
     return {
-      isConfirmedTerms, v$, t, handleRegister,
+      v$, t, handleSubmit,
     };
   },
 });

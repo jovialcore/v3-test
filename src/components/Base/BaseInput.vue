@@ -76,6 +76,7 @@ export default defineComponent({
 
     &:focus{ /* Microsoft Edge */
       border-color: $primary-button;
+      background-color: rgba(6,231,205,0.05);
     }
 
     &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */

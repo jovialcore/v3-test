@@ -1,9 +1,10 @@
 <template>
-  <div class="form-field" :class="classes">
+  <div class="input-container" :class="classes">
     <label v-if="label">{{ label }}</label>
     <select
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="updateValue"
       :disabled="disable"
+      :class="classes"
       @change="$emit('change')"
     >
       <option value="" disabled :selected="!modelValue">
@@ -11,17 +12,24 @@
       </option>
       <option
         v-for="(option, index) in options"
-        :selected="modelValue === option"
-        :value="option"
+        :selected="modelValue === option[value]"
+        :value="option[value]"
         :key="`${index}`"
       >
-        {{ option }}
+        {{ option[text] }}
       </option>
     </select>
+    <span>
+      {{ error }}
+    </span>
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, PropType } from 'vue';
+
+type OptionType = {
+  [key: string]: string | number;
+}
 
 export default defineComponent({
   model: {
@@ -31,22 +39,39 @@ export default defineComponent({
   props: {
     label: { type: String, required: false },
     placeholder: { type: String },
-    options: { type: Array, default: (): Array<Record<string, string>> => [], required: true },
-    modelValue: { type: String },
+    error: { type: String, default: '' },
+    options: { type: Array as PropType<OptionType[]>, default: () => [], required: true },
+    modelValue: { type: [Number, String] },
     disable: { type: Boolean, default: false },
     block: { type: Boolean, default: false },
+    value: {
+      type: String,
+      required: false,
+      default: '_id',
+    },
+    text: {
+      type: String,
+      default: 'text',
+    },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const classes = computed(() => ({
       block: props.block,
+      error: props.error,
     }));
-    return { classes };
+
+    function updateValue(event: Event) {
+      const { value } = event.target as HTMLInputElement;
+
+      emit('update:modelValue', value);
+    }
+    return { classes, updateValue };
   },
 });
 </script>
 
 <style scoped lang="scss">
-.form-field {
+.input-container {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -76,10 +101,16 @@ export default defineComponent({
     &:disabled {
       cursor: not-allowed;
     }
+    &.error{ /* Microsoft Edge */
+      border-color: $error;
+    }
     &:focus,
     &:focus-visible {
       outline: none !important;
       border: 1px solid $secondary;
+      option {
+        background-color: rgba(6,231,205,0.05);
+      }
     }
   }
   &.block {
@@ -92,5 +123,10 @@ export default defineComponent({
   font-weight: 400;
   background: var(--white);
   color: black;
+}
+
+span {
+  color: $error;
+  padding-left: 8px;
 }
 </style>

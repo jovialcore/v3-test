@@ -1,12 +1,7 @@
 <template>
   <div class="description">
-    <h1>{{ t(`Login.description.main`) }}</h1>
-    <p>{{ t(`Login.description.sub`) }}</p>
-    <img
-      class="descriptive"
-      alt="Four people celebrating"
-      v-lazy="{ src: '/images/login/login.png' }"
-    />
+    <h1>{{ t(`RegisterFinished.description.main`) }}</h1>
+    <p>{{ t(`RegisterFinished.description.sub`) }}</p>
   </div>
 </template>
 
@@ -28,9 +23,4 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-div.description {
-  p {
-    flex-grow: 1;
-  }
-}
 </style>

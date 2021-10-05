@@ -9,7 +9,7 @@
         <li>{{ t(`CheckEmail.completed.items.another_email`) }}</li>
         <li>{{ t(`CheckEmail.completed.items.cant_deliver`) }}</li>
       </ul>
-      <a href="#">{{ t(`CheckEmail.completed.reenter_email`) }}</a>
+      <a href="#" @click="clearEmail">{{ t(`CheckEmail.completed.reenter_email`) }}</a>
     </div>
   </div>
 </template>
@@ -17,12 +17,20 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   setup() {
     const i18n = useI18n();
+    const store = useStore();
 
-    return { t: i18n.t };
+    async function clearEmail() {
+      store.dispatch('user/setUser', { email: '' });
+    }
+
+    return {
+      t: i18n.t, clearEmail,
+    };
   },
 });
 </script>

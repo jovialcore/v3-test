@@ -2,7 +2,7 @@
   <form @submit.prevent class="form">
     <div class="form-content">
       <div class="form-title">
-        <h1>{{ t(`Login.form.title`) }}</h1>
+        <h1>{{ t(`Login.form.title`) }} &#9996;</h1>
         <p>
           {{ t(`Login.form.subtitle`) }}
           <base-link primary :to="{ name: 'RegisterStep1' }">
@@ -28,7 +28,7 @@
       <div class="buttons">
         <div>
           <base-button
-            @click="handleLogin"
+            @click="handleSubmit"
             :disabled="v$.$invalid"
             block
             primary
@@ -89,7 +89,7 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, form);
 
-    async function handleLogin() {
+    async function handleSubmit() {
       const isValidate = await v$.value.$validate();
 
       if (isValidate) {
@@ -103,7 +103,7 @@ export default defineComponent({
       }
     }
 
-    return { v$, t, handleLogin };
+    return { v$, t, handleSubmit };
   },
 });
 </script>

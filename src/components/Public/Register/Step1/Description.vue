@@ -28,4 +28,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+div.description {
+  p {
+    flex-grow: 1;
+  }
+}
 </style>

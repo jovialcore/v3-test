@@ -19,16 +19,14 @@ export default {
 .login-card {
   display: grid;
   grid-template-columns: 510px 480px;
-  grid-template-rows: 50px 725px;
   width: 990px;
-  height: 775px;
+  height: fit-content;
 }
 
 @media screen and (max-width: 1060px) {
   .login-card {
     width: 90%;
     padding: 0px 50px;
-    height: fit-content;
   }
 }
 
@@ -36,7 +34,6 @@ export default {
   .login-card {
     display: flex;
     flex-direction: column;
-    height: fit-content;
   }
 }
 </style>

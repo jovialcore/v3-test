@@ -5,6 +5,7 @@
         "lawyer_sub": "Lawyer"
     },
     "form": {
+        "prelude": "Step 2 of 3",
         "title": "Set up your profile",
         "first_name": "First name",
         "last_name": "Last name",

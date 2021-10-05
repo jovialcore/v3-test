@@ -5,6 +5,7 @@ import '@/assets/styles/description.scss';
 import { createApp } from 'vue';
 import VueLazyLoad from 'vue3-lazyload';
 import GAuth from 'vue3-google-oauth2';
+import Maska from 'maska';
 import App from './App.vue';
 import setupBaseComponents from './configs/setupBaseComponents';
 
@@ -22,6 +23,7 @@ const gAuthOptions = {
 const app = createApp(App);
 
 app.use(GAuth, gAuthOptions);
+app.use(Maska);
 
 setupBaseComponents(app);
 

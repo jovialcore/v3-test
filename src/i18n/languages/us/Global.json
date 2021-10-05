@@ -2,7 +2,7 @@
   "errors": {
     "required": "This field is required",
     "email": "Invalid email",
-    "minLength": "This field needs more characters",
+    "minLength": "Minimum length not satisfied",
     "maxLength": "This field needs less characters",
     "upperCase": "This field must contain at least one capital letter."
   }

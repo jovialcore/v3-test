@@ -24,19 +24,24 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/layouts/Public.vue'),
     children: [
       {
-        path: 'step/1',
+        path: '',
         name: 'RegisterStep1',
-        component: () => import('@/views/Public/Register.vue'),
+        component: () => import('@/views/Public/Register/Step1.vue'),
       },
       {
-        path: 'step/2',
+        path: 'step/2/:token',
         name: 'RegisterStep2',
-        component: () => import('@/views/Public/Step2.vue'),
+        component: () => import('@/views/Public/Register/Step2.vue'),
       },
       {
-        path: 'step/3',
+        path: 'step/3/:token',
         name: 'RegisterStep3',
-        component: () => import('@/views/Public/Step3.vue'),
+        component: () => import('@/views/Public/Register/Step3.vue'),
+      },
+      {
+        path: 'finished',
+        name: 'RegisterFinished',
+        component: () => import('@/views/Public/Register/Finished.vue'),
       },
     ],
   },
@@ -61,7 +66,18 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Public/CheckEmail.vue'),
       },
     ],
-
+  },
+  {
+    path: '/user',
+    component: () => import('@/layouts/Public.vue'),
+    children: [
+      {
+        name: 'Activation',
+        path: 'activate/:token',
+        component: () => import('@/views/Public/Activate.vue'),
+        props: true,
+      },
+    ],
   },
 ];
 
