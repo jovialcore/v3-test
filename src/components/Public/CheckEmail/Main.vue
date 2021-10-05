@@ -1,17 +1,25 @@
 <template>
-  <form class="form" v-if="!state.completed">
+  <form class="form" v-if="!completed">
     <div class="form-content">
       <div class="inputs">
         <base-input
+          v-model="v$.email.$model"
+          :error="v$.email.$errors[0]?.$message"
           :label="t(`CheckEmail.form.email`)"
           :placeholder="t(`CheckEmail.form.email_placeholder`)"
+          type="email"
         />
       </div>
       <div class="buttons">
         <div>
-          <base-button block neutral @click="sendEmail">{{
-            t(`CheckEmail.form.send_mail_button`)
-          }}</base-button>
+          <base-button
+            @click="handleSendEmail"
+            :disabled="v$.$invalid"
+            block
+            neutral
+          >
+            {{ t(`CheckEmail.form.send_mail_button`) }}
+          </base-button>
         </div>
       </div>
     </div>
@@ -20,24 +28,46 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import useVuelidate from '@vuelidate/core';
+import { RulesType } from '@/types/Vuelidate';
+import { required, email } from '@/utils/I18nValidators';
+
 import Completed from './Completed.vue';
 
 export default defineComponent({
   components: { Completed },
   setup() {
-    const i18n = useI18n();
+    const { t } = useI18n();
 
-    const state = reactive({
-      completed: false,
+    const form = reactive({
+      email: '',
+      language: '',
     });
 
-    function sendEmail() {
-      state.completed = true;
+    const rules = {
+      email: { required, email },
+    } as RulesType;
+
+    const v$ = useVuelidate(rules, form);
+
+    const completed = ref(false);
+
+    async function handleSendEmail() {
+      const isValidate = await v$.value.$validate();
+
+      if (isValidate) {
+        completed.value = true;
+      }
     }
 
-    return { t: i18n.t, state, sendEmail };
+    return {
+      completed,
+      v$,
+      t,
+      handleSendEmail,
+    };
   },
 });
 </script>

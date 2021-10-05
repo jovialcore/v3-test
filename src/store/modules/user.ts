@@ -10,6 +10,10 @@ export const state: GlobalType = {
   currentUser: undefined,
 };
 
+export interface User {
+  email: string,
+}
+
 export const mutations: MutationTree<GlobalType> = {
   SET_CURRENT_USER(state, data) {
     state.currentUser = data;

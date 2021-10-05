@@ -13,7 +13,7 @@ import {
 } from '@/types/services/Auth';
 import { getRequestError } from '@/utils/Services';
 
-const BASE_ENDPOINT = '/auth/';
+const BASE_ENDPOINT = '/auth';
 
 function AuthService(api: AxiosInstance):AuthServiceInterface {
   async function register({
@@ -41,21 +41,24 @@ function AuthService(api: AxiosInstance):AuthServiceInterface {
     };
   }
   async function activation({
-    activationToken, firstName, lastName, whatBringsYouHere, phone, company, size, industry, CRM,
+    activationToken, firstName,
+    lastName, job, whatBringsYouHere,
+    phone, company, size, industry, crm,
   }:ActivationParams): Promise<ServiceReturnMsgAndUser> {
     const body = {
       activationToken,
       firstName,
       lastName,
+      job,
       whatBringsYouHere,
       phone,
       company,
       size,
       industry,
-      CRM,
+      crm,
     };
 
-    const response = await api.post(`${BASE_ENDPOINT}/activation`, body);
+    const response = await api.patch(`${BASE_ENDPOINT}/activation`, body);
 
     let errors: RequestError;
 
@@ -168,7 +171,7 @@ function AuthService(api: AxiosInstance):AuthServiceInterface {
     };
   }
   async function googleRegister({
-    tokenId, firstName, lastName, whatBringsYouHere, phone, company, size, industry, CRM,
+    tokenId, firstName, lastName, whatBringsYouHere, phone, company, size, industry, crm,
   }:GoogleRegisterParams): Promise<ServiceReturnMsgAndUser> {
     const body = {
       tokenId,
@@ -179,7 +182,7 @@ function AuthService(api: AxiosInstance):AuthServiceInterface {
       company,
       size,
       industry,
-      CRM,
+      crm,
     };
 
     const response = await api.post(`${BASE_ENDPOINT}/googleRegister`, body);

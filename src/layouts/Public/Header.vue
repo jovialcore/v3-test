@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div>
+    <div class="logo-container">
       <img
         class="logo"
         alt="Juridoc Logo"
@@ -42,40 +42,54 @@ export default defineComponent({
   border-radius: 5px 5px 0px 0px;
   display: grid;
   grid-column: 1/3;
-  grid-template-columns: 420px 390px;
+  grid-template-columns: 510px 480px;
   height: 50px;
-  padding-top: 27px;
-  padding-left: 90px;
 
-  &:first-child {
-    background-color: $neutral-bg;
+  .logo-container {
+    border-radius: 5px 0px 0px 0px;
+    padding-top: 27px;
+    background-color: $neutral-bg ;
+    padding-left: 90px;
     img {
       width: 83px;
       height: 23px;
     }
   }
-  div.selector {
+  .selector {
+    border-radius: 0px 5px 0px 0px;
+    padding-top: 27px;
+    padding-right: 90px;
+    width: 100%;
     background-color: $white;
     justify-content: flex-end;
     display: flex;
   }
 }
 
-// @media screen and (max-width: 1060px) {
-//   .login-card {
-//     width: 90%;
-//     padding: 0px 50px;
-//     height: fit-content;
-//   }
-// }
-
 @media (orientation: portrait) {
   .header {
-    padding: 27px 30px 0px 30px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: fit-content;
-    justify-content: space-between;
+    justify-content: center;
+    .logo-container {
+      padding-top: 27px;
+      background-color: $neutral-bg ;
+      padding-left: 10%;
+      img {
+        width: 83px;
+        height: 23px;
+      }
+    }
+    .selector {
+      padding-right: 10%;
+      padding-top: 27px;
+      width: 100%;
+      background-color: $neutral-bg ;
+      justify-content: flex-end;
+      display: flex;
+    }
+
   }
 }
 </style>

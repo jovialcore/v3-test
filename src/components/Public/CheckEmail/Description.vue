@@ -1,7 +1,7 @@
 <template>
   <div class="description">
     <h1>{{ t(`CheckEmail.description.main`) }}</h1>
-    <p>{{ t(`CheckEmail.description.sub`, { email }) }}</p>
+    <p v-if="email">{{ t(`CheckEmail.description.sub`, { email }) }}</p>
     <img
       class="descriptive"
       v-lazy="{ src: '/images/login/check-email.png' }"
@@ -19,21 +19,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+import {
+  defineComponent,
+  computed,
+  ref,
+  watch,
+} from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   setup() {
+    const store = useStore();
     const langStorage = localStorage.getItem('lang');
     const currentLang = ref(langStorage || 'br');
     const i18n = useI18n();
-
+    const email = computed(() => {
+      const user = store.getters['user/getCurrentUser'];
+      if (user) return user.email;
+      return '';
+    });
     watch(currentLang, (newValue) => {
       window.localStorage.setItem('lang', newValue);
       i18n.locale.value = newValue;
     });
 
-    return { currentLang, email: 'flyingtotees@gmail.com', t: i18n.t };
+    return { currentLang, email, t: i18n.t };
   },
 });
 </script>

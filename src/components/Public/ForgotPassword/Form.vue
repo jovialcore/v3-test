@@ -12,7 +12,7 @@
       <div class="buttons">
         <div>
           <base-button
-            @click="handleForgotPassword"
+            @click="handleSubmit"
             :disabled="v$.$invalid"
             block
             neutral
@@ -51,7 +51,7 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, form);
 
-    async function handleForgotPassword() {
+    async function handleSubmit() {
       const isValidate = await v$.value.$validate();
 
       if (isValidate) {
@@ -65,7 +65,7 @@ export default defineComponent({
       }
     }
 
-    return { v$, t, handleForgotPassword };
+    return { v$, t, handleSubmit };
   },
 });
 </script>

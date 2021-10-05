@@ -7,7 +7,7 @@
     },
     "form": {
         "email": "Email",
-        "email_placeholder": "name{'a'}email.com",
+        "email_placeholder": "name{'@'}email.com",
         "send_mail_button": "Enviar"
     },
     "completed": {

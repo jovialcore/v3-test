@@ -5,6 +5,8 @@ const BASE_URL = process.env.VUE_APP_BASE_URL_JURIDOC_API || 'http://localhost:3
 
 const api = Axios.create({
   baseURL: BASE_URL,
+  // withCredentials: true,
+  // xsrfCookieName: 'token',
 });
 
 api.interceptors.response.use(

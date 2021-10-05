@@ -1,7 +1,17 @@
 import { RouteLocationNormalized, NavigationGuardNext } from 'vue-router';
 import $api from '../services';
 
-const AUTH_ROUTES_NAMES = ['Login', 'ForgotPassword', 'RegisterStep1', 'Logout'];
+const AUTH_ROUTES_NAMES = [
+  'Activation',
+  'CheckEmail',
+  'ForgotPassword',
+  'Login',
+  'Logout',
+  'RegisterFinished',
+  'RegisterStep1',
+  'RegisterStep2',
+  'RegisterStep3',
+];
 
 async function isAuthenticated(): Promise<boolean | string> {
   const response = await $api.auth.currentUser();

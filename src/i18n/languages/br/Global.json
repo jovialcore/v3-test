@@ -1,8 +1,8 @@
 {
   "errors": {
-    "required": "Este campo é necessário",
+    "required": "Este campo é obrigatório",
     "email": "Email inválido",
-    "minLength": "Este campo tem que possuir mais caracteres",
+    "minLength": "O tamanho mínimo de caracteres não está satisfeito",
     "maxLength": "Este campo tem que possuir menos caracteres",
     "upperCase": "Este campo deve conter pelo menos uma letra maiúscula"
   }

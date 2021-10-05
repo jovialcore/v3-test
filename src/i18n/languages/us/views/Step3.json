@@ -1,24 +1,100 @@
 {
-    "form": {
-        "title": "Congratulations, we're setting up your free trial.",
-        "company_name": "Company Name",
-        "company_name_placeholder": "Juridoc",
-        "return_button": "Back",
-        "company_size": "Company size",
-        "next_button": "Next",
-        "default_select_placeholder": "Select",
-        "industry": "Industry",
-        "crm": "CRM"
-    },
-    "description": {
-        "main": "You're almost done",
-        "sub": "Just a few more details from your company and you're ready to go",
-        "items_brand": "Grow your business with us!",
-        "items": {
-            "save_time": "Save time and money",
-            "teamwork": "Facilitate teamwork",
-            "deals_faster": "Close deals faster",
-            "productivity": "Increase productivity"
-        }
+  "form": {
+    "prelude": "Step 3 of 3",
+    "title": "Congratulations, we're setting up your free trial.",
+    "company_name": "Company Name",
+    "company_name_placeholder": "Juridoc",
+    "return_button": "Back",
+    "company_size": "Company size",
+    "next_button": "Next",
+    "default_select_placeholder": "Select",
+    "industry": "Industry",
+    "crm": "CRM",
+    "options": {
+      "industry": [
+        "Administrative Services",
+        "Advocacy",
+        "Architecture",
+        "Arts",
+        "Bloggers/Youtube",
+        "Business Consulting",
+        "Cinematographic Studio",
+        "Commercial Representation",
+        "Dentist",
+        "Design in General",
+        "Digital Marketing Agency",
+        "Doctors",
+        "General Education",
+        "Graphic Design",
+        "Human Resources",
+        "Insurance Brokerage",
+        "Interior Design",
+        "Intermediation",
+        "IT Services",
+        "Journalism and Advisory",
+        "Marketing",
+        "Marketing and Propaganda",
+        "Marketplace",
+        "Music",
+        "Nutrition",
+        "Organization of Events",
+        "Photo",
+        "Physical Education",
+        "Physiotherapy",
+        "Psychology",
+        "Real Estate Brokerage",
+        "Technology Consulting",
+        "Tourism",
+        "Translation",
+        "Veterinary",
+        "Web Development",
+        "Other"
+      ],
+      "company_size": [
+        "Solo",
+        "2 - 5",
+        "6 - 10",
+        "11 - 25",
+        "26 - 50",
+        "51 - 200",
+        "201 - 1.000",
+        "1.001 - 10.000",
+        "10.000 +"
+      ],
+      "crm": [
+        "Hubspot",
+        "Insightly",
+        "Pipedrive",
+        "Salesforce",
+        "SugarCRM",
+        "ZohoCRM",
+        "None"
+      ],
+      "what_brought": [
+        "Proposal",
+        "Contracts",
+        "Quotes",
+        "Sales / Marketing Collaboration",
+        "Tool consolidation",
+        "eSignatures",
+        "API",
+        "Tracking / Analytics",
+        "Document Storage",
+        "HR Docs",
+        "Partner / Reseller",
+        "Other"
+      ]
     }
+  },
+  "description": {
+    "main": "You're almost done",
+    "sub": "Just a few more details from your company and you're ready to go",
+    "items_brand": "Grow your business with us!",
+    "items": {
+      "save_time": "Save time and money",
+      "teamwork": "Facilitate teamwork",
+      "deals_faster": "Close deals faster",
+      "productivity": "Increase productivity"
+    }
+  }
 }
