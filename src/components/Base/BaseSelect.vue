@@ -58,6 +58,7 @@ export default defineComponent({
     const classes = computed(() => ({
       block: props.block,
       error: props.error,
+      selected: props.modelValue,
     }));
 
     function updateValue(event: Event) {
@@ -76,16 +77,18 @@ export default defineComponent({
   flex-direction: column;
   gap: 4px;
   label {
-    font-size: 18px;
+    color: $input-labels;
+    font-size: 14px;
     font-weight: 700;
+    margin-bottom: 5px;
   }
 
   select {
     height: 48px;
     border: 1px solid #dedede;
 
-    font-size: 16px;
-
+    font-size: 14px;
+    color: $text-dark-grey-6;
     padding-left: 16px;
     padding-right: 16px;
 
@@ -96,7 +99,8 @@ export default defineComponent({
     appearance: none;
 
     cursor: pointer;
-    background: url('../../assets/icons/select_icon.svg') no-repeat 95% !important;
+    background: url('../../assets/icons/select_icon.svg') no-repeat 95%;
+    background-size: 10px 10px;
 
     &:disabled {
       cursor: not-allowed;
@@ -108,21 +112,15 @@ export default defineComponent({
     &:focus-visible {
       outline: none !important;
       border: 1px solid $secondary;
-      option {
-        background-color: rgba(6,231,205,0.05);
-      }
+    }
+    &.selected {
+      background-color: $transparent-focus-bg-elements !important;
+      border: 1px solid $secondary;
     }
   }
   &.block {
     width: 100%;
   }
-}
-
-.options {
-  font-size: 16px;
-  font-weight: 400;
-  background: var(--white);
-  color: black;
 }
 
 span {

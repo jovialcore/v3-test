@@ -27,6 +27,7 @@ li {
   display: flex;
   align-items: center;
   gap: 8px;
+  color: $text-dark-grey-2
 }
 .check-icon {
   width: 32px;

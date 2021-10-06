@@ -1,7 +1,7 @@
 {
     "description": {
         "main": "Verifique seu email",
-        "sub": "Acabamos de lhe enviar um e-mail com um link para ativar sua conta em {email}",
+        "sub": "Acabamos de lhe enviar um e-mail com um link para ativar sua conta em ",
         "has_account": "Já tem uma conta?",
         "has_account_link": "Entre agora"
     },

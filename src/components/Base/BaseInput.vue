@@ -34,6 +34,7 @@ export default defineComponent({
     const classes = computed(() => ({
       block: props.block,
       error: props.error,
+      hasData: props.modelValue,
     }));
 
     function updateValue(event: Event) {
@@ -60,6 +61,8 @@ export default defineComponent({
   }
 
   label {
+    color: $input-labels;
+    font-size: 14px;
     font-weight: 700;
     margin-bottom: 5px;
   }
@@ -70,13 +73,14 @@ export default defineComponent({
     height: 3rem;
     outline: none !important;
     border-radius: 5px;
+    font-size: 14px;
     &.error{ /* Microsoft Edge */
       border-color: $error;
     }
 
-    &:focus{ /* Microsoft Edge */
+    &:focus, &.hasData{ /* Microsoft Edge */
       border-color: $primary-button;
-      background-color: rgba(6,231,205,0.05);
+      background-color: $transparent-focus-bg-elements;
     }
 
     &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */

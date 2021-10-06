@@ -2,7 +2,6 @@
   <form @submit.prevent class="form">
     <div class="form-content">
       <div class="form-title">
-        <span>{{ t(`Step3.form.prelude`) }}</span>
         <h1>{{ t(`Step3.form.title`) }}</h1>
       </div>
       <div class="inputs">
@@ -42,7 +41,7 @@
       <div class="buttons">
         <base-button
           @click="toBack"
-          transparent
+          undo
         >
           {{t(`Step3.form.return_button`)}}
         </base-button>
@@ -139,5 +138,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 .form .buttons {
   flex-direction: row;
+}
+.form .form-title h1 {
+  font-size: 28px;
 }
 </style>

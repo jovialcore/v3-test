@@ -28,13 +28,10 @@
 
 <style lang="scss" scoped>
 .loading {
-  // position: absolute;
-  // left: 50%;
-  // top: 50%;
   margin: -35px 0 0 -56px;
-  width: 112px;
-  height: 70px;
-  *zoom: 1;
+  width: 168px;
+  height: 90px;
+  zoom: 1;
 }
 .loading:before,
 .loading:after {
@@ -47,7 +44,7 @@
 .loading .finger {
   float: left;
   margin: 0 2px 0 0;
-  width: 20px;
+  width: 30px;
   height: 100%;
 }
 .loading .finger-1 {
@@ -132,8 +129,8 @@
   position: absolute;
   left: 3px;
   bottom: 3px;
-  width: 14px;
-  height: 14px;
+  width: 24px;
+  height: 24px;
   -webkit-border-radius: 10px 10px 7px 7px;
   -webkit-background-clip: padding-box;
   -moz-border-radius: 10px 10px 7px 7px;

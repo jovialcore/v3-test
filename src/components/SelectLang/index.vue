@@ -59,7 +59,8 @@ select {
   border: none;
   padding-right: 20px;
   text-align: right;
-  background: url('../../assets/icons/select_icon.svg') no-repeat 98% !important;
+  background: url('../../assets/icons/select_icon.svg') no-repeat 98%;
+  background-size: 10px 10px;
   height: 23px;
   // margin-bottom: 3rem;
   &::-ms-expand {

@@ -47,7 +47,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .description {
   h1 {
-    color: #404446;
+    color: $text-dark-grey-3;
     font-weight: bold;
     font-size: 32px;
   }

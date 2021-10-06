@@ -2,7 +2,6 @@
   <form @submit.prevent class="form">
     <div class="form-content">
       <div class="form-title">
-        <span>{{ t(`Step2.form.prelude`) }}</span>
         <h1>{{ t(`Step2.form.title`) }}</h1>
       </div>
       <div class="inputs">
@@ -45,6 +44,7 @@
         @click="handleSubmit"
         block
         primary
+        :disabled="v$.$invalid"
       >
         {{ t(`Step2.form.next_button`) }}
       </base-button>
