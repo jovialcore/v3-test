@@ -16,7 +16,6 @@
             @click="handleSendEmail"
             :disabled="v$.$invalid"
             block
-            neutral
           >
             {{ t(`CheckEmail.form.send_mail_button`) }}
           </base-button>

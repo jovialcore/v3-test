@@ -1,7 +1,10 @@
 <template>
   <div class="description">
     <h1>{{ t(`CheckEmail.description.main`) }}</h1>
-    <p v-if="email">{{ t(`CheckEmail.description.sub`, { email }) }}</p>
+    <p v-if="email">
+      {{ t(`CheckEmail.description.sub`) }}
+      <span class="highlight">{{email}}</span>
+    </p>
     <img
       class="descriptive"
       v-lazy="{ src: '/images/login/check-email.png' }"
@@ -37,7 +40,7 @@ export default defineComponent({
     const email = computed(() => {
       const user = store.getters['user/getCurrentUser'];
       if (user) return user.email;
-      return '';
+      return 'doijunior@gmail.com';
     });
     watch(currentLang, (newValue) => {
       window.localStorage.setItem('lang', newValue);
@@ -52,12 +55,15 @@ export default defineComponent({
 <style lang="scss" scoped>
 .description {
   h1 {
-    color: #404446;
+    color: $text-dark-grey-4;
     font-weight: bold;
     font-size: 32px;
   }
+  p {
+    color: $text-dark-grey-5;
+  }
   a {
-    color: #1f78de;
+    color: $link-color;
   }
   .description-footer p {
     margin-bottom: 0;

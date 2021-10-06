@@ -1,7 +1,7 @@
 {
     "description": {
         "main": "Check your e-mail",
-        "sub": "We’ve sent an e-mail with a link to activate your account to {email}",
+        "sub": "We’ve sent an e-mail with a link to activate your account to ",
         "has_account": "Already have an account? ",
         "has_account_link": "Log in."
     },

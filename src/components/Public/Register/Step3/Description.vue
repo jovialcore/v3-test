@@ -1,5 +1,5 @@
 <template>
-  <div class="description">
+  <div class="description step3">
     <h1>{{ t(`Step3.description.main`) }}</h1>
     <p>{{ t(`Step3.description.sub`) }}</p>
     <div>
@@ -29,6 +29,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+h1, p {
+  color: $text-dark-grey-2;
+}
 ul {
   list-style: none;
   display: flex;

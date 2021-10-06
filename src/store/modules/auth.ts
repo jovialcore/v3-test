@@ -22,10 +22,10 @@ export type RegisterActivationStep3Type = {
 };
 
 export type RegisterActivationType =
-RegisterActivationStep2Type &
-RegisterActivationStep3Type & {
-  activationToken: string;
-};
+  RegisterActivationStep2Type &
+  RegisterActivationStep3Type & {
+    activationToken: string;
+  };
 
 export type RegisterAccessDataType = BaseAuthType & { language: string };
 

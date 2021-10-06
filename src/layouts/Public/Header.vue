@@ -8,6 +8,7 @@
       />
     </div>
     <div class="selector">
+      <span>{{step}}</span>
       <SelectLang v-model="currentLang" />
     </div>
   </div>
@@ -15,9 +16,10 @@
 
 <script lang="ts">
 import {
-  defineComponent, ref, watch,
+  computed, defineComponent, ref, watch,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 import SelectLang from '@/components/SelectLang/index.vue';
 
 export default defineComponent({
@@ -26,13 +28,20 @@ export default defineComponent({
     const langStorage = localStorage.getItem('lang');
     const currentLang = ref(langStorage || 'br');
     const i18n = useI18n();
-
+    const route = useRoute();
+    // const message = ref('');
     watch(currentLang, (newValue) => {
       window.localStorage.setItem('lang', newValue);
       i18n.locale.value = newValue;
     });
+    console.log(route.name);
 
-    return { currentLang, t: i18n.t };
+    const step = computed(() => {
+      if (route.name === 'RegisterStep2') return i18n.t('Step2.form.prelude');
+      if (route.name === 'RegisterStep3') return i18n.t('Step3.form.prelude');
+      return '';
+    });
+    return { currentLang, step, t: i18n.t };
   },
 });
 </script>
@@ -47,7 +56,7 @@ export default defineComponent({
 
   .logo-container {
     border-radius: 5px 0px 0px 0px;
-    padding-top: 27px;
+    padding-top: 23px;
     background-color: $neutral-bg ;
     padding-left: 90px;
     img {
@@ -57,12 +66,18 @@ export default defineComponent({
   }
   .selector {
     border-radius: 0px 5px 0px 0px;
-    padding-top: 27px;
+    padding-top: 23px;
     padding-right: 90px;
+    padding-left: 70px;
     width: 100%;
     background-color: $white;
-    justify-content: flex-end;
+    justify-content: space-between;
     display: flex;
+    span {
+      color: $text-dark-grey-6;
+      font-size: 14px;
+      line-height: 27px;
+    }
   }
 }
 
@@ -73,6 +88,7 @@ export default defineComponent({
     height: fit-content;
     justify-content: center;
     .logo-container {
+      border-radius: 5px 5px 0px 0px;
       padding-top: 27px;
       background-color: $neutral-bg ;
       padding-left: 10%;
@@ -82,6 +98,7 @@ export default defineComponent({
       }
     }
     .selector {
+      border-radius: 0px 0px 0px 0px;
       padding-right: 10%;
       padding-top: 27px;
       width: 100%;
