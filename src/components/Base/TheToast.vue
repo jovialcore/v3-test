@@ -1,6 +1,28 @@
 <template>
-<div id="snackbar">{{mesage}}</div>
+  <div
+    :class="{ show: !!mesage, type }"
+    id="snackbar"
+  >
+    {{mesage}}
+  </div>
 </template>
+<script lang="ts">
+import { defineComponent, computed } from 'vue';
+
+export default defineComponent({
+  props: {
+    show: { type: Boolean, default: false },
+    mesage: { type: String, default: '' },
+    type: { type: String, default: 'info' },
+    timeout: { type: Number, default: 2.5 },
+  },
+  setup(props) {
+    return {
+      timeoutFormatCSS: computed(() => `${props.timeout}s`),
+    };
+  },
+});
+</script>
 
 <style lang="scss" scoped>
 #snackbar {
@@ -23,8 +45,8 @@
   visibility: visible; /* Show the snackbar */
   /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
   However, delay the fade out process for 2.5 seconds */
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s v-bind(timeoutFormatCSS);
+  animation: fadein 0.5s, fadeout 0.5s v-bind(timeoutFormatCSS);
 }
 
 /* Animations to fade the snackbar in and out */
