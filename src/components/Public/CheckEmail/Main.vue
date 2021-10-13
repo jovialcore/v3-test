@@ -1,5 +1,5 @@
 <template>
-  <form class="form" v-if="!completed">
+  <form class="form" v-if="!isCompleted">
     <div class="form-content">
       <div class="inputs">
         <base-input
@@ -13,8 +13,9 @@
       <div class="buttons">
         <div>
           <base-button
-            @click="handleSendEmail"
+            @click.prevent="handleCheckEmail"
             :disabled="v$.$invalid"
+            primary
             block
           >
             {{ t(`CheckEmail.form.send_mail_button`) }}
@@ -27,45 +28,57 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useStore } from 'vuex';
 import useVuelidate from '@vuelidate/core';
 import { RulesType } from '@/types/Vuelidate';
 import { required, email } from '@/utils/I18nValidators';
 
 import Completed from './Completed.vue';
+import { CheckEmailType } from '@/store/modules/auth';
+import useToast from '@/hooks/useToast';
 
 export default defineComponent({
   components: { Completed },
-  setup() {
+  props: {
+    isCompleted: { type: Boolean, required: true },
+  },
+  setup(props, { emit }) {
+    const store = useStore();
     const { t } = useI18n();
+    const toast = useToast();
 
-    const form = reactive({
-      email: '',
-      language: '',
-    });
+    const form = computed<CheckEmailType>(() => store.getters['auth/getCheckEmailData']);
 
     const rules = {
       email: { required, email },
     } as RulesType;
 
-    const v$ = useVuelidate(rules, form);
+    const v$ = useVuelidate(rules, form.value);
 
-    const completed = ref(false);
-
-    async function handleSendEmail() {
+    async function handleCheckEmail() {
       const isValidate = await v$.value.$validate();
 
       if (isValidate) {
-        completed.value = true;
+        form.value.language = window.localStorage.getItem('lang') || 'us';
+        try {
+          const response = await store.dispatch('auth/submitCheckEmail');
+
+          if (response.data) {
+            emit('setCompleted', true);
+          }
+        } catch (err) {
+          toast.open({ mesage: err?.response?.data?.message });
+        }
       }
     }
 
     return {
-      completed,
+      form,
       v$,
       t,
-      handleSendEmail,
+      handleCheckEmail,
     };
   },
 });

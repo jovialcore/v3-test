@@ -5,22 +5,21 @@ const BASE_URL = process.env.VUE_APP_BASE_URL_JURIDOC_API || 'http://localhost:3
 
 const api = Axios.create({
   baseURL: BASE_URL,
-  // withCredentials: true,
-  // xsrfCookieName: 'token',
+  withCredentials: undefined,
 });
 
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    const canThrowAnError = error.request.status === 0 || error.request.status === 500;
+// api.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     const canThrowAnError = error.request.status === 0 || error.request.status === 500;
 
-    if (canThrowAnError) {
-      throw new Error(error.message);
-    }
+//     if (canThrowAnError) {
+//       throw new Error(error.message);
+//     }
 
-    return error;
-  },
-);
+//     return error;
+//   },
+// );
 
 export default {
   auth: AuthService(api),

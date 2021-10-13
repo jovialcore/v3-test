@@ -17,30 +17,25 @@ export type RegisterParams = {
   language: string;
 }
 
-export type ActivationParams = {
-  activationToken: string;
+export type UserRegisterData = {
   firstName: string;
   lastName: string;
-  job: string;
-  whatBringsYouHere: string;
-  phone: string;
+  job?: string;
+  whatBringsYouHere?: string;
+  phone?: string;
   company: string;
-  size: string;
-  industry: string;
-  crm: string;
+  size?: string;
+  industry?: string;
+  crm?: string;
 }
+
+export type ActivationParams = {
+  activationToken: string;
+} & UserRegisterData;
 
 export type GoogleRegisterParams = {
   tokenId: string;
-  firstName: string;
-  lastName: string;
-  whatBringsYouHere: string;
-  phone: string;
-  company: string;
-  size: number;
-  industry: string;
-  crm: string;
-}
+} & UserRegisterData;
 
 export type LoginParams = {
   email: string;
@@ -48,6 +43,11 @@ export type LoginParams = {
 }
 
 export type ForgotPasswordParams = {
+  email: string;
+  language: string;
+}
+
+export type ResendActivationParams = {
   email: string;
   language: string;
 }
@@ -70,6 +70,7 @@ export interface AuthServiceInterface {
   login({ email, password }:LoginParams): Promise<ServiceReturnUser>;
   currentUser(): Promise<ServiceReturnUser>;
   forgotPassword({ email, language }: ForgotPasswordParams): Promise<ServiceBasicReturn>;
+  resendActivation({ email, language }: ResendActivationParams): Promise<ServiceBasicReturn>;
   resetPassword({
     token, newPassword, passwordConfirm,
   }:ResetPasswordParams): Promise<ServiceBasicReturn>;

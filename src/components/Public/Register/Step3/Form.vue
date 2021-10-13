@@ -6,6 +6,7 @@
       </div>
       <div class="inputs">
         <base-input
+          required
           v-model="v$.company.$model"
           :error="v$.company.$errors[0]?.$message"
           :label="t(`Step3.form.company_name`)"
@@ -46,9 +47,9 @@
           {{t(`Step3.form.return_button`)}}
         </base-button>
         <base-button
-          @click="handleSubmit"
+          @click="handleActivationRegister"
           block
-          :disabled="!isConfirmedTerms"
+          :disabled="v$.$invalid || !isConfirmedTerms"
           primary
         >
           {{t(`Step3.form.next_button`)}}
@@ -61,15 +62,16 @@
 <script lang="ts">
 import useVuelidate from '@vuelidate/core';
 import {
-  defineComponent, reactive, computed, onBeforeMount, ref,
+  defineComponent, reactive, computed, onBeforeMount, ref, onMounted,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { required } from '@/utils/I18nValidators';
 import { RulesType } from '@/types/Vuelidate';
-import { RegisterActivationType } from '@/store/modules/auth';
+import { RegisterActivationDataType, RegisterType } from '@/store/modules/auth';
 import { CompanySizeOptions, CRMOptions, IndustryOptions } from '@/utils/options/Register';
+import useToast from '@/hooks/useToast';
 
 type OptionType = {
   [key: string]: string | number;
@@ -85,37 +87,79 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const router = useRouter();
+    const route = useRoute();
     const { t } = useI18n();
+    const toast = useToast();
+
+    const token = ref('');
+    const isGoogle = ref(false);
+
     const options: OptionsType = reactive({
       industrySize: [],
       industry: [],
       crm: [],
     });
 
-    const form = computed<RegisterActivationType>(() => store.getters['auth/getRegisterActivationData']);
+    const form = computed<RegisterActivationDataType>(() => store.getters['auth/getRegisterActivationData']);
+    const register = computed<RegisterType>(() => store.getters['auth/getRegisterData']);
 
     const rules = {
       company: { required },
-      size: { required },
-      industry: { required },
-      crm: { required },
+      size: {},
+      industry: {},
+      crm: {},
     } as RulesType;
+
     const isConfirmedTerms = ref(false);
-    const v$ = useVuelidate(rules, form);
+
+    const v$ = useVuelidate(rules, form.value);
 
     function toBack() {
-      router.back();
+      router.push({
+        name: 'RegisterStep2',
+        params: {
+          token: token.value,
+          isGoogle: String(isGoogle.value),
+        },
+      });
     }
 
-    async function handleSubmit() {
+    async function handleActivationRegister() {
       const isValidate = await v$.value.$validate();
+      let response;
 
       if (isValidate) {
-        store.dispatch('auth/setRegisterActivationStep3', form.value);
-        store.dispatch('auth/submitActivation');
+        try {
+          if (isGoogle.value) {
+            response = await store.dispatch('auth/submitGoogleActivation');
+          } else {
+            response = await store.dispatch('auth/submitActivation');
+          }
+
+          if (response.data) {
+            toast.open({ mesage: response.data.msg });
+            router.push({ name: 'RegisterFinished' });
+          }
+        } catch (err) {
+          toast.open({ mesage: err?.response?.data?.message });
+        }
+
         router.push({ name: 'RegisterFinished' });
       }
     }
+
+    onMounted(() => {
+      token.value = String(route.params.token) || '';
+      isGoogle.value = route.params.isGoogle === 'true' || false;
+
+      if (!token.value) router.push({ name: 'Login' });
+
+      if (isGoogle.value) {
+        register.value.tokenId = String(token.value);
+      } else {
+        register.value.activationToken = String(token.value);
+      }
+    });
 
     onBeforeMount(() => {
       options.industrySize = CompanySizeOptions();
@@ -128,7 +172,7 @@ export default defineComponent({
       options,
       t,
       toBack,
-      handleSubmit,
+      handleActivationRegister,
       isConfirmedTerms,
     };
   },

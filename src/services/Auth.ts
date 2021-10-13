@@ -7,6 +7,7 @@ import {
   GoogleRegisterParams,
   LoginParams,
   RegisterParams,
+  ResendActivationParams,
   ResetPasswordParams,
   ServiceReturnMsgAndUser,
   ServiceReturnUser,
@@ -16,17 +17,7 @@ import { getRequestError } from '@/utils/Services';
 const BASE_ENDPOINT = '/auth';
 
 function AuthService(api: AxiosInstance):AuthServiceInterface {
-  async function register({
-    email,
-    password,
-    language,
-  }:RegisterParams): Promise<ServiceBasicReturn> {
-    const body = {
-      email,
-      password,
-      language,
-    };
-
+  async function register(body: RegisterParams): Promise<ServiceBasicReturn> {
     const response = await api.post(`${BASE_ENDPOINT}/register`, body);
 
     let errors: RequestError;
@@ -40,24 +31,7 @@ function AuthService(api: AxiosInstance):AuthServiceInterface {
       errors,
     };
   }
-  async function activation({
-    activationToken, firstName,
-    lastName, job, whatBringsYouHere,
-    phone, company, size, industry, crm,
-  }:ActivationParams): Promise<ServiceReturnMsgAndUser> {
-    const body = {
-      activationToken,
-      firstName,
-      lastName,
-      job,
-      whatBringsYouHere,
-      phone,
-      company,
-      size,
-      industry,
-      crm,
-    };
-
+  async function activation(body: ActivationParams): Promise<ServiceReturnMsgAndUser> {
     const response = await api.patch(`${BASE_ENDPOINT}/activation`, body);
 
     let errors: RequestError;
@@ -71,9 +45,7 @@ function AuthService(api: AxiosInstance):AuthServiceInterface {
       errors,
     };
   }
-  async function login({ email, password }:LoginParams): Promise<ServiceReturnUser> {
-    const body = { email, password };
-
+  async function login(body: LoginParams): Promise<ServiceReturnUser> {
     const response = await api.post(`${BASE_ENDPOINT}/login`, body);
 
     let errors: RequestError;
@@ -101,12 +73,8 @@ function AuthService(api: AxiosInstance):AuthServiceInterface {
       errors,
     };
   }
-  async function forgotPassword({
-    email,
-    language,
-  }: ForgotPasswordParams): Promise<ServiceBasicReturn> {
-    const body = { email, language };
 
+  async function forgotPassword(body: ForgotPasswordParams): Promise<ServiceBasicReturn> {
     const response = await api.post(`${BASE_ENDPOINT}/forgotPassword`, body);
 
     let errors: RequestError;
@@ -120,15 +88,23 @@ function AuthService(api: AxiosInstance):AuthServiceInterface {
       errors,
     };
   }
-  async function resetPassword({
-    token, newPassword, passwordConfirm,
-  }:ResetPasswordParams): Promise<ServiceBasicReturn> {
-    const body = {
-      token,
-      newPassword,
-      passwordConfirm,
-    };
 
+  async function resendActivation(body: ResendActivationParams): Promise<ServiceBasicReturn> {
+    const response = await api.post(`${BASE_ENDPOINT}/resendActivation`, body);
+
+    let errors: RequestError;
+
+    if (!response.data) {
+      errors = getRequestError(response);
+    }
+
+    return {
+      data: response.data || undefined,
+      errors,
+    };
+  }
+
+  async function resetPassword(body: ResetPasswordParams): Promise<ServiceBasicReturn> {
     const response = await api.post(`${BASE_ENDPOINT}/resetPassword`, body);
 
     let errors: RequestError;
@@ -142,6 +118,7 @@ function AuthService(api: AxiosInstance):AuthServiceInterface {
       errors,
     };
   }
+
   async function logout(): Promise<ServiceBasicReturn> {
     const response = await api.get(`${BASE_ENDPOINT}/logout`);
 
@@ -156,6 +133,7 @@ function AuthService(api: AxiosInstance):AuthServiceInterface {
       errors,
     };
   }
+
   async function googleLogin(tokenId: string): Promise<ServiceReturnUser> {
     const response = await api.post(`${BASE_ENDPOINT}/googleLogin`, { tokenId });
 
@@ -170,21 +148,7 @@ function AuthService(api: AxiosInstance):AuthServiceInterface {
       errors,
     };
   }
-  async function googleRegister({
-    tokenId, firstName, lastName, whatBringsYouHere, phone, company, size, industry, crm,
-  }:GoogleRegisterParams): Promise<ServiceReturnMsgAndUser> {
-    const body = {
-      tokenId,
-      firstName,
-      lastName,
-      whatBringsYouHere,
-      phone,
-      company,
-      size,
-      industry,
-      crm,
-    };
-
+  async function googleRegister(body: GoogleRegisterParams): Promise<ServiceReturnMsgAndUser> {
     const response = await api.post(`${BASE_ENDPOINT}/googleRegister`, body);
 
     let errors: RequestError;
@@ -205,6 +169,7 @@ function AuthService(api: AxiosInstance):AuthServiceInterface {
     login,
     currentUser,
     forgotPassword,
+    resendActivation,
     resetPassword,
     logout,
     googleLogin,

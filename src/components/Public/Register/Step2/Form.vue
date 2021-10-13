@@ -11,12 +11,14 @@
             :error="v$.firstName.$errors[0]?.$message"
             :label="t(`Step2.form.first_name`)"
             :placeholder="t(`Step2.form.first_name_placeholder`)"
+            required
           />
           <base-input
             v-model="v$.lastName.$model"
             :error="v$.lastName.$errors[0]?.$message"
             :label="t(`Step2.form.last_name`)"
             :placeholder="t(`Step2.form.last_name_placeholder`)"
+            required
           />
         </div>
         <base-input
@@ -64,6 +66,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { required } from '@/utils/I18nValidators';
 import { RulesType } from '@/types/Vuelidate';
 import { WhatBroughtOptions } from '@/utils/options/Register';
+import { RegisterActivationDataType, RegisterType } from '@/store/modules/auth';
 
 type OptionType = {
   [key: string]: string | number;
@@ -79,46 +82,56 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute();
     const { t } = useI18n();
+
     const token = ref('');
+    const isGoogle = ref(false);
 
-    const options:OptionsType = reactive({ whatBrought: [] });
+    const options: OptionsType = reactive({ whatBrought: [] });
 
-    const form = computed(() => store.getters['auth/getRegisterActivationData']);
+    const form = computed<RegisterActivationDataType>(() => store.getters['auth/getRegisterActivationData']);
+    const register = computed<RegisterType>(() => store.getters['auth/getRegisterData']);
 
     const rules = {
       firstName: { required },
       lastName: { required },
-      job: { required },
-      whatBringsYouHere: { required },
-      phone: { required },
+      job: { },
+      whatBringsYouHere: { },
+      phone: { },
     } as RulesType;
 
-    const v$ = useVuelidate(rules, form);
+    const v$ = useVuelidate(rules, form.value);
 
     async function handleSubmit() {
       const isValidate = await v$.value.$validate();
 
       if (isValidate) {
-        store.dispatch('auth/setRegisterActivationStep2', form.value);
+        if (form.value.phone) {
+          form.value.phone = form.value.phone.replace('+', '').replace(/ /g, '');
+        }
 
         router.push({
           name: 'RegisterStep3',
           params: {
             token: token.value,
+            isGoogle: String(isGoogle.value),
           },
         });
       }
     }
 
     onMounted(() => {
-      const { token: activationToken } = route.params;
+      token.value = String(route.params.token) || '';
+      isGoogle.value = route.params.isGoogle === 'true' || false;
 
-      if (!activationToken) {
-        router.push({ name: 'Login' });
+      console.log(token.value);
+
+      if (!token.value) router.push({ name: 'Login' });
+
+      if (isGoogle.value) {
+        register.value.tokenId = String(token.value);
+      } else {
+        register.value.activationToken = String(token.value);
       }
-
-      form.value.activationToken = String(activationToken);
-      token.value = String(activationToken);
     });
 
     onBeforeMount(() => {

@@ -8,26 +8,24 @@
       <li>{{ t(`CheckEmail.completed.items.another_email`) }}</li>
       <li>{{ t(`CheckEmail.completed.items.cant_deliver`) }}</li>
     </ul>
-    <a href="#" @click="clearEmail">{{ t(`CheckEmail.completed.reenter_email`) }}</a>
+    <a href="#" @click.prevent="handleClearEmail">{{ t(`CheckEmail.completed.reenter_email`) }}</a>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useStore } from 'vuex';
 
 export default defineComponent({
-  setup() {
-    const i18n = useI18n();
-    const store = useStore();
+  setup(_, { emit }) {
+    const { t } = useI18n();
 
-    async function clearEmail() {
-      store.dispatch('user/setUser', { email: '' });
+    function handleClearEmail() {
+      emit('setCompleted', false);
     }
 
     return {
-      t: i18n.t, clearEmail,
+      t, handleClearEmail,
     };
   },
 });

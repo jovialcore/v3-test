@@ -28,7 +28,7 @@
       <div class="buttons">
         <div>
           <base-button
-            @click="handleSubmit"
+            @click="handleLogin"
             :disabled="v$.$invalid"
             block
             primary
@@ -42,7 +42,7 @@
           </div>
         </div>
         <base-button
-          @click="teste"
+          @click="handleGoogleLogin"
           block
           neutral
         >
@@ -59,15 +59,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useVuelidate, ValidationArgs } from '@vuelidate/core';
+import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
+import { useI18n } from 'vue-i18n';
+import { useVuelidate } from '@vuelidate/core';
 import { useRouter } from 'vue-router';
+import GoogleAuth from '@/utils/GoogleAuth';
 import {
   required, email, maxLength, minLength,
 } from '@/utils/I18nValidators';
 import useToast from '@/hooks/useToast';
+
+import { LoginDataType } from '@/store/modules/auth';
+import { RulesType } from '@/types/Vuelidate';
 
 export default defineComponent({
   setup() {
@@ -76,42 +80,55 @@ export default defineComponent({
     const router = useRouter();
     const toast = useToast();
 
-    const form = reactive({
-      email: '',
-      password: '',
-    });
-
-    type RulesType = {
-      [key: string]: ValidationArgs
-    }
+    const form = computed<LoginDataType>(() => store.getters['auth/getLoginData']);
 
     const rules = {
       email: { required, email },
       password: { required, minLength: minLength(6), maxLength: maxLength(16) },
     } as RulesType;
 
-    const v$ = useVuelidate(rules, form);
+    const v$ = useVuelidate(rules, form.value);
 
-    async function handleSubmit() {
+    async function handleLogin() {
       const isValidate = await v$.value.$validate();
 
       if (isValidate) {
-        store.dispatch('auth/setLoginData', form);
-        const response = await store.dispatch('auth/submitLogin', form);
+        try {
+          const response = await store.dispatch('auth/submitLogin', form);
 
-        if (response.data) {
-          store.dispatch('user/setUser', response.data);
-          router.push({ name: 'Home' });
+          if (response.data) {
+            router.push({ name: 'Home' });
+          }
+        } catch (err) {
+          toast.open({ mesage: err?.response?.data?.message });
         }
       }
     }
 
-    function teste() {
-      toast.open({ mesage: 'Hi Toast' });
+    async function handleGoogleLogin() {
+      const auth = await GoogleAuth();
+      const user = await auth.signIn();
+      const tokenId = user.getAuthResponse().id_token;
+      try {
+        const response = await store.dispatch('auth/submitGoogleLogin', tokenId);
+
+        if (response.data) {
+          router.push({ name: 'Home' });
+        }
+      } catch (err) {
+        toast.open({ mesage: err?.response?.data?.message });
+      }
+
+      // if (response.data) {
+      //   toast.open({ mesage: response.data.msg });
+      //   store.dispatch('user/setUser', response.data);
+      //   router.push({ name: 'Home' });
+      // }
+      router.push({ name: 'Home' });
     }
 
     return {
-      v$, t, handleSubmit, teste,
+      v$, t, handleLogin, handleGoogleLogin,
     };
   },
 });

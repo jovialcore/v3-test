@@ -34,7 +34,6 @@ export default defineComponent({
       window.localStorage.setItem('lang', newValue);
       i18n.locale.value = newValue;
     });
-    console.log(route.name);
 
     const step = computed(() => {
       if (route.name === 'RegisterStep2') return i18n.t('Step2.form.prelude');
