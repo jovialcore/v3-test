@@ -22,9 +22,9 @@ import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup() {
-    const i18n = useI18n();
+    const { t } = useI18n();
 
-    return { t: i18n.t };
+    return { t };
   },
 });
 </script>

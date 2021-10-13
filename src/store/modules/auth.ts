@@ -1,47 +1,47 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex';
 import $api from '@/services';
 
-export type BaseAuthType = {
+export type LoginDataType = {
   email: string;
   password: string;
 };
 
-export type RegisterActivationStep2Type = {
+export type RegisterActivationDataType ={
   firstName: string;
   lastName: string;
-  job: string;
-  whatBringsYouHere: string;
-  phone: string;
-};
-
-export type RegisterActivationStep3Type = {
+  job?: string;
+  whatBringsYouHere?: string;
+  phone?: string;
   company: string;
-  size: string;
-  industry: string;
-  crm: string;
+  size?: string;
+  industry?: string;
+  crm?: string;
 };
 
-export type RegisterActivationType =
-  RegisterActivationStep2Type &
-  RegisterActivationStep3Type & {
-    activationToken: string;
-  };
-
-export type RegisterAccessDataType = BaseAuthType & { language: string };
+export type RegisterAccessDataType = LoginDataType & { language: string };
 
 export type RegisterType = {
-  accessData: RegisterAccessDataType,
-  activationData: RegisterActivationType,
-  currentStep: string;
+  accessData: RegisterAccessDataType;
+  data: RegisterActivationDataType;
+  activationToken?: string;
+  tokenId?: string;
+};
+
+export type ForgotPasswordType = {
+  email: string;
+  language: string;
+};
+
+export type CheckEmailType = {
+  email: string;
+  language: string;
 };
 
 type GlobalType = {
-  login: BaseAuthType;
+  login: LoginDataType;
   register: RegisterType;
-  forgotPassword: {
-    email: string;
-    language: string;
-  };
+  forgotPassword: ForgotPasswordType;
+  checkEmail: CheckEmailType;
 };
 
 export const state: GlobalType = {
@@ -49,25 +49,23 @@ export const state: GlobalType = {
     email: '',
     password: '',
   },
+  checkEmail: {
+    email: '',
+    language: '',
+  },
   register: {
     accessData: {
       email: '',
       password: '',
       language: '',
     },
-    activationData: {
-      activationToken: '',
+    activationToken: '',
+    tokenId: '',
+    data: {
       firstName: '',
       lastName: '',
-      job: '',
-      whatBringsYouHere: '',
-      phone: '',
       company: '',
-      size: '',
-      industry: '',
-      crm: '',
     },
-    currentStep: '',
   },
   forgotPassword: {
     email: '',
@@ -85,64 +83,62 @@ export const mutations: MutationTree<GlobalType> = {
   SET_REGISTER_ACCESS_DATA(state, data) {
     state.register.accessData = data;
   },
-  SET_REGISTER_ACTIVATION_STEP2_DATA(state, data) {
-    state.register.activationData.activationToken = data.activationToken;
-    state.register.activationData.firstName = data.firstName;
-    state.register.activationData.lastName = data.lastName;
-    state.register.activationData.job = data.job;
-    state.register.activationData.whatBringsYouHere = data.whatBringsYouHere;
-    state.register.activationData.phone = data.phone.replace('+', '').replace(/ /g, '');
-  },
-  SET_REGISTER_ACTIVATION_STEP3_DATA(state, data) {
-    state.register.activationData.company = data.company;
-    state.register.activationData.size = data.size;
-    state.register.activationData.industry = data.industry;
-    state.register.activationData.crm = data.crm;
-  },
-  SET_REGISTER_STEP(state, data) {
-    state.register.currentStep = data;
-  },
   SET_FORGOT_PASSWORD_DATA(state, data) {
     state.forgotPassword = data;
+  },
+  SET_CHECK_EMAIL_DATA(state, data) {
+    state.checkEmail = data;
   },
 };
 
 export const actions: ActionTree<GlobalType, void> = {
-  setLoginData: ({ commit }, data: BaseAuthType) => commit('SET_LOGIN_DATA', data),
-
-  setRegisterAccessData: ({ commit }, data: BaseAuthType & { language: string }) => commit('SET_REGISTER_ACCESS_DATA', data),
-
-  setRegisterActivationStep2(
-    { commit }, data: RegisterActivationStep2Type & { activationToken: string },
-  ) { commit('SET_REGISTER_ACTIVATION_STEP2_DATA', data); },
-
-  setRegisterActivationStep3({ commit }, data: RegisterActivationStep3Type) {
-    commit('SET_REGISTER_ACTIVATION_STEP3_DATA', data);
-  },
-
-  setForgotPasswordData: ({ commit }, data:{ email: string }) => commit('SET_FORGOT_PASSWORD_DATA', data),
+  setLoginData: ({ commit }, data: LoginDataType) => commit('SET_LOGIN_DATA', data),
+  setCheckEmailData: ({ commit }, data: CheckEmailType) => commit('SET_CHECK_EMAIL_DATA', data),
+  setRegisterAccessData: ({ commit }, data: LoginDataType & { language: string }) => commit('SET_REGISTER_ACCESS_DATA', data),
+  setForgotPasswordData: ({ commit }, data: { email: string }) => commit('SET_FORGOT_PASSWORD_DATA', data),
   async submitLogin({ state }) {
     const body = state.login;
     const response = await $api.auth.login(body);
 
     return response;
   },
+  async submitGoogleLogin(_, tokenId: string) {
+    const response = await $api.auth.googleLogin(tokenId);
 
+    return response;
+  },
+  async submitCheckEmail({ state }) {
+    const body = state.checkEmail;
+    const response = await $api.auth.resendActivation(body);
+
+    return response;
+  },
   async submitRegister({ state }) {
     const body = state.register.accessData;
     const response = await $api.auth.register(body);
 
     return response;
   },
-
   async submitActivation({ state }) {
-    const body = state.register.activationData;
-    console.log(body);
-    const response = await $api.auth.activation(body);
+    const body = state.register.data;
+
+    const response = await $api.auth.activation({
+      activationToken: state.register.activationToken || '',
+      ...body,
+    });
 
     return response;
   },
+  async submitGoogleActivation({ state }) {
+    const body = state.register.data;
 
+    const response = await $api.auth.googleRegister({
+      tokenId: state.register.tokenId || '',
+      ...body,
+    });
+
+    return response;
+  },
   async submitForgotPassword({ state }) {
     const body = state.forgotPassword;
     const response = await $api.auth.forgotPassword(body);
@@ -152,7 +148,10 @@ export const actions: ActionTree<GlobalType, void> = {
 };
 
 export const getters: GetterTree<GlobalType, void> = {
-  getLoginData: (state) => state.login,
-  getRegisterAccessData: (state): RegisterAccessDataType => state.register.accessData,
-  getRegisterActivationData: (state): RegisterActivationType => state.register.activationData,
+  getLoginData: (state):LoginDataType => state.login,
+  getRegisterAccessData: (state):RegisterAccessDataType => state.register.accessData,
+  getRegisterActivationData: (state):RegisterActivationDataType => state.register.data,
+  getRegisterData: (state): RegisterType => state.register,
+  getCheckEmailData: (state):CheckEmailType => state.checkEmail,
+  getForgotPasswordData: (state):ForgotPasswordType => state.forgotPassword,
 };

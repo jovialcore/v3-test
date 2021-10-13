@@ -1,7 +1,7 @@
 <template>
   <div class="description">
     <h1>{{ t(`CheckEmail.description.main`) }}</h1>
-    <p v-if="email">
+    <p v-if="email && isCompleted">
       {{ t(`CheckEmail.description.sub`) }}
       <span class="highlight">{{email}}</span>
     </p>
@@ -22,32 +22,18 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  computed,
-  ref,
-  watch,
-} from 'vue';
+import { defineComponent } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useStore } from 'vuex';
 
 export default defineComponent({
+  props: {
+    email: { type: String, default: '' },
+    isCompleted: { type: Boolean, default: false },
+  },
   setup() {
-    const store = useStore();
-    const langStorage = localStorage.getItem('lang');
-    const currentLang = ref(langStorage || 'br');
-    const i18n = useI18n();
-    const email = computed(() => {
-      const user = store.getters['user/getCurrentUser'];
-      if (user) return user.email;
-      return 'doijunior@gmail.com';
-    });
-    watch(currentLang, (newValue) => {
-      window.localStorage.setItem('lang', newValue);
-      i18n.locale.value = newValue;
-    });
+    const { t } = useI18n();
 
-    return { currentLang, email, t: i18n.t };
+    return { t };
   },
 });
 </script>

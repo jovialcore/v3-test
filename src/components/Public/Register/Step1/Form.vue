@@ -29,7 +29,7 @@
       <div class="buttons">
         <div>
           <base-button
-            @click="handleSubmit"
+            @click="handleRegister"
             :disabled="!(!v$.$invalid)"
             block
             primary
@@ -37,7 +37,11 @@
             {{ t(`Register.form.register_button`) }}
           </base-button>
         </div>
-        <base-button block neutral>
+        <base-button
+          @click="handleGoogleRegister"
+          block
+          neutral
+        >
           <img
             class="descriptive"
             alt="Google G icon"
@@ -52,7 +56,7 @@
 
 <script lang="ts">
 import useVuelidate from '@vuelidate/core';
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
@@ -60,43 +64,67 @@ import {
   required, email, minLength, upperCase,
 } from '@/utils/I18nValidators';
 import { RulesType } from '@/types/Vuelidate';
+import GoogleAuth from '@/utils/GoogleAuth';
+import { CheckEmailType, RegisterAccessDataType, RegisterType } from '@/store/modules/auth';
+import useToast from '@/hooks/useToast';
 
 export default defineComponent({
   setup() {
     const { t } = useI18n();
     const store = useStore();
     const router = useRouter();
+    const toast = useToast();
 
-    const form = reactive({
-      email: '',
-      password: '',
-      language: '',
-    });
+    const form = computed<RegisterAccessDataType>(() => store.getters['auth/getRegisterAccessData']);
+    const register = computed<RegisterType>(() => store.getters['auth/getRegisterData']);
+    const checkEmail = computed<CheckEmailType>(() => store.getters['auth/getCheckEmailData']);
 
     const rules = {
       email: { required, email },
       password: { required, minLength: minLength(6), upperCase },
     } as RulesType;
 
-    const v$ = useVuelidate(rules, form);
+    const v$ = useVuelidate(rules, form.value);
 
-    async function handleSubmit() {
+    async function handleRegister() {
       const isValidate = await v$.value.$validate();
 
       if (isValidate) {
-        form.language = window.localStorage.getItem('lang') || 'us';
-        store.dispatch('user/setUser', { email: form.email });
-        store.dispatch('auth/setRegisterAccessData', form);
+        form.value.language = window.localStorage.getItem('lang') || 'us';
+        try {
+          const response = await store.dispatch('auth/submitRegister');
 
-        const response = await store.dispatch('auth/submitRegister', form);
+          checkEmail.value.email = form.value.email;
+          checkEmail.value.language = form.value.language;
 
-        if (response.data) {
-          router.push({ name: 'CheckEmail' });
+          if (response.data) {
+            toast.open({ mesage: response.data.msg });
+            router.push({ name: 'CheckEmail' });
+          }
+        } catch (err) {
+          toast.open({ mesage: err?.response?.data?.message });
         }
       }
     }
+
+    async function handleGoogleRegister() {
+      const auth = await GoogleAuth();
+      const user = await auth.signIn();
+
+      register.value.data.firstName = user.getBasicProfile().getGivenName();
+      register.value.data.lastName = user.getBasicProfile().getFamilyName();
+
+      router.push({
+        name: 'RegisterStep3',
+        params: {
+          token: user.getAuthResponse().id_token,
+          isGoogle: 'true',
+        },
+      });
+    }
+
     return {
-      v$, t, handleSubmit,
+      v$, t, handleRegister, handleGoogleRegister,
     };
   },
 });

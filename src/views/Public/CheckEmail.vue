@@ -1,12 +1,22 @@
 <template>
-  <Description />
-  <Completed v-if="email" />
-  <Main v-else />
+  <Description
+    :email="email"
+    :is-completed="isCompleted"
+  />
+  <Completed
+    v-if="email && isCompleted"
+    @set-completed="setCompleted"
+  />
+  <Main
+    v-else
+    :is-completed="isCompleted"
+    @set-completed="setCompleted"
+  />
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
-// import { useStore } from 'vuex';
+import { computed, defineComponent, ref } from 'vue';
+import { useStore } from 'vuex';
 import Completed from '@/components/Public/CheckEmail/Completed.vue';
 import Description from '@/components/Public/CheckEmail/Description.vue';
 import Main from '@/components/Public/CheckEmail/Main.vue';
@@ -14,14 +24,15 @@ import Main from '@/components/Public/CheckEmail/Main.vue';
 export default defineComponent({
   components: { Description, Completed, Main },
   setup() {
-    // const store = useStore();
-    const email = computed(() => {
-      // const user = store.getters['user/getCurrentUser'];
-      // if (user) return user.email;
-      const email = 'doijunior@gmail.com';
-      return email;
-    });
-    return { email };
+    const store = useStore();
+    const email = computed<string>(() => (store.getters['auth/getCheckEmailData']).email);
+    const isCompleted = ref(true);
+
+    function setCompleted(value: boolean) {
+      isCompleted.value = value;
+    }
+
+    return { isCompleted, email, setCompleted };
   },
 });
 </script>

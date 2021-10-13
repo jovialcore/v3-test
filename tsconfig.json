@@ -13,8 +13,11 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
+    "allowJs": true,
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "gapi", 
+      "gapi.auth2"
     ],
     "typeRoots": [
       "src/@types",

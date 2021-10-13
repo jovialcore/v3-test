@@ -29,12 +29,12 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Public/Register/Step1.vue'),
       },
       {
-        path: 'step/2/:token',
+        path: 'step/2/:token/:isGoogle?',
         name: 'RegisterStep2',
         component: () => import('@/views/Public/Register/Step2.vue'),
       },
       {
-        path: 'step/3/:token',
+        path: 'step/3/:token/:isGoogle?',
         name: 'RegisterStep3',
         component: () => import('@/views/Public/Register/Step3.vue'),
       },
@@ -74,8 +74,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: 'Activation',
         path: 'activate/:token',
-        component: () => import('@/views/Public/Activate.vue'),
-        props: true,
+        redirect: { name: 'RegisterStep2' },
       },
     ],
   },

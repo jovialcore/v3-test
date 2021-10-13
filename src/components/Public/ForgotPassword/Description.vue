@@ -25,21 +25,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+import { defineComponent } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup() {
-    const langStorage = localStorage.getItem('lang');
-    const currentLang = ref(langStorage || 'br');
-    const i18n = useI18n();
+    const { t } = useI18n();
 
-    watch(currentLang, (newValue) => {
-      window.localStorage.setItem('lang', newValue);
-      i18n.locale.value = newValue;
-    });
-
-    return { currentLang, t: i18n.t };
+    return { t };
   },
 });
 </script>

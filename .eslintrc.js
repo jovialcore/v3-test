@@ -17,7 +17,8 @@ module.exports = {
     'import/no-dynamic-require': 'off',
     'no-shadow': 'off',
     'import/prefer-default-export': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
+    'no-param-reassign': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     "linebreak-style": 0

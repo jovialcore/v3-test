@@ -7,7 +7,9 @@
       :value="modelValue"
       :placeholder="placeholder"
       @input="updateValue"
+      :required="required"
     />
+    <span class="required" v-if="required">*</span>
     <span>
       {{ error }}
     </span>
@@ -28,6 +30,7 @@ export default defineComponent({
     placeholder: { type: String, default: '' },
     error: { type: String, default: '' },
     block: { type: Boolean },
+    required: { type: Boolean },
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
@@ -53,6 +56,8 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .input-container {
+    position: relative;
+
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -74,7 +79,7 @@ export default defineComponent({
     outline: none !important;
     border-radius: 5px;
     font-size: 14px;
-    &.error{ /* Microsoft Edge */
+    &.error {
       border-color: $error;
     }
 
@@ -111,11 +116,18 @@ export default defineComponent({
     // &.block {
     //   width: 100%;
     // }
+
   }
 
   span {
     color: $error;
     padding-left: 8px;
+    &.required {
+      position: absolute;
+      top: 32px;
+      right: 8px;
+    }
   }
+
 }
 </style>
