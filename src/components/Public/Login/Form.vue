@@ -119,11 +119,6 @@ export default defineComponent({
         toast.open({ mesage: err?.response?.data?.message });
       }
 
-      // if (response.data) {
-      //   toast.open({ mesage: response.data.msg });
-      //   store.dispatch('user/setUser', response.data);
-      //   router.push({ name: 'Home' });
-      // }
       router.push({ name: 'Home' });
     }
 
@@ -133,3 +128,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss"  scoped>
+.forgot_password a {
+  font-size: 13px;
+}
+</style>

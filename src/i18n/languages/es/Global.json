@@ -4,6 +4,7 @@
     "email": "Email inválido",
     "minLength": "Este campo necesita de más caracteres",
     "maxLength": "Este campo necesita de menos caracteres",
-    "upperCase": "Este campo debe contener al menos una letra mayúscula."
+    "upperCase": "Este campo debe contener al menos una letra mayúscula.",
+    "sameAsPassword": "Las contraseñas no coinciden"
   }
 }

@@ -24,6 +24,10 @@ export const minLength = (value: number): returnType => withI18nMessage(
 
 export const email = withI18nMessage(validators.email);
 
+export const sameAs = (value: string | number):returnType => withI18nMessage(
+  validators.sameAs(value),
+);
+
 export const upperCase = withI18nMessage(
   validators.helpers.withMessage(
     'This field must contain at least one capital letter',

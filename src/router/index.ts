@@ -51,8 +51,9 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         name: 'ForgotPassword',
-        path: '',
+        path: ':token?',
         component: () => import('@/views/Public/ForgotPassword.vue'),
+        props: true,
       },
     ],
   },
@@ -75,6 +76,11 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Activation',
         path: 'activate/:token',
         redirect: { name: 'RegisterStep2' },
+      },
+      {
+        name: 'ResetPassword',
+        path: 'reset/:token',
+        redirect: { name: 'ForgotPassword' },
       },
     ],
   },

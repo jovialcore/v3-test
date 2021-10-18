@@ -51,7 +51,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 button, .btn {
-  font-size: 20px;
+  font-size: 17px;
   width: fit-content;
   height: 55px;
   display: flex;

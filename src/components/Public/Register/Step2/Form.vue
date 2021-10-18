@@ -123,8 +123,6 @@ export default defineComponent({
       token.value = String(route.params.token) || '';
       isGoogle.value = route.params.isGoogle === 'true' || false;
 
-      console.log(token.value);
-
       if (!token.value) router.push({ name: 'Login' });
 
       if (isGoogle.value) {
