@@ -32,6 +32,12 @@ export type ForgotPasswordType = {
   language: string;
 };
 
+export type ResetPasswordType = {
+  token: string;
+  newPassword: string;
+  passwordConfirm: string;
+};
+
 export type CheckEmailType = {
   email: string;
   language: string;
@@ -41,6 +47,7 @@ type GlobalType = {
   login: LoginDataType;
   register: RegisterType;
   forgotPassword: ForgotPasswordType;
+  resetPassword: ResetPasswordType;
   checkEmail: CheckEmailType;
 };
 
@@ -71,6 +78,11 @@ export const state: GlobalType = {
     email: '',
     language: '',
   },
+  resetPassword: {
+    token: '',
+    newPassword: '',
+    passwordConfirm: '',
+  },
 };
 
 export const mutations: MutationTree<GlobalType> = {
@@ -86,6 +98,9 @@ export const mutations: MutationTree<GlobalType> = {
   SET_FORGOT_PASSWORD_DATA(state, data) {
     state.forgotPassword = data;
   },
+  SET_RESET_PASSWORD_DATA(state, data) {
+    state.resetPassword = data;
+  },
   SET_CHECK_EMAIL_DATA(state, data) {
     state.checkEmail = data;
   },
@@ -96,6 +111,7 @@ export const actions: ActionTree<GlobalType, void> = {
   setCheckEmailData: ({ commit }, data: CheckEmailType) => commit('SET_CHECK_EMAIL_DATA', data),
   setRegisterAccessData: ({ commit }, data: LoginDataType & { language: string }) => commit('SET_REGISTER_ACCESS_DATA', data),
   setForgotPasswordData: ({ commit }, data: { email: string }) => commit('SET_FORGOT_PASSWORD_DATA', data),
+  setResetPasswordData: ({ commit }, data: RegisterType) => commit('SET_RESET_PASSWORD_DATA', data),
   async submitLogin({ state }) {
     const body = state.login;
     const response = await $api.auth.login(body);
@@ -145,6 +161,12 @@ export const actions: ActionTree<GlobalType, void> = {
 
     return response;
   },
+  async submitResetPassword({ state }) {
+    const body = state.resetPassword;
+    const response = await $api.auth.resetPassword(body);
+
+    return response;
+  },
 };
 
 export const getters: GetterTree<GlobalType, void> = {
@@ -154,4 +176,5 @@ export const getters: GetterTree<GlobalType, void> = {
   getRegisterData: (state): RegisterType => state.register,
   getCheckEmailData: (state):CheckEmailType => state.checkEmail,
   getForgotPasswordData: (state):ForgotPasswordType => state.forgotPassword,
+  getResetPasswordData: (state):ResetPasswordType => state.resetPassword,
 };

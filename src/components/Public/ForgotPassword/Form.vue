@@ -15,7 +15,7 @@
             @click="handleForgotPassword"
             :disabled="v$.$invalid"
             block
-            neutral
+            primary
           >
           {{ t(`ForgotPassword.form.send_mail_button`) }}
           </base-button>
@@ -56,17 +56,18 @@ export default defineComponent({
 
       if (isValidate) {
         form.value.language = window.localStorage.getItem('lang') || 'us';
+
         try {
           const response = await store.dispatch('auth/submitForgotPassword', form);
 
           if (response.data) {
-            router.push({ name: 'Home' });
+            router.push({ name: 'Login' });
           }
         } catch (err) {
           toast.open({ mesage: err?.response?.data?.message });
         }
 
-        router.push({ name: 'Home' });
+        router.push({ name: 'Login' });
       }
     }
 

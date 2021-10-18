@@ -76,6 +76,7 @@ export default defineComponent({
     border: 1px solid $border-neutral;
     padding: 1rem;
     height: 3rem;
+    color: $text-dark-grey-2;
     outline: none !important;
     border-radius: 5px;
     font-size: 14px;

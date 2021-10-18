@@ -6,7 +6,7 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build --mode development",
     "s3sync": "aws s3 sync ./dist s3://juridoc --profile tilit-stag",
-    "deploy": "yarn build && yarn s3sync", 
+    "deploy": "yarn build && yarn s3sync",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

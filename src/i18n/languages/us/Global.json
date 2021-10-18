@@ -4,6 +4,7 @@
     "email": "Invalid email",
     "minLength": "Minimum length not satisfied",
     "maxLength": "This field needs less characters",
-    "upperCase": "This field must contain at least one capital letter."
+    "upperCase": "This field must contain at least one capital letter",
+    "sameAsPassword": "Passwords do not match"
   }
 }

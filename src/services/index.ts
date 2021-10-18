@@ -1,11 +1,13 @@
 import Axios from 'axios';
+import { JURIDOC_API } from '../configs/Environment';
 import AuthService from './Auth';
 
-const BASE_URL = process.env.VUE_APP_BASE_URL_JURIDOC_API || 'http://localhost:3000/';
+const BASE_URL = JURIDOC_API;
 
 const api = Axios.create({
   baseURL: BASE_URL,
-  withCredentials: undefined,
+  // withCredentials: true,
+  // xsrfCookieName: 'token',
 });
 
 // api.interceptors.response.use(
