@@ -20,18 +20,18 @@
         "nextButton": "Próximo",
         "options": {
             "whatBrought": [
-                "Proposal",
-                "Contracts",
-                "Quotes",
-                "Sales / Marketing Collaboration",
-                "Tool consolidation",
+                "Proposta",
+                "Contratos",
+                "Orçamentos",
+                "Vendas / Colaboração em Marketing",
+                "Consolidação de ferramentas",
                 "eSignatures",
                 "API",
-                "Tracking / Analytics",
-                "Document Storage",
-                "HR Docs",
-                "Partner / Reseller",
-                "Other"
+                "Rastreamento / Análise",
+                "Armazenamento de documentos",
+                "Documentos HR",
+                "Parceiro / Revendedor",
+                "Outros"
             ],
             "eSignature": [
                 "Adobesign",
