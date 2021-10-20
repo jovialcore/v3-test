@@ -2,23 +2,23 @@
     "description": {
         "main": "Check your e-mail",
         "sub": "We’ve sent an e-mail with a link to activate your account to ",
-        "has_account": "Already have an account? ",
-        "has_account_link": "Log in."
+        "hasAccount": "Already have an account? ",
+        "hasAccountLink": "Log in."
     },
     "form": {
         "email": "Email",
-        "email_placeholder": "name{'@'}email.com",
-        "send_mail_button": "Send"
+        "emailPlaceholder": "name{'@'}email.com",
+        "sendMailButton": "Send"
     },
     "completed": {
         "title": "Didn't get an email?",
         "sub": "If you don't see an email from uus within an few minutes, a few things could have happened:",
         "items": {
-            "spam_folder": "The email is on your spam folder.",
-            "mistake_email": "The email address you entered had a mistake or typo.",
-            "another_email": "You accidentally gave us another email address.",
-            "cant_deliver": "We can't deliver the email on this address."
+            "spamFolder": "The email is on your spam folder.",
+            "mistakeEmail": "The email address you entered had a mistake or typo.",
+            "anotherEmail": "You accidentally gave us another email address.",
+            "cantDeliver": "We can't deliver the email on this address."
         },
-        "reenter_email": "Re-enter your email and try again"
+        "reenterEmail": "Re-enter your email and try again"
     }
 }

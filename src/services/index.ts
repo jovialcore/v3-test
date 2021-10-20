@@ -6,7 +6,7 @@ const BASE_URL = JURIDOC_API;
 
 const api = Axios.create({
   baseURL: BASE_URL,
-  // withCredentials: true,
+  withCredentials: true,
   // xsrfCookieName: 'token',
 });
 

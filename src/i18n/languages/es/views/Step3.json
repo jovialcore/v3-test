@@ -1,13 +1,12 @@
 {
   "form": {
-    "prelude": "Paso 3 de 3",
     "title": "Enhorabuena, estamos preparando su prueba gratuita.",
-    "company_name": "Nombre de la empresa",
-    "company_name_placeholder": "Juridoc",
-    "return_button": "Anterior",
-    "company_size": "Tamaño de la empresa",
-    "next_button": "Siguiente",
-    "default_select_placeholder": "Seleccione",
+    "companyName": "Nombre de la empresa",
+    "companyNamePlaceholder": "Juridoc",
+    "returnButton": "Anterior",
+    "companySize": "Tamaño de la empresa",
+    "nextButton": "Siguiente",
+    "defaultSelectPlaceholder": "Seleccione",
     "industry": "Sector industrial",
     "crm": "CRM",
     "options": {
@@ -50,7 +49,7 @@
         "Web Development",
         "Other"
       ],
-      "company_size": [
+      "companySize": [
         "Solo",
         "2 - 5",
         "6 - 10",
@@ -69,31 +68,18 @@
         "SugarCRM",
         "ZohoCRM",
         "None"
-      ],
-      "what_brought": [
-        "Proposal",
-        "Contracts",
-        "Quotes",
-        "Sales / Marketing Collaboration",
-        "Tool consolidation",
-        "eSignatures",
-        "API",
-        "Tracking / Analytics",
-        "Document Storage",
-        "HR Docs",
-        "Partner / Reseller",
-        "Other"
       ]
-    }
+    },
+    "confirmTerms": "Confirmo que he leído, consentido y aceptado las condiciones de uso y la política de privacidad de Juridoc, y que soy mayor de edad."
   },
   "description": {
     "main": "Ya casi has terminado",
     "sub": "Sólo unos pocos detalles más sobre su negocio y estará listo para empezar",
-    "items_brand": "Construya su negocio con nosotros",
+    "itemsBrand": "Construya su negocio con nosotros",
     "items": {
-      "save_time": "Ahorrar tiempo y dinero",
+      "saveTime": "Ahorrar tiempo y dinero",
       "teamwork": "Facilitar el trabajo en equipo",
-      "deals_faster": "Cerrar acuerdos más rápidamente",
+      "dealsFaster": "Cerrar acuerdos más rápidamente",
       "productivity": "Aumente su productividad"
     }
   }

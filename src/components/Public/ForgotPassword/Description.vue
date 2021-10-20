@@ -9,9 +9,9 @@
     />
     <div class="description-footer">
       <p>
-        {{ t('ForgotPassword.description.has_account') }}
+        {{ t('ForgotPassword.description.hasAccount') }}
         <base-link :to="{ name: 'Login' }">
-          {{ t('ForgotPassword.description.has_account_link') }}
+          {{ t('ForgotPassword.description.hasAccountLink') }}
         </base-link>
       </p>
       <p>

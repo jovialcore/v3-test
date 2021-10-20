@@ -6,13 +6,13 @@
   "form": {
     "title": "Login",
     "subtitle": "New here? ",
-    "subtitle_link": "Sign up",
+    "subtitleLink": "Sign up",
     "email": "E-mail",
     "password": "Password",
-    "email_placeholder": "name{'@'}email.com",
-    "password_placeholder": "Enter your password",
-    "login_button": "Login",
-    "login_with_google": "Signin with Google",
-    "forgot_password": "Forgot password?"
+    "emailPlaceholder": "name{'@'}email.com",
+    "passwordPlaceholder": "Enter your password",
+    "loginButton": "Login",
+    "loginWithGoogle": "Signin with Google",
+    "forgotPassword": "Forgot password?"
   }
 }

@@ -12,9 +12,9 @@
     />
     <div class="description-footer">
       <p>
-        {{ t('CheckEmail.description.has_account') }}
+        {{ t('CheckEmail.description.hasAccount') }}
         <base-link :to="{ name: 'Login' }">
-          {{ t('CheckEmail.description.has_account_link') }}
+          {{ t('CheckEmail.description.hasAccountLink') }}
         </base-link>
       </p>
     </div>

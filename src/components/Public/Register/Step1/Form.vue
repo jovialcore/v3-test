@@ -7,7 +7,7 @@
         <p>
           {{ t(`Register.form.subtitle`) }}
           <base-link primary :to="{ name: 'Login' }">
-            {{ t(`Register.form.subtitle_link`) }}
+            {{ t(`Register.form.subtitleLink`) }}
           </base-link>
         </p>
       </div>
@@ -16,14 +16,14 @@
           v-model="v$.email.$model"
           :error="v$.email.$errors[0]?.$message"
           :label="t(`Register.form.email`)"
-          :placeholder="t(`Register.form.email_placeholder`)"
+          :placeholder="t(`Register.form.emailPlaceholder`)"
         />
         <base-input
           v-model="v$.password.$model"
           :error="v$.password.$errors[0]?.$message"
           type="password"
           :label="t(`Register.form.password`)"
-          :placeholder="t(`Register.form.password_placeholder`)"
+          :placeholder="t(`Register.form.passwordPlaceholder`)"
         />
       </div>
       <div class="buttons">
@@ -34,7 +34,7 @@
             block
             primary
           >
-            {{ t(`Register.form.register_button`) }}
+            {{ t(`Register.form.registerButton`) }}
           </base-button>
         </div>
         <base-button
@@ -47,7 +47,7 @@
             alt="Google G icon"
             v-lazy="{ src: '/images/login/g-icon.png' }"
           />
-          {{ t(`Register.form.register_with_google`) }}
+          {{ t(`Register.form.registerWithGoogle`) }}
         </base-button>
       </div>
     </div>

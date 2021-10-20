@@ -9,34 +9,34 @@
           required
           v-model="v$.company.$model"
           :error="v$.company.$errors[0]?.$message"
-          :label="t(`Step3.form.company_name`)"
-          :placeholder="t(`Step3.form.company_name_placeholder`)"
+          :label="t(`Step3.form.companyName`)"
+          :placeholder="t(`Step3.form.companyNamePlaceholder`)"
         />
         <base-select
           v-model="v$.size.$model"
           :error="v$.size.$errors[0]?.$message"
-          :label="t(`Step3.form.company_size`)"
-          :placeholder="t(`Step3.form.default_select_placeholder`)"
+          :label="t(`Step3.form.companySize`)"
+          :placeholder="t(`Step3.form.defaultSelectPlaceholder`)"
           :options="options.industrySize"
         ></base-select>
         <base-select
           v-model="v$.industry.$model"
           :error="v$.industry.$errors[0]?.$message"
           :label="t(`Step3.form.industry`)"
-          :placeholder="t(`Step3.form.default_select_placeholder`)"
+          :placeholder="t(`Step3.form.defaultSelectPlaceholder`)"
           :options="options.industry"
         ></base-select>
         <base-select
           v-model="v$.crm.$model"
           :error="v$.crm.$errors[0]?.$message"
           :label="t(`Step3.form.crm`)"
-          :placeholder="t(`Step3.form.default_select_placeholder`)"
+          :placeholder="t(`Step3.form.defaultSelectPlaceholder`)"
           :options="options.crm"
         ></base-select>
         <base-checkbox
           v-model="isConfirmedTerms"
           id="confirm_terms"
-          :label="t(`Register.form.confirm_terms`)"
+          :label="t(`Step3.form.confirmTerms`)"
         />
       </div>
       <div class="buttons">
@@ -44,7 +44,7 @@
           @click="toBack"
           undo
         >
-          {{t(`Step3.form.return_button`)}}
+          {{t(`Step3.form.returnButton`)}}
         </base-button>
         <base-button
           @click="handleActivationRegister"
@@ -52,7 +52,7 @@
           :disabled="v$.$invalid || !isConfirmedTerms"
           primary
         >
-          {{t(`Step3.form.next_button`)}}
+          {{t(`Step3.form.nextButton`)}}
         </base-button>
       </div>
     </div>

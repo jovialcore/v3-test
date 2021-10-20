@@ -6,7 +6,7 @@
           v-model="v$.email.$model"
           :error="v$.email.$errors[0]?.$message"
           :label="t(`ForgotPassword.form.email`)"
-          :placeholder="t(`ForgotPassword.form.email_placeholder`)"
+          :placeholder="t(`ForgotPassword.form.emailPlaceholder`)"
         />
       </div>
       <div class="buttons">
@@ -17,7 +17,7 @@
             block
             primary
           >
-          {{ t(`ForgotPassword.form.send_mail_button`) }}
+            {{ t(`ForgotPassword.form.sendMailButton`) }}
           </base-button>
         </div>
       </div>

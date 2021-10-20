@@ -3,12 +3,12 @@
     <h1 class="completed-title">{{ t(`CheckEmail.completed.title`) }}</h1>
     <p>{{ t(`CheckEmail.completed.sub`) }}</p>
     <ul>
-      <li>{{ t(`CheckEmail.completed.items.spam_folder`) }}</li>
-      <li>{{ t(`CheckEmail.completed.items.mistake_email`) }}</li>
-      <li>{{ t(`CheckEmail.completed.items.another_email`) }}</li>
-      <li>{{ t(`CheckEmail.completed.items.cant_deliver`) }}</li>
+      <li>{{ t(`CheckEmail.completed.items.spamFolder`) }}</li>
+      <li>{{ t(`CheckEmail.completed.items.mistakeEmail`) }}</li>
+      <li>{{ t(`CheckEmail.completed.items.anotherEmail`) }}</li>
+      <li>{{ t(`CheckEmail.completed.items.cantDeliver`) }}</li>
     </ul>
-    <a href="#" @click.prevent="handleClearEmail">{{ t(`CheckEmail.completed.reenter_email`) }}</a>
+    <a href="#" @click.prevent="handleClearEmail">{{ t(`CheckEmail.completed.reenterEmail`) }}</a>
   </div>
 </template>
 

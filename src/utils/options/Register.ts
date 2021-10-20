@@ -13,7 +13,7 @@ export const CompanySizeOptions = ():OptionType[] => {
   for (let i = 0; i < QUANTITY_SIZES; i += 1) {
     options.push({
       _id: i,
-      text: t(`Step3.form.options.company_size[${i}]`),
+      text: t(`Step3.form.options.companySize[${i}]`),
     });
   }
   return options;
@@ -51,8 +51,8 @@ export const WhatBroughtOptions = ():OptionType[] => {
   const options = [];
   for (let i = 0; i < QUANTITY_WHAT_BROUGHT; i += 1) {
     options.push({
-      _id: t(`Step3.form.options.what_brought[${i}]`),
-      text: t(`Step3.form.options.what_brought[${i}]`),
+      _id: t(`Step2.form.options.whatBrought[${i}]`),
+      text: t(`Step2.form.options.whatBrought[${i}]`),
     });
   }
   return options;

@@ -9,29 +9,29 @@
           <base-input
             v-model="v$.firstName.$model"
             :error="v$.firstName.$errors[0]?.$message"
-            :label="t(`Step2.form.first_name`)"
-            :placeholder="t(`Step2.form.first_name_placeholder`)"
+            :label="t(`Step2.form.firstName`)"
+            :placeholder="t(`Step2.form.firstNamePlaceholder`)"
             required
           />
           <base-input
             v-model="v$.lastName.$model"
             :error="v$.lastName.$errors[0]?.$message"
-            :label="t(`Step2.form.last_name`)"
-            :placeholder="t(`Step2.form.last_name_placeholder`)"
+            :label="t(`Step2.form.lastName`)"
+            :placeholder="t(`Step2.form.lastNamePlaceholder`)"
             required
           />
         </div>
         <base-input
           v-model="v$.job.$model"
           :error="v$.job.$errors[0]?.$message"
-          :label="t(`Step2.form.job_title`)"
-          :placeholder="t(`Step2.form.job_title_placeholder`)"
+          :label="t(`Step2.form.jobTitle`)"
+          :placeholder="t(`Step2.form.jobTitlePlaceholder`)"
         />
         <base-select
           v-model="v$.whatBringsYouHere.$model"
           :error="v$.whatBringsYouHere.$errors[0]?.$message"
-          :label="t(`Step2.form.what_brought_to_juridoc`)"
-          :placeholder="t(`Step2.form.what_brought_to_juridoc_placeholder`)"
+          :label="t(`Step2.form.whatBroughtToJuridoc`)"
+          :placeholder="t(`Step2.form.whatBroughtToJuridocPlaceholder`)"
           :options="options.whatBrought"
         />
         <base-input
@@ -39,7 +39,7 @@
           v-model="v$.phone.$model"
           :error="v$.phone.$errors[0]?.$message"
           :label="t(`Step2.form.phone`)"
-          :placeholder="t(`Step2.form.phone_placeholder`)"
+          :placeholder="t(`Step2.form.phonePlaceholder`)"
         />
       </div>
       <base-button
@@ -48,7 +48,7 @@
         primary
         :disabled="v$.$invalid"
       >
-        {{ t(`Step2.form.next_button`) }}
+        {{ t(`Step2.form.nextButton`) }}
       </base-button>
     </div>
   </form>

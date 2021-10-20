@@ -25,7 +25,7 @@
             block
             primary
           >
-          {{ t(`ForgotPassword.formReset.submit_button`) }}
+          {{ t(`ForgotPassword.formReset.submitButton`) }}
           </base-button>
         </div>
       </div>

@@ -2,24 +2,24 @@
     "description": {
         "main": "Comece criando seu perfil",
         "sub": "Juridoc nos ajudou a nos tornar mais eficientes, nos deu uma melhor visão geral e nos permitiu maximizar o valor de nosso trabalho jurídico - para obter melhores contratos. Não posso recomendá-los o suficiente!",
-        "lawyer_sub": "Advogado"
+        "lawyerSub": "Advogado"
     },
     "form": {
         "prelude": "Etapa 2 de 3",
         "title": "Crie seu perfil",
-        "first_name": "Primeiro nome",
-        "last_name": "Sobrenome",
-        "job_title": "Posição",
-        "what_brought_to_juridoc": "O que o trouxe à Juridoc?",
+        "firstName": "Primeiro nome",
+        "lastName": "Sobrenome",
+        "jobTitle": "Posição",
+        "whatBroughtToJuridoc": "O que o trouxe à Juridoc?",
         "phone": "Telefone",
-        "first_name_placeholder": "Bill",
-        "last_name_placeholder": "Gates",
-        "job_title_placeholder": "CEO",
-        "what_brought_to_juridoc_placeholder": "Selecionar",
-        "phone_placeholder": "+55 11 98 198 7898",
-        "next_button": "Próximo",
-        "select_options": {
-            "what_brought_to_juridoc": [
+        "firstNamePlaceholder": "Bill",
+        "lastNamePlaceholder": "Gates",
+        "jobTitlePlaceholder": "CEO",
+        "whatBroughtToJuridocPlaceholder": "Selecionar",
+        "phonePlaceholder": "+55 11 98 198 7898",
+        "nextButton": "Próximo",
+        "options": {
+            "whatBrought": [
                 "Proposal",
                 "Contracts",
                 "Quotes",

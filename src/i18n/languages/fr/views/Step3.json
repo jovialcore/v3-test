@@ -1,13 +1,12 @@
 {
   "form": {
-    "prelude": "Étape 3 sur 3",
     "title": "Vous avez presque terminé.",
-    "company_name": "Nom de l'entreprise",
-    "company_name_placeholder": "Juridoc",
-    "return_button": "Précédent",
-    "company_size": "Taille de l'entreprise",
-    "next_button": "Suivant",
-    "default_select_placeholder": "Sélectionner",
+    "companyName": "Nom de l'entreprise",
+    "companyNamePlaceholder": "Juridoc",
+    "returnButton": "Précédent",
+    "companySize": "Taille de l'entreprise",
+    "nextButton": "Suivant",
+    "defaultSelectPlaceholder": "Sélectionner",
     "industry": "Secteur d'activité",
     "crm": "CRM",
     "options": {
@@ -50,7 +49,7 @@
         "Web Development",
         "Other"
       ],
-      "company_size": [
+      "companySize": [
         "Solo",
         "2 - 5",
         "6 - 10",
@@ -69,31 +68,18 @@
         "SugarCRM",
         "ZohoCRM",
         "None"
-      ],
-      "what_brought": [
-        "Proposal",
-        "Contracts",
-        "Quotes",
-        "Sales / Marketing Collaboration",
-        "Tool consolidation",
-        "eSignatures",
-        "API",
-        "Tracking / Analytics",
-        "Document Storage",
-        "HR Docs",
-        "Partner / Reseller",
-        "Other"
       ]
-    }
+    },
+    "confirmTerms": "Je confirme que j'ai lu, consenti et accepté les conditions d'utilisation et la politique de confidentialité de Juridoc, et que je suis majeur."
   },
   "description": {
     "main": "Vous avez presque terminé",
     "sub": "Encore quelques détails sur votre entreprise et vous serez prêt à commencer",
-    "items_brand": "Développez votre entreprise avec nous!",
+    "itemsBrand": "Développez votre entreprise avec nous!",
     "items": {
-      "save_time": "Economisez du temps et de l'argent",
+      "saveTime": "Economisez du temps et de l'argent",
       "teamwork": "Facilitez le travail d'équipe",
-      "deals_faster": "Concluez des affaires plus rapidement",
+      "dealsFaster": "Concluez des affaires plus rapidement",
       "productivity": "Augmentez votre productivité"
     }
   }

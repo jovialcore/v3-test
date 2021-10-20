@@ -9,6 +9,5 @@ import Form from '@/components/Public/Login/Form.vue';
 
 export default {
   components: { Description, Form },
-  // components: { Description, Form },
 };
 </script>

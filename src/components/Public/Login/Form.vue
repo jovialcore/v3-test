@@ -6,7 +6,7 @@
         <p>
           {{ t(`Login.form.subtitle`) }}
           <base-link primary :to="{ name: 'RegisterStep1' }">
-            {{ t(`Login.form.subtitle_link`) }}
+            {{ t(`Login.form.subtitleLink`) }}
           </base-link>
         </p>
       </div>
@@ -15,14 +15,14 @@
           v-model="v$.email.$model"
           :error="v$.email.$errors[0]?.$message"
           :label="t(`Login.form.email`)"
-          :placeholder="t(`Login.form.email_placeholder`)"
+          :placeholder="t(`Login.form.emailPlaceholder`)"
         />
         <base-input
           v-model="v$.password.$model"
           :error="v$.password.$errors[0]?.$message"
           type="password"
           :label="t(`Login.form.password`)"
-          :placeholder="t(`Login.form.password_placeholder`)"
+          :placeholder="t(`Login.form.passwordPlaceholder`)"
         />
       </div>
       <div class="buttons">
@@ -32,12 +32,11 @@
             :disabled="v$.$invalid"
             block
             primary
-          >{{
-            t(`Login.form.login_button`)
-          }}</base-button>
-          <div class="forgot_password">
+            >{{ t(`Login.form.loginButton`) }}</base-button
+          >
+          <div class="forgotPassword">
             <base-link :to="{ name: 'ForgotPassword' }">
-              {{ t(`Login.form.forgot_password`) }}
+              {{ t(`Login.form.forgotPassword`) }}
             </base-link>
           </div>
         </div>
@@ -51,7 +50,7 @@
             alt="Google G icon"
             v-lazy="{ src: '/images/login/g-icon.png' }"
           />
-          {{ t(`Login.form.login_with_google`) }}
+          {{ t(`Login.form.loginWithGoogle`) }}
         </base-button>
       </div>
     </div>
@@ -97,7 +96,7 @@ export default defineComponent({
           const response = await store.dispatch('auth/submitLogin', form);
 
           if (response.data) {
-            router.push({ name: 'Home' });
+            router.push({ name: 'Dashboard' });
           }
         } catch (err) {
           toast.open({ mesage: err?.response?.data?.message });
@@ -113,13 +112,11 @@ export default defineComponent({
         const response = await store.dispatch('auth/submitGoogleLogin', tokenId);
 
         if (response.data) {
-          router.push({ name: 'Home' });
+          router.push({ name: 'Dashboard' });
         }
       } catch (err) {
         toast.open({ mesage: err?.response?.data?.message });
       }
-
-      router.push({ name: 'Home' });
     }
 
     return {
@@ -130,7 +127,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss"  scoped>
-.forgot_password a {
+.forgotPassword a {
   font-size: 13px;
 }
 </style>

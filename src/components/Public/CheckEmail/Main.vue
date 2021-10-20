@@ -6,7 +6,7 @@
           v-model="v$.email.$model"
           :error="v$.email.$errors[0]?.$message"
           :label="t(`CheckEmail.form.email`)"
-          :placeholder="t(`CheckEmail.form.email_placeholder`)"
+          :placeholder="t(`CheckEmail.form.emailPlaceholder`)"
           type="email"
         />
       </div>
@@ -18,7 +18,7 @@
             primary
             block
           >
-            {{ t(`CheckEmail.form.send_mail_button`) }}
+            {{ t(`CheckEmail.form.sendMailButton`) }}
           </base-button>
         </div>
       </div>

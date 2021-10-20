@@ -3,11 +3,11 @@
     <h1>{{ t(`Step3.description.main`) }}</h1>
     <p>{{ t(`Step3.description.sub`) }}</p>
     <div>
-      <h1>{{ t(`Step3.description.items_brand`) }}</h1>
+      <h1>{{ t(`Step3.description.itemsBrand`) }}</h1>
       <ul>
-        <checked-item :label="t(`Step3.description.items.save_time`)" />
+        <checked-item :label="t(`Step3.description.items.saveTime`)" />
         <checked-item :label="t(`Step3.description.items.teamwork`)" />
-        <checked-item :label="t(`Step3.description.items.deals_faster`)" />
+        <checked-item :label="t(`Step3.description.items.dealsFaster`)" />
         <checked-item :label="t(`Step3.description.items.productivity`)" />
       </ul>
     </div>
