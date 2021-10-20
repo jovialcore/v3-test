@@ -2,14 +2,14 @@
   <div class="phone-input-container" :class="classes">
     <label v-if="label">{{ label }}</label>
     <vue-tel-input
-      v-model="state.props"
+      v-model="state.phone"
+      v-maska="['+## ## ########', '+## ## #########']"
       class="phone-input"
       :inputOptions="{
         placeholder,
         required,
       }"
     />
-    <span class="required" v-if="required">*</span>
     <span>
       {{ error }}
     </span>
@@ -77,23 +77,26 @@ export default defineComponent({
   height: 3rem;
   padding: 1rem;
   font-size: 14px;
+  width: 100%;
   &:focus-within,
   &.hasData {
     border-color: $primary-button;
     background-color: $transparent-focus-bg-elements;
   }
   &::placeholder {
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: $text-soft-grey;
-    opacity: 1; /* Firefox */
+    opacity: 1;
   }
 }
 </style>
 <style lang="scss">
+.phone-input-container input.error {
+  border-color: $error;
+}
 .phone-input input {
   background: transparent;
 }
-.phone-input div {
+.phone-input div:hover {
   background-color: transparent;
 }
 </style>

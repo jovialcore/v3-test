@@ -34,8 +34,7 @@
           :placeholder="t(`Step2.form.whatBroughtToJuridocPlaceholder`)"
           :options="options.whatBrought"
         />
-        <base-input
-          v-maska="['+## ## ########', '+## ## #########']"
+        <base-phone-input
           v-model="v$.phone.$model"
           :error="v$.phone.$errors[0]?.$message"
           :label="t(`Step2.form.phone`)"
@@ -94,9 +93,9 @@ export default defineComponent({
     const rules = {
       firstName: { required },
       lastName: { required },
-      job: { },
-      whatBringsYouHere: { },
-      phone: { },
+      job: {},
+      whatBringsYouHere: {},
+      phone: {},
     } as RulesType;
 
     const v$ = useVuelidate(rules, form.value);
