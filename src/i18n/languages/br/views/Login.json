@@ -6,13 +6,13 @@
   "form": {
     "title": "Login",
     "subtitle": "novo aqui? ",
-    "subtitle_link": "cadastre-se",
+    "subtitleLink": "cadastre-se",
     "email": "E-mail",
     "password": "Senha",
-    "email_placeholder": "name{'@'}email.com",
-    "password_placeholder": "Digite sua senha",
-    "login_button": "Entrar",
-    "login_with_google": "Entrar com o Google",
-    "forgot_password": "Esqueceu sua senha?"
+    "emailPlaceholder": "name{'@'}email.com",
+    "passwordPlaceholder": "Digite sua senha",
+    "loginButton": "Entrar",
+    "loginWithGoogle": "Entrar com o Google",
+    "forgotPassword": "Esqueceu sua senha?"
   }
 }

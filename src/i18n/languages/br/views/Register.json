@@ -7,13 +7,12 @@
     "prelude": "Comece gratuitamente",
     "title": "Registre-se na Juridoc",
     "subtitle": "Já é um membro? ",
-    "subtitle_link": "Entre agora",
+    "subtitleLink": "Entre agora",
     "email": "E-mail",
     "password": "Senha",
-    "email_placeholder": "name{'@'}email.com",
-    "password_placeholder": "6+ caracteres, 1 letra maiúscula",
-    "register_button": "Criar conta",
-    "register_with_google": "Cadastre-se no Google",
-    "confirm_terms": "Confirmo que li, consenti e aceitei os Termos de Uso e a Política de Privacidade da Juridoc, e que sou maior de idade legal."
+    "emailPlaceholder": "name{'@'}email.com",
+    "passwordPlaceholder": "6+ caracteres, 1 letra maiúscula",
+    "registerButton": "Criar conta",
+    "registerWithGoogle": "Cadastre-se no Google"
   }
 }

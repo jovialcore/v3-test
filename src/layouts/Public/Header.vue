@@ -20,7 +20,7 @@ import {
 } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
-import SelectLang from '@/components/SelectLang/index.vue';
+import SelectLang from '@/layouts/Public/SelectLang.vue';
 
 export default defineComponent({
   components: { SelectLang },

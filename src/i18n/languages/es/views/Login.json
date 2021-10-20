@@ -6,13 +6,13 @@
   "form": {
     "title": "Inicio de sesión",
     "subtitle": "¿Eres nuevo aquí? ",
-    "subtitle_link": "Inscribirse",
+    "subtitleLink": "Inscribirse",
     "email": "E-mail",
     "password": "Contraseña",
-    "email_placeholder": "name{'@'}email.com",
-    "password_placeholder": "Introduzca su contraseña",
-    "login_button": "Acceder",
-    "login_with_google": "Iniciar sesión con Google",
-    "forgot_password": "¿Ha olvidado su contraseña?"
+    "emailPlaceholder": "name{'@'}email.com",
+    "passwordPlaceholder": "Introduzca su contraseña",
+    "loginButton": "Acceder",
+    "loginWithGoogle": "Iniciar sesión con Google",
+    "forgotPassword": "¿Ha olvidado su contraseña?"
   }
 }

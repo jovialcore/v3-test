@@ -7,13 +7,12 @@
     "prelude": "Start for free",
     "title": "Sign up to Juridoc",
     "subtitle": "Already a member? ",
-    "subtitle_link": "Log in",
+    "subtitleLink": "Log in",
     "email": "E-mail",
     "password": "Password",
-    "email_placeholder": "name{'@'}email.com",
-    "password_placeholder": "6+ characters, 1 Capital letter",
-    "register_button": "Create an account",
-    "register_with_google": "Signup with Google",
-    "confirm_terms": "I confirm that I have read, consent and agree to Juridoc’s Term of Use and Privacy Policy, and I am of legal age."
+    "emailPlaceholder": "name{'@'}email.com",
+    "passwordPlaceholder": "6+ characters, 1 Capital letter",
+    "registerButton": "Create an account",
+    "registerWithGoogle": "Signup with Google"
   }
 }

@@ -1,0 +1,20 @@
+.options-sidebar {
+    .list, .actions {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 0.5rem;
+    }
+    .sidebar-options-title {
+        padding: 1rem;
+        color: $neutral-1;
+        border-bottom: 2px solid #1B202A;
+        margin-bottom: 0.5rem;
+    }
+    .option-button {
+        color: $neutral-1;
+        font-size: 14px;
+    }
+    .option-button.imported {
+        color: $yellow-orange;
+    }
+}
