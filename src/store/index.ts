@@ -1,30 +1,20 @@
 import { createStore, ModuleTree } from 'vuex';
 
-type ContextType = __WebpackModuleApi.RequireContext;
-type ModuleType = {
-  [key: string]: ContextType;
-};
+const files = import.meta.glob('./modules/*.ts');
 
-const files: ContextType = require.context('.', true, /\.ts$/);
+const modules: ModuleTree<any> = {};
 
-const modules: ModuleTree<ModuleType> = {};
+Object.keys(files).forEach(async (file) => {
+  const structures = file.split('/');
+  const fileName = structures[structures.length - 1].replace('.ts', '');
+  const module = await files[file]();
 
-files.keys().forEach((fileName) => {
-  if (fileName === './index.ts') return;
-
-  const moduleName = fileName
-    .replace(/^\.\//, '')
-    .replace(/\.\w+$/, '')
-    .replace('modules/', '');
-
-  modules[moduleName] = {
+  modules[fileName] = {
     namespaced: true,
-    ...files(fileName),
+    ...module,
   };
 });
 
-const store = createStore({
+export const store = createStore({
   modules,
 });
-
-export default store;

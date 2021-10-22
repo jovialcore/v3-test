@@ -1,15 +1,21 @@
 <template>
-  <div class="input-container" :class="classes">
+  <div
+    class="input-container"
+    :class="classes"
+  >
     <label v-if="label">{{ label }}</label>
     <input
       :class="classes"
       :type="type"
       :value="modelValue"
       :placeholder="placeholder"
-      @input="updateValue"
       :required="required"
-    />
-    <span class="required" v-if="required">*</span>
+      @input="updateValue"
+    >
+    <span
+      v-if="required"
+      class="required"
+    >*</span>
     <span>
       {{ error }}
     </span>

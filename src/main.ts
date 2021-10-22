@@ -10,26 +10,25 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App.vue';
-import setupBaseComponents from './configs/setupBaseComponents';
-import SetupGoogleAPI from './configs/SetupGoogleAPI';
+import { setupBaseComponents } from './configs/BaseComponents';
+import setupGoogleAPI from './configs/SetupGoogleAPI';
 
 import router from './router';
-import store from './store';
-import i18n from './i18n';
-
-SetupGoogleAPI();
+import { store } from './store';
+import { i18n } from './i18n';
 
 const app = createApp(App);
-app.use(Maska);
 
 library.add(fas);
+app.component('font-awesome-icon', FontAwesomeIcon);
 
+setupGoogleAPI();
 setupBaseComponents(app);
 
+app.use(router);
+app.use(store);
 app.use(i18n);
 app.use(VueLazyLoad);
-app.component('font-awesome-icon', FontAwesomeIcon);
-app.use(store);
-app.use(router);
+app.use(Maska);
 
 app.mount('#app');

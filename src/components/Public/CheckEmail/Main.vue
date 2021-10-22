@@ -1,5 +1,8 @@
 <template>
-  <form class="form" v-if="!isCompleted">
+  <form
+    v-if="!isCompleted"
+    class="form"
+  >
     <div class="form-content">
       <div class="inputs">
         <base-input
@@ -13,10 +16,10 @@
       <div class="buttons">
         <div>
           <base-button
-            @click.prevent="handleCheckEmail"
             :disabled="v$.$invalid"
             primary
             block
+            @click.prevent="handleCheckEmail"
           >
             {{ t(`CheckEmail.form.sendMailButton`) }}
           </base-button>
