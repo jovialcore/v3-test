@@ -1,11 +1,17 @@
 <template>
-  <form @submit.prevent class="form">
+  <form
+    class="form"
+    @submit.prevent
+  >
     <div class="form-content">
       <div class="form-title">
         <h1>{{ t(`Login.form.title`) }} &#9996;</h1>
         <p>
           {{ t(`Login.form.subtitle`) }}
-          <base-link primary :to="{ name: 'RegisterStep1' }">
+          <base-link
+            primary
+            :to="{ name: 'RegisterStep1' }"
+          >
             {{ t(`Login.form.subtitleLink`) }}
           </base-link>
         </p>
@@ -28,12 +34,13 @@
       <div class="buttons">
         <div>
           <base-button
-            @click="handleLogin"
             :disabled="v$.$invalid"
             block
             primary
-            >{{ t(`Login.form.loginButton`) }}</base-button
+            @click="handleLogin"
           >
+            {{ t(`Login.form.loginButton`) }}
+          </base-button>
           <div class="forgotPassword">
             <base-link :to="{ name: 'ForgotPassword' }">
               {{ t(`Login.form.forgotPassword`) }}
@@ -41,15 +48,15 @@
           </div>
         </div>
         <base-button
-          @click="handleGoogleLogin"
           block
           neutral
+          @click="handleGoogleLogin"
         >
           <img
+            v-lazy="{ src: '/images/login/g-icon.png' }"
             class="descriptive"
             alt="Google G icon"
-            v-lazy="{ src: '/images/login/g-icon.png' }"
-          />
+          >
           {{ t(`Login.form.loginWithGoogle`) }}
         </base-button>
       </div>
@@ -81,12 +88,12 @@ export default defineComponent({
 
     const form = computed<LoginDataType>(() => store.getters['auth/getLoginData']);
 
-    const rules = {
+    const rules = computed(() => ({
       email: { required, email },
       password: { required, minLength: minLength(6), maxLength: maxLength(16) },
-    } as RulesType;
+    } as RulesType));
 
-    const v$ = useVuelidate(rules, form.value);
+    const v$ = useVuelidate(rules.value, form.value);
 
     async function handleLogin() {
       const isValidate = await v$.value.$validate();

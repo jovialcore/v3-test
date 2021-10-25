@@ -1,10 +1,8 @@
 import Axios from 'axios';
 import { JURIDOC_API } from '../configs/Environment';
 
-const BASE_URL = JURIDOC_API;
-
 const api = Axios.create({
-  baseURL: BASE_URL,
+  baseURL: JURIDOC_API,
   withCredentials: true,
   // xsrfCookieName: 'token',
 });

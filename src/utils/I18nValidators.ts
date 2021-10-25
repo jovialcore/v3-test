@@ -1,10 +1,10 @@
 import * as validators from '@vuelidate/validators';
 import { ValidationRuleWithParams } from '@vuelidate/core';
-import i18n from '@/i18n';
+import { i18n } from '@/i18n';
+
+const { t } = i18n.global;
 
 const { createI18nMessage } = validators;
-
-const { t } = i18n.global || i18n;
 
 const messagePath = ({ $validator }: {$validator: string}) => `Global.errors.${$validator}`;
 

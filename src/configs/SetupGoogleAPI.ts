@@ -1,6 +1,6 @@
 import { GAPI_CLIENT_ID } from './Environment';
 
-function SetupGoogleApi() {
+function setupGoogleApi() {
   return new Promise<void>((resolve, reject) => {
     const src = 'https://apis.google.com/js/api.js';
 
@@ -21,15 +21,15 @@ function SetupGoogleApi() {
   });
 }
 
-function SetupGoogleAuth(config: gapi.auth2.ClientConfig):void {
+function setupGoogleAuth(config: gapi.auth2.ClientConfig):void {
   window.gapi.load('auth2', () => {
     window.gapi.auth2.init(config);
   });
 }
 
 export default async (): Promise<void> => {
-  await SetupGoogleApi();
-  SetupGoogleAuth({
-    client_id: GAPI_CLIENT_ID,
+  await setupGoogleApi();
+  setupGoogleAuth({
+    client_id: String(GAPI_CLIENT_ID),
   });
 };
