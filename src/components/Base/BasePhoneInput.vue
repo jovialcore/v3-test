@@ -80,6 +80,7 @@ export default defineComponent({
   width: 100%;
   &:focus-within,
   &.hasData {
+    box-shadow: inset 0 0 0 transparent, 0 0 0 transparent;
     border-color: $primary-button;
     background-color: $transparent-focus-bg-elements;
   }
@@ -95,6 +96,27 @@ export default defineComponent({
 }
 .phone-input input {
   background: transparent;
+  color: $text-dark-grey-2;
+  font-size: 14px;
+  &:focus, &.hasData{ /* Microsoft Edge */
+    border-color: $primary-button;
+    background-color: $transparent-focus-bg-elements;
+  }
+
+  &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $text-soft-grey;
+    opacity: 1; /* Firefox */
+  }
+
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $text-soft-grey;
+  }
+
+  &::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $text-soft-grey;
+  }
 }
 .phone-input div:hover {
   background-color: transparent;
