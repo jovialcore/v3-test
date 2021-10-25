@@ -1,11 +1,14 @@
 <template>
-  <div class="phone-input-container" :class="classes">
+  <div
+    class="phone-input-container"
+    :class="classes"
+  >
     <label v-if="label">{{ label }}</label>
     <vue-tel-input
       v-model="state.phone"
       v-maska="['+## ## ########', '+## ## #########']"
       class="phone-input"
-      :inputOptions="{
+      :input-options="{
         placeholder,
         required,
       }"
@@ -29,18 +32,18 @@ export default defineComponent({
     prop: 'modelValue',
     event: 'input',
   },
-  emits: ['update:modelValue'],
   props: {
-    modelValue: { type: [String, Number], default: '' },
-    label: { type: String },
+    modelValue: { type: String, default: '' },
+    label: { type: String, default: '' },
     placeholder: { type: String, default: '' },
     error: { type: String, default: '' },
     block: { type: Boolean },
     required: { type: Boolean },
   },
+  emits: ['update:modelValue'],
   setup(props, { emit }) {
     const state = reactive({
-      phone: props.modelValue,
+      phone: props.modelValue || '',
     });
 
     const classes = computed(() => ({
@@ -57,12 +60,12 @@ export default defineComponent({
 });
 
 </script>
-<style src="vue-tel-input/dist/vue-tel-input.css"></style>;
 <style lang="scss" scoped>
 .phone-input-container {
   display: flex;
   flex-direction: column;
   gap: 4px;
+
   label {
     color: $input-labels;
     font-size: 14px;
@@ -89,15 +92,15 @@ export default defineComponent({
     opacity: 1;
   }
 }
-</style>
-<style lang="scss">
 .phone-input-container input.error {
   border-color: $error;
+
 }
 .phone-input input {
   background: transparent;
   color: $text-dark-grey-2;
   font-size: 14px;
+
   &:focus, &.hasData{ /* Microsoft Edge */
     border-color: $primary-button;
     background-color: $transparent-focus-bg-elements;
@@ -120,5 +123,8 @@ export default defineComponent({
 }
 .phone-input div:hover {
   background-color: transparent;
+}
+.vue-tel-input{
+  border: 1px solid $border-neutral;
 }
 </style>

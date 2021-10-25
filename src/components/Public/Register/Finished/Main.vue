@@ -1,6 +1,6 @@
 <template>
   <div id="the-hand">
-    <the-hand/>
+    <the-hand />
   </div>
 </template>
 

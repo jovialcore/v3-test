@@ -1,12 +1,18 @@
 <template>
-  <form @submit.prevent class="form">
+  <form
+    class="form"
+    @submit.prevent
+  >
     <div class="form-content">
       <div class="form-title">
         <span>{{ t(`Register.form.prelude`) }}</span>
         <h1>{{ t(`Register.form.title`) }}</h1>
         <p>
           {{ t(`Register.form.subtitle`) }}
-          <base-link primary :to="{ name: 'Login' }">
+          <base-link
+            primary
+            :to="{ name: 'Login' }"
+          >
             {{ t(`Register.form.subtitleLink`) }}
           </base-link>
         </p>
@@ -29,24 +35,24 @@
       <div class="buttons">
         <div>
           <base-button
-            @click="handleRegister"
             :disabled="!(!v$.$invalid)"
             block
             primary
+            @click="handleRegister"
           >
             {{ t(`Register.form.registerButton`) }}
           </base-button>
         </div>
         <base-button
-          @click="handleGoogleRegister"
           block
           neutral
+          @click="handleGoogleRegister"
         >
           <img
+            v-lazy="{ src: '/images/login/g-icon.png' }"
             class="descriptive"
             alt="Google G icon"
-            v-lazy="{ src: '/images/login/g-icon.png' }"
-          />
+          >
           {{ t(`Register.form.registerWithGoogle`) }}
         </base-button>
       </div>

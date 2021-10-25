@@ -47,7 +47,7 @@ export default defineComponent({
     label: { type: String, required: false },
     placeholder: { type: String },
     error: { type: String, default: '' },
-    options: { type: Array as PropType<OptionType[]>, default: () => [], required: true },
+    options: { type: String, default: '', required: true },
     modelValue: { type: [Number, String] },
     disable: { type: Boolean, default: false },
     block: { type: Boolean, default: false },
