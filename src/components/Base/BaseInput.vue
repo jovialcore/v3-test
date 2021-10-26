@@ -62,11 +62,12 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .input-container {
-    position: relative;
+  position: relative;
 
   display: flex;
   flex-direction: column;
   gap: 4px;
+
   &.block {
     width: 100%;
   }

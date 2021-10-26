@@ -66,15 +66,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'SF UI Display Medium';
-  color: $text-soft-grey;
-  font-size: 17px;
 }
 
 html,
 body {
   min-height: 100vh;
   height: fit-content;
+  font-family: 'SF UI Display Medium';
+  color: $text-soft-grey;
+  font-size: 17px;
 }
 
 #app {

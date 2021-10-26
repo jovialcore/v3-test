@@ -1,5 +1,8 @@
 <template>
-  <form @submit.prevent class="form">
+  <form
+    class="form"
+    @submit.prevent
+  >
     <div class="form-content">
       <div class="form-title">
         <h1>{{ t(`Step2.form.title`) }}</h1>
@@ -34,8 +37,8 @@
           :placeholder="t(`Step2.form.whatBroughtToJuridocPlaceholder`)"
           :options="options.whatBrought"
         />
-        <base-input
-          v-maska="['+## ## ########', '+## ## #########']"
+
+        <BasePhoneInput
           v-model="v$.phone.$model"
           :error="v$.phone.$errors[0]?.$message"
           :label="t(`Step2.form.phone`)"
@@ -43,10 +46,10 @@
         />
       </div>
       <base-button
-        @click="handleSubmit"
         block
         primary
         :disabled="v$.$invalid"
+        @click="handleSubmit"
       >
         {{ t(`Step2.form.nextButton`) }}
       </base-button>
@@ -56,13 +59,13 @@
 
 <script lang="ts">
 import {
-  defineComponent, computed, onMounted, reactive, ref, onBeforeMount,
+  defineComponent, computed, onMounted, reactive, ref, onBeforeMount, watch,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
-
 import useVuelidate from '@vuelidate/core';
 import { useStore } from 'vuex';
 import { useRoute, useRouter } from 'vue-router';
+
 import { required } from '@/utils/I18nValidators';
 import { RulesType } from '@/types/Vuelidate';
 import { WhatBroughtOptions } from '@/utils/options/Register';
@@ -81,7 +84,7 @@ export default defineComponent({
     const store = useStore();
     const router = useRouter();
     const route = useRoute();
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
 
     const token = ref('');
     const isGoogle = ref(false);
@@ -91,13 +94,13 @@ export default defineComponent({
     const form = computed<RegisterActivationDataType>(() => store.getters['auth/getRegisterActivationData']);
     const register = computed<RegisterType>(() => store.getters['auth/getRegisterData']);
 
-    const rules = {
+    const rules = computed(() => ({
       firstName: { required },
       lastName: { required },
-      job: { },
-      whatBringsYouHere: { },
-      phone: { },
-    } as RulesType;
+      job: {},
+      whatBringsYouHere: {},
+      phone: {},
+    } as RulesType));
 
     const v$ = useVuelidate(rules, form.value);
 
@@ -130,14 +133,23 @@ export default defineComponent({
       } else {
         register.value.activationToken = String(token.value);
       }
+
+      form.value.phone = '';
     });
 
     onBeforeMount(() => {
       options.whatBrought = WhatBroughtOptions();
     });
 
+    watch(locale, () => {
+      options.whatBrought = WhatBroughtOptions();
+    });
+
     return {
-      options, v$, t, handleSubmit,
+      options,
+      v$,
+      t,
+      handleSubmit,
     };
   },
 });

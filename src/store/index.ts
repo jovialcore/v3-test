@@ -1,20 +1,21 @@
 import { createStore, ModuleTree } from 'vuex';
 
-const files = import.meta.glob('./modules/*.ts');
+export async function setupStore() {
+  const files = import.meta.glob('./modules/*.ts');
 
-const modules: ModuleTree<any> = {};
+  const modules: ModuleTree<any> = {};
+  for (const file in files) {
+    const structures = file.split('/');
+    const fileName = structures[structures.length - 1].replace('.ts', '');
+    const module = await files[file]();
 
-Object.keys(files).forEach(async (file) => {
-  const structures = file.split('/');
-  const fileName = structures[structures.length - 1].replace('.ts', '');
-  const module = await files[file]();
+    modules[fileName] = {
+      namespaced: true,
+      ...module,
+    };
+  }
 
-  modules[fileName] = {
-    namespaced: true,
-    ...module,
-  };
-});
-
-export const store = createStore({
-  modules,
-});
+  return createStore({
+    modules,
+  });
+}

@@ -23,7 +23,8 @@
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
     "vue-i18n": "^9.1.7",
-    "vue-router": "4",
+    "vue-router": "^4.0.0-0",
+    "vue-tel-input": "^6.0.0-beta.4",
     "vue3-google-oauth2": "^1.0.6",
     "vue3-lazyload": "^0.2.2-beta",
     "vuelidate": "^0.7.6",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@types/gapi": "^0.0.41",
     "@types/gapi.auth2": "^0.0.55",
+    "@types/vue-tel-input": "^2.1.2",
     "@types/vuelidate": "^0.7.15",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",

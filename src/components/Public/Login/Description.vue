@@ -3,10 +3,10 @@
     <h1>{{ t(`Login.description.main`) }}</h1>
     <p>{{ t(`Login.description.sub`) }}</p>
     <img
+      v-lazy="{ src: '/images/login/login.png' }"
       class="descriptive"
       alt="Four people celebrating"
-      v-lazy="{ src: '/images/login/login.png' }"
-    />
+    >
   </div>
 </template>
 

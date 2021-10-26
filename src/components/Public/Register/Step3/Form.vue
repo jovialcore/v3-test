@@ -1,13 +1,16 @@
 <template>
-  <form @submit.prevent class="form">
+  <form
+    class="form"
+    @submit.prevent
+  >
     <div class="form-content">
       <div class="form-title">
         <h1>{{ t(`Step3.form.title`) }}</h1>
       </div>
       <div class="inputs">
         <base-input
-          required
           v-model="v$.company.$model"
+          required
           :error="v$.company.$errors[0]?.$message"
           :label="t(`Step3.form.companyName`)"
           :placeholder="t(`Step3.form.companyNamePlaceholder`)"
@@ -18,41 +21,41 @@
           :label="t(`Step3.form.companySize`)"
           :placeholder="t(`Step3.form.defaultSelectPlaceholder`)"
           :options="options.industrySize"
-        ></base-select>
+        />
         <base-select
           v-model="v$.industry.$model"
           :error="v$.industry.$errors[0]?.$message"
           :label="t(`Step3.form.industry`)"
           :placeholder="t(`Step3.form.defaultSelectPlaceholder`)"
           :options="options.industry"
-        ></base-select>
+        />
         <base-select
           v-model="v$.crm.$model"
           :error="v$.crm.$errors[0]?.$message"
           :label="t(`Step3.form.crm`)"
           :placeholder="t(`Step3.form.defaultSelectPlaceholder`)"
           :options="options.crm"
-        ></base-select>
+        />
         <base-checkbox
-          v-model="isConfirmedTerms"
           id="confirm_terms"
+          v-model="isConfirmedTerms"
           :label="t(`Step3.form.confirmTerms`)"
         />
       </div>
       <div class="buttons">
         <base-button
-          @click="toBack"
           undo
+          @click="toBack"
         >
-          {{t(`Step3.form.returnButton`)}}
+          {{ t(`Step3.form.returnButton`) }}
         </base-button>
         <base-button
-          @click="handleActivationRegister"
           block
           :disabled="v$.$invalid || !isConfirmedTerms"
           primary
+          @click="handleActivationRegister"
         >
-          {{t(`Step3.form.nextButton`)}}
+          {{ t(`Step3.form.nextButton`) }}
         </base-button>
       </div>
     </div>
@@ -62,7 +65,7 @@
 <script lang="ts">
 import useVuelidate from '@vuelidate/core';
 import {
-  defineComponent, reactive, computed, onBeforeMount, ref, onMounted,
+  defineComponent, reactive, computed, onBeforeMount, ref, onMounted, watch,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
@@ -88,7 +91,7 @@ export default defineComponent({
     const store = useStore();
     const router = useRouter();
     const route = useRoute();
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
     const toast = useToast();
 
     const token = ref('');
@@ -167,13 +170,19 @@ export default defineComponent({
       options.crm = CRMOptions();
     });
 
+    watch(locale, () => {
+      options.industrySize = CompanySizeOptions();
+      options.industry = IndustryOptions();
+      options.crm = CRMOptions();
+    });
+
     return {
       v$,
       options,
+      isConfirmedTerms,
       t,
       toBack,
       handleActivationRegister,
-      isConfirmedTerms,
     };
   },
 });
