@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'SF UI Display Ultralight';
+  font-family: 'SF UI Display';
   font-style: normal;
   font-weight: normal;
   src: url('../fonts/sf-ui-display-ultralight-58646b19bf205.woff')
@@ -15,19 +15,17 @@
 // }
 
 @font-face {
-  font-family: 'SF UI Display Light';
+  font-family: 'SF UI Display';
   font-style: normal;
   font-weight: normal;
-  src: local('SF UI Display Light'),
-    url('../fonts/sf-ui-display-light-58646b33e0551.woff') format('woff');
+  src: url('../fonts/sf-ui-display-light-58646b33e0551.woff') format('woff');
 }
 
 @font-face {
-  font-family: 'SF UI Display Medium';
+  font-family: 'SF UI Display';
   font-style: normal;
   font-weight: normal;
-  src: local('SF UI Display Medium'),
-    url('../fonts/sf-ui-display-medium-58646be638f96.woff') format('woff');
+  src: url('../fonts/sf-ui-display-medium-58646be638f96.woff') format('woff');
 }
 
 // @font-face {
@@ -38,13 +36,12 @@
 //     url('sf-ui-display-semibold-58646eddcae92.woff') format('woff');
 // }
 
-// @font-face {
-//   font-family: 'SF UI Display Bold';
-//   font-style: normal;
-//   font-weight: normal;
-//   src: local('SF UI Display Bold'),
-//     url('sf-ui-display-bold-58646a511e3d9.woff') format('woff');
-// }
+@font-face {
+  font-family: 'SF UI Display';
+  font-style: bold;
+  font-weight: bold;
+  src: url('../fonts/sf-ui-display-bold-58646a511e3d9.woff') format('woff');
+}
 
 // @font-face {
 //   font-family: 'SF UI Display Heavy';
@@ -66,6 +63,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'SF UI Display';
+  color: $text-soft-grey;
+  font-size: 17px;
 }
 
 html,

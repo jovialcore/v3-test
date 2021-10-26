@@ -1,21 +1,30 @@
 <template>
   <select @change="(e) => changeSelect(e)">
     <option
-      v-for="(option, i) in options"
-      :selected="modelValue === option['value']"
-      :value="option['value']"
+      v-for="(option, i) in options.languages"
+      :selected="modelValue === option['_id']"
+      :value="option['_id']"
       :key="`${i}`"
     >
-      {{ t(`SelectLang.${option['name']}`) }}
+      {{ option.text }}
     </option>
   </select>
 </template>
 
 <script lang="ts">
 import {
-  defineComponent, reactive,
+  defineComponent, onBeforeMount, reactive, watch,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { LanguagesOptions } from '@/utils/options/Global';
+
+type OptionType = {
+  [key: string]: string | number;
+};
+
+type OptionsType = {
+  languages: OptionType[] | undefined;
+};
 
 export default defineComponent({
   model: {
@@ -28,18 +37,23 @@ export default defineComponent({
     value: { type: String, default: 'value' },
   },
   setup(_, { emit }) {
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
 
-    const options = reactive([
-      { name: 'ptBr', value: 'br' },
-      { name: 'fr', value: 'fr' },
-      { name: 'us', value: 'us' },
-      { name: 'es', value: 'es' },
-    ]);
+    const options: OptionsType = reactive({
+      languages: [],
+    });
 
     function changeSelect(event: Event) {
       emit('update:modelValue', (event.target as HTMLSelectElement).value);
     }
+
+    function getOptions() {
+      options.languages = LanguagesOptions();
+    }
+
+    onBeforeMount(getOptions);
+    watch(locale, getOptions);
+
     return {
       t,
       options,

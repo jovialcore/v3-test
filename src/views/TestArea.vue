@@ -16,7 +16,7 @@ export default defineComponent({
     const toast = useToast();
 
     function openModal() {
-      modal.open({ component: 'ModalTeste1' });
+      modal.open({ component: 'InviteModal' });
     }
 
     function openToast() {

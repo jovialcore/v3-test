@@ -6,5 +6,13 @@
     "maxLength": "Ce champ a besoin de moins de caractères",
     "upperCase": "Ce champ doit contenir au moins une majuscule.",
     "sameAsPassword": "Les mots de passe ne correspondent pas"
+  },
+  "options": {
+    "languages": [
+      { "value": "pt-BR", "text": "Portugais (Brésil)"},
+      { "value": "fr-FR", "text": "Français"},
+      { "value": "en-US", "text": "Anglais (États-Unis)"},
+      { "value": "es-ES", "text": "Espanol"}
+    ]
   }
 }

@@ -5,13 +5,13 @@ type MessagesType = {
 }
 
 const messages: MessagesType = {
-  br: {},
-  es: {},
-  fr: {},
-  us: {},
+  'pt-BR': {},
+  'es-ES': {},
+  'fr-FR': {},
+  'en-US': {},
 };
 
-const languages = ['br', 'es', 'fr', 'us'];
+const languages = ['pt-BR', 'es-ES', 'fr-FR', 'en-US'];
 
 const files = import.meta.glob('./languages/**/*.json');
 
@@ -28,6 +28,6 @@ Object.keys(files).forEach(async (file) => {
 });
 
 export const i18n = createI18n({
-  locale: window.localStorage.getItem('lang') || 'br',
+  locale: window.localStorage.getItem('lang') || 'pt-BR',
   messages,
 });

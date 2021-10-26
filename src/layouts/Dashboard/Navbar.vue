@@ -23,6 +23,13 @@
       <base-button v-if="routeName === 'Documents'" dashboard neutral
         ><font-awesome-icon icon="file-alt" />Novo documento</base-button
       >
+      <base-button
+        v-else-if="routeName === 'Team'"
+        dashboard
+        neutral
+        @click="openInviteModal"
+        ><font-awesome-icon icon="user-plus" />Novo convite</base-button
+      >
       <font-awesome-icon icon="bell"></font-awesome-icon>
       <font-awesome-icon icon="graduation-cap"></font-awesome-icon>
       <navbar-profile></navbar-profile>
@@ -34,13 +41,18 @@
 import { computed, defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
 import NavbarProfile from '@/layouts/Dashboard/Navbar/NavbarMenu.vue';
+import useModal from '@/hooks/useModal';
 
 export default defineComponent({
   components: { NavbarProfile },
   setup() {
     const route = useRoute();
     const routeName = computed(() => route.name);
-    return { routeName };
+    function openInviteModal() {
+      const modal = useModal();
+      modal.open({ component: 'InviteModal' });
+    }
+    return { routeName, openInviteModal };
   },
 });
 </script>

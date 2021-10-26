@@ -3,7 +3,9 @@
     <component
       :is="modalData.component"
       :open="modalData.show"
-      @close="handleModalToogle({ show: false, component: modalData.component })"
+      @close="
+        handleModalToogle({ show: false, component: modalData.component })
+      "
     />
   </teleport>
 </template>
@@ -13,13 +15,11 @@ import {
   reactive, onMounted, onBeforeUnmount, defineComponent,
 } from 'vue';
 import useModal, { ModalData } from '@/hooks/useModal';
-import ModalTeste1 from '@/components/ModalTeste1.vue';
-import ModalTeste2 from '@/components/ModalTeste2.vue';
+import InviteModal from '@/components/Settings/Team/InviteModal.vue';
 
 export default defineComponent({
   components: {
-    ModalTeste1,
-    ModalTeste2,
+    InviteModal,
   },
   setup() {
     const modal = useModal();
@@ -51,5 +51,4 @@ export default defineComponent({
 </script>
 
 <style>
-
 </style>

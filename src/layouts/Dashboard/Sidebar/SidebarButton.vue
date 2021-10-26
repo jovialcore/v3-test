@@ -50,7 +50,7 @@ export default defineComponent({
   border: none;
   font-family: 'SF UI Display Light';
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 0.75rem;
   &:hover {
     background: $secondary;
   }

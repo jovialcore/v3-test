@@ -29,7 +29,7 @@ export default defineComponent({
     const currentLang = ref(langStorage || 'br');
     const i18n = useI18n();
     const route = useRoute();
-    // const message = ref('');
+
     watch(currentLang, (newValue) => {
       window.localStorage.setItem('lang', newValue);
       i18n.locale.value = newValue;
