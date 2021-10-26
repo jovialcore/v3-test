@@ -97,13 +97,13 @@ export default defineComponent({
 
 }
 .phone-input input {
-  background: transparent;
-  color: $text-dark-grey-2;
-  font-size: 14px;
+  background-color: transparent !important;
+  color: $text-dark-grey-2  !important;
+  font-size: 14px !important;
 
   &:focus, &.hasData{ /* Microsoft Edge */
-    border-color: $primary-button;
-    background-color: $transparent-focus-bg-elements;
+    border-color: $primary-button !important;
+    background-color: $transparent-focus-bg-elements !important;
   }
 
   &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -120,11 +120,20 @@ export default defineComponent({
     /* Microsoft Edge */
     color: $text-soft-grey;
   }
+
 }
 .phone-input div:hover {
   background-color: transparent;
 }
 .vue-tel-input{
   border: 1px solid $border-neutral;
+}
+
+.vti__input {
+  background-color: transparent !important;
+}
+input {
+  background-color: transparent !important;
+
 }
 </style>
