@@ -22,11 +22,25 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'settings',
-        name: 'Settings',
         components: {
-          default: () => import('../views/Dashboard/Settings.vue'),
           OptionsSidebar: () => import('../views/Dashboard/OptionsSidebar/Settings.vue'),
         },
+        children: [
+          {
+            path: '',
+            name: 'Settings',
+            components: {
+              default: () => import('../views/Dashboard/Settings/index.vue'),
+            },
+          },
+          {
+            path: 'team',
+            name: 'Team',
+            components: {
+              default: () => import('../views/Dashboard/Settings/Team.vue'),
+            },
+          },
+        ],
       },
       {
         path: 'templates',

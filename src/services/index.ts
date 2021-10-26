@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import { JURIDOC_API } from '../configs/Environment';
 import AuthService from './Auth';
+import TeamService from './Team';
 
 const BASE_URL = JURIDOC_API;
 
@@ -25,4 +26,5 @@ const api = Axios.create({
 
 export default {
   auth: AuthService(api),
+  team: TeamService(api),
 };

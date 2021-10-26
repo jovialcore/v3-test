@@ -6,5 +6,13 @@
     "maxLength": "This field needs less characters",
     "upperCase": "This field must contain at least one capital letter",
     "sameAsPassword": "Passwords do not match"
+  },
+  "options": {
+    "languages": [
+      { "value": "pt-BR", "text": "Portuguese (Brazil)"},
+      { "value": "fr-FR", "text": "French"},
+      { "value": "en-US", "text": "French (USA)"},
+      { "value": "es-ES", "text": "Spanish"}
+    ]
   }
 }

@@ -3,12 +3,20 @@
         list-style: none;
         padding: 0;
         margin-bottom: 0.5rem;
+        & a {
+            text-decoration: none;
+        }
     }
     .sidebar-options-title {
         padding: 1rem;
         color: $neutral-1;
         border-bottom: 2px solid #1B202A;
         margin-bottom: 0.5rem;
+        &.secondary {
+            padding: 0.5rem;
+            border-bottom: none;
+            margin-bottom: 0;
+        }
     }
     .option-button {
         color: $neutral-1;

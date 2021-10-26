@@ -25,7 +25,7 @@
       <base-button block navbar
         ><font-awesome-icon icon="street-view" />Onboarding</base-button
       >
-      <base-button block navbar
+      <base-button block navbar @click="openInviteModal"
         ><font-awesome-icon icon="plus" />Enviar convites para membros da
         equipe</base-button
       >
@@ -38,6 +38,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
+import useModal from '@/hooks/useModal';
 
 export default defineComponent({
   setup() {
@@ -47,7 +48,11 @@ export default defineComponent({
     function openMenu() {
       state.active = !state.active;
     }
-    return { state, openMenu };
+    function openInviteModal() {
+      const modal = useModal();
+      modal.open({ component: 'InviteModal' });
+    }
+    return { state, openMenu, openInviteModal };
   },
 });
 </script>

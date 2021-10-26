@@ -134,7 +134,7 @@ export default defineComponent({
 .options-section {
   display: flex;
   width: 100%;
-  min-width: 200px;
+  min-width: 220px;
   .options-content {
     background: #1f2531;
     flex: 1;
