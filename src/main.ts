@@ -14,7 +14,7 @@ import App from './App.vue';
 import { setupBaseComponents } from './configs/BaseComponents';
 import setupGoogleAPI from './configs/SetupGoogleAPI';
 
-import router from './router';
+import { setupRouter } from './router';
 import { setupStore } from './store';
 import { i18n } from './i18n';
 
@@ -27,7 +27,7 @@ async function main() {
   setupGoogleAPI();
   setupBaseComponents(app);
 
-  app.use(router);
+  app.use(await setupRouter());
   app.use(await setupStore());
   app.use(i18n);
   app.use(VueLazyLoad);

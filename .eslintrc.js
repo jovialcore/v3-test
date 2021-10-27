@@ -7,7 +7,7 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'plugin:vue/vue3-essential',
     'plugin:vue/essential',
-    'airbnb-base',
+    'airbnb-base'
   ],
   globals: {
     Atomics: 'readonly',
@@ -40,9 +40,9 @@ module.exports = {
     'no-explicit-any': 'off',
     'no-shadow': 'off',
     '@typescript-eslint/no-empty-function': 'off',
-    "linebreak-style": 0,
-    "no-unused-vars":'off',
-    "no-undef": 'off',
+    'linebreak-style': 0,
+    'no-unused-vars':'off',
+    'no-undef': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },
