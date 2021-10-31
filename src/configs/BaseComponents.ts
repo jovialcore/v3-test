@@ -8,7 +8,7 @@ function getFileName(componentPath: string): string {
 }
 
 export function setupBaseComponents(app: App): void {
-  const components = import.meta.glob('../components/Base/*.vue');
+  const components = import.meta.glob('../components/Base/**/*.vue');
 
   Object.keys(components).forEach(async (componentPath) => {
     const componentName: string = getFileName(componentPath);

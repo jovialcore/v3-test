@@ -1,41 +1,129 @@
 <template>
-  <base-button @click.prevent="openModal" primary>Abrir modal</base-button>
-  <base-button @click.prevent="openToast" primary>Abrir toast</base-button>
-  <base-button @click.prevent="openModal2" primary>Abrir modal2</base-button>
-  <base-button @click.prevent="openToast2" primary>Abrir toast2</base-button>
+  <base-table
+    :columns="columns"
+    :data="data"
+    :total-items="16"
+    :start-items="1"
+    @next-page="nextPage"
+    @back-page="backPage"
+    @set-page="setPage"
+  >
+    <template v-slot:header-select="row">
+      <base-checkbox :id="`checkbox-${row.item.id}`"  />
+    </template>
+    <template v-slot:body-select="row">
+      <base-checkbox :id="`checkbox-${row.item.name}`" />
+    </template>
+    <template v-slot:body-stage="row">
+      <base-tag :status="row.item.stage" />
+    </template>
+  </base-table>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import useModal from '@/hooks/useModal';
-import useToast from '@/hooks/useToast';
+import { defineComponent, reactive } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup() {
-    const modal = useModal();
-    const toast = useToast();
+    const {t} = useI18n();
+    const columns = reactive([
+        {
+          id: 'select',
+          name: '',
+        },
+        {
+          id: 'name',
+          name: 'Nome',
+        },
+        {
+          id: 'experience',
+          name: 'Experiência',
+        },
+        {
+          id: 'stage',
+          name: 'Estágio',
+        },
+        {
+          id: 'people',
+          name: 'Pessoas',
+        },
+        {
+          id: 'update',
+          name: 'Atualização',
+        },
+        {
+          id: 'create',
+          name: 'Criado',
+        },
+        {
+          id: 'sign',
+          name: 'Assinatura',
+        },
+        {
+          id: 'pdf',
+          name: 'PDF',
+        },
+      ]);
 
-    function openModal() {
-      modal.open({ component: 'InviteModal' });
+    const data = reactive([
+      {
+        name: "Teste1",
+        experience: "Teste1",
+        stage: "draft",
+        people: "Teste1",
+        update: "Teste1",
+        create: "31/12/2000",
+        pdf: "https://google.com",
+      },
+      {
+        name: "Teste1",
+        experience: "Teste1",
+        stage: "approval",
+        people: "Teste1",
+        update: "Teste1",
+        create: "31/12/2000",
+        pdf: "https://google.com",
+      },
+      {
+        name: "Teste1",
+        experience: "Teste1",
+        stage: "finished",
+        people: "Teste1",
+        update: "Teste1",
+        create: "31/12/2000",
+        pdf: "https://google.com",
+      },
+      {
+        name: "Teste1",
+        experience: "Teste1",
+        stage: "finished",
+        people: "Teste1",
+        update: "Teste1",
+        create: "31/12/2000",
+        pdf: "https://google.com",
+      },
+    ]);
+
+    function setPage(page: number) {
+      console.log('set-page: ', page);
     }
 
-    function openToast() {
-      toast.open({ mesage: 'Hi, Toast!' });
+    function nextPage() {
+      console.log('next-page');
     }
 
-    function openModal2() {
-      modal.open({ component: 'ModalTeste2' });
-    }
-
-    function openToast2() {
-      toast.open({ mesage: 'Hi, Toast2! dassssssssssssssssssssssssssssssssssssssssssssss' });
+    function backPage() {
+      console.log('back-page');
     }
 
     return {
-      openModal,
-      openToast,
-      openModal2,
-      openToast2,
+      columns,
+      data,
+      nextPage,
+      setPage,
+      backPage,
+      t
     };
   },
 });

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import beforeEachRoute from '../middlewares/beforeEachRoute';
+// import beforeEachRoute from '../middlewares/beforeEachRoute';
 
 export async function setupRouter() {
   const routes: Array<RouteRecordRaw> = [];
@@ -17,7 +17,7 @@ export async function setupRouter() {
     routes,
   });
 
-  router.beforeEach(beforeEachRoute);
+  // router.beforeEach(beforeEachRoute);
 
   return router;
 }
