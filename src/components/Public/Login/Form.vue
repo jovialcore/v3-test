@@ -104,6 +104,7 @@ export default defineComponent({
 
           if (response.data) {
             router.push({ name: 'Dashboard' });
+            store.dispatch('auth/resetLoginData');
           }
         } catch (err) {
           toast.open({ mesage: err?.response?.data?.message });

@@ -15,7 +15,7 @@ export type RegisterActivationDataType ={
   company: string;
   size?: string;
   industry?: string;
-  crm?: string;
+  language?: string;
 };
 
 export type RegisterAccessDataType = LoginDataType & { language: string };
@@ -98,11 +98,56 @@ export const mutations: MutationTree<GlobalType> = {
   SET_FORGOT_PASSWORD_DATA(state, data) {
     state.forgotPassword = data;
   },
-  SET_RESET_PASSWORD_DATA(state, data) {
-    state.resetPassword = data;
-  },
   SET_CHECK_EMAIL_DATA(state, data) {
     state.checkEmail = data;
+  },
+  RESET_LOGIN_DATA(state) {
+    state.login = {
+      email: '',
+      password: ''
+    };
+  },
+  RESET_FORGOT_PASSWORD_DATA(state) {
+    state.forgotPassword = {
+      email: '',
+      language: '',
+    };
+  },
+  RESET_REGISTER_ACCESS_DATA(state) {
+    state.register.accessData = {
+      email: '',
+      password: '',
+      language: '',
+    };
+  },
+  RESET_CHECK_EMAIL_DATA(state) {
+    state.checkEmail = {
+      email: '',
+      language: '',
+    };
+  },
+  RESET_PASSWORD_DATA(state) {
+    state.resetPassword = {
+      token: '',
+      newPassword: '',
+      passwordConfirm: '',
+    };
+  },
+  RESET_REGISTER(state) {
+    state.register = {
+      accessData: {
+        email: '',
+        password: '',
+        language: '',
+      },
+      activationToken: '',
+      tokenId: '',
+      data: {
+        firstName: '',
+        lastName: '',
+        company: '',
+      },
+    };
   },
 };
 
@@ -111,7 +156,12 @@ export const actions: ActionTree<GlobalType, void> = {
   setCheckEmailData: ({ commit }, data: CheckEmailType) => commit('SET_CHECK_EMAIL_DATA', data),
   setRegisterAccessData: ({ commit }, data: LoginDataType & { language: string }) => commit('SET_REGISTER_ACCESS_DATA', data),
   setForgotPasswordData: ({ commit }, data: { email: string }) => commit('SET_FORGOT_PASSWORD_DATA', data),
-  setResetPasswordData: ({ commit }, data: RegisterType) => commit('SET_RESET_PASSWORD_DATA', data),
+  resetLoginData: ({ commit }) => commit('RESET_LOGIN_DATA'),
+  resetCheckEmailData: ({ commit }) => commit('RESET_CHECK_EMAIL_DATA'),
+  resetForgotPasswordData: ({ commit }) => commit('RESET_FORGOT_PASSWORD_DATA'),
+  resetPasswordData: ({ commit }) => commit('RESET_PASSWORD_DATA'),
+  resetRegisterAccessData: ({ commit }) => commit('RESET_REGISTER_ACCESS_DATA'),
+  resetRegister: ({ commit }) => commit('RESET_REGISTER'),
   async submitLogin({ state }) {
     const body = state.login;
     const response = await $api.auth.login(body);
