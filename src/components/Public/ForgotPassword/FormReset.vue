@@ -81,6 +81,7 @@ export default defineComponent({
 
           if (response.data) {
             router.push({ name: 'Login' });
+            store.dispatch('auth/resetPasswordData');
           }
         } catch (err) {
           toast.open({ mesage: err?.response?.data?.message });

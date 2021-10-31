@@ -76,7 +76,7 @@ import useToast from '@/hooks/useToast';
 
 export default defineComponent({
   setup() {
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
     const store = useStore();
     const router = useRouter();
     const toast = useToast();
@@ -119,6 +119,7 @@ export default defineComponent({
 
       register.value.data.firstName = user.getBasicProfile().getGivenName();
       register.value.data.lastName = user.getBasicProfile().getFamilyName();
+      register.value.data.language = locale.value;
 
       router.push({
         name: 'RegisterStep3',

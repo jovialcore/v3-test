@@ -142,12 +142,11 @@ export default defineComponent({
           if (response.data) {
             toast.open({ mesage: response.data.msg });
             router.push({ name: 'RegisterFinished' });
+            store.dispatch('auth/resetRegister');
           }
         } catch (err) {
           toast.open({ mesage: err?.response?.data?.message });
         }
-
-        router.push({ name: 'RegisterFinished' });
       }
     }
 
