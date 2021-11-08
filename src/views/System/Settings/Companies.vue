@@ -46,8 +46,22 @@ export default defineComponent({
 
     const data = reactive([
     ]);
+
     store.dispatch('companies/getCompanies');
-    const companies = computed<any>(() => store.getters['companies/get']);
+    // const companies = computed<any>(() => store.getters['companies/get']);
+    const companies = [
+      {
+        companyName: 'tilit',
+        description: 'testing',
+        subsidiary: 'test',
+      },
+      {
+        companyName: 'tilit 2',
+        description: 'testing 2',
+        subsidiary: 'test',
+      },
+    ];
+
     function setPage(page: number) {
       console.log('set-page: ', page);
     }

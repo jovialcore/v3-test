@@ -69,6 +69,8 @@ export default {
     display: flex;
     section {
       flex: 1;
+      background-color: $background-light-gray;
+      padding-top: 15px;
     }
   }
 }

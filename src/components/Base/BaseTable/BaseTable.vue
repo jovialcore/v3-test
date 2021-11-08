@@ -142,7 +142,7 @@ export default defineComponent({
   border-spacing: 0;
   width: 100%;
   display: table;
-  // height: fit-content;
+  background-color: $white-bg-elements;
 
   td, th {
 
