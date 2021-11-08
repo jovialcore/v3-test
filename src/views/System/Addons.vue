@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>testando addons</div>
 </template>
 
 <script lang="ts">

@@ -1,4 +1,5 @@
 <template>
+  <!-- <div /> -->
   <table class="base-table">
     <thead>
       <tr>
@@ -6,15 +7,13 @@
           v-for="(column, i) in columns"
           :key="`column_${column.id}`"
         >
-          <div class="content">
-            <slot
-              :item="column"
-              :index="i"
-              :name="`header-${column.id}`"
-            >
-              {{ column.name }}
-            </slot>
-          </div>
+          <slot
+            :item="column"
+            :index="i"
+            :name="`header-${column.id}`"
+          >
+            {{ column.name }}
+          </slot>
         </th>
       </tr>
     </thead>
@@ -27,21 +26,19 @@
           v-for="(column, j) in columns"
           :key="`row_${i}_column_${j}`"
         >
-          <div class="content">
-            <slot
-              :item="item"
-              :index="i"
-              :name="`body-${column.id}`"
-            >
-              <template v-if="item[column.id]">
-                {{ item[column.id] }}
-              </template>
-            </slot>
-          </div>
+          <slot
+            :item="item"
+            :index="i"
+            :name="`body-${column.id}`"
+          >
+            <template v-if="item[column.id]">
+              {{ item[column.id] }}
+            </template>
+          </slot>
         </td>
       </tr>
     </tbody>
-    <tfoot>
+    <!-- <tfoot>
       <tr>
         <td :colspan="columns.length">
           <div class="content navigation">
@@ -68,7 +65,7 @@
           </div>
         </td>
       </tr>
-    </tfoot>
+    </tfoot> -->
   </table>
 </template>
 
@@ -144,15 +141,11 @@ export default defineComponent({
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
+  display: table;
+  // height: fit-content;
 
   td, th {
-    .content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: $text-dark-grey-6;
-      font-weight: 500;
-    }
+
   }
 
   tr {

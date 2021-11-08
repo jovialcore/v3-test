@@ -1,9 +1,15 @@
 <template>
-  <div></div>
+  <div>
+    oi
+  </div>
 </template>
 
 <script lang="ts">
-export default {};
+export default {
+  setup() {
+  },
+
+};
 </script>
 
 <style lang="scss" scoped>

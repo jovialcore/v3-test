@@ -1,17 +1,20 @@
 <template>
-  <button class="sidebar-button" :class="classes">
+  <button
+    class="sidebar-button"
+    :class="classes"
+  >
     <img
       v-if="icon && !fontAwesome"
       v-lazy="{ src: icon }"
       :alt="alt || 'icon'"
       :width="iconSize"
       :height="iconSize"
-    />
+    >
     <font-awesome-icon
       v-if="icon && fontAwesome"
       :icon="icon"
       :style="{ width: iconSize, height: iconSize }"
-    ></font-awesome-icon>
+    />
     {{ label }}
   </button>
 </template>
@@ -21,18 +24,20 @@ import { computed, defineComponent } from 'vue';
 
 export default defineComponent({
   props: {
-    icon: { type: String },
+    icon: { type: String, default: undefined },
     fontAwesome: { type: Boolean },
-    iconSize: { type: String || Number },
-    alt: { type: String },
-    label: { type: String },
+    iconSize: { type: String || Number, default: '24' },
+    alt: { type: String, default: 'sidebar item' },
+    label: { type: String, default: undefined },
     row: { type: Boolean },
+    submenu: { type: Boolean, default: false },
     block: { type: Boolean },
   },
   setup(props) {
     const classes = computed(() => ({
       row: props.row,
       block: props.block,
+      submenu: props.submenu,
     }));
     return { classes };
   },
@@ -57,6 +62,11 @@ export default defineComponent({
   &.block {
     width: 100%;
     justify-content: initial;
+  }
+  &.submenu{
+    &:hover {
+      background-color: #1f2531;
+    }
   }
 }
 .sidebar-button svg {

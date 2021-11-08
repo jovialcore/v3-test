@@ -1,13 +1,15 @@
 <template>
   <div class="options-sidebar">
-    <p class="sidebar-options-title">Documents</p>
+    <p class="sidebar-options-title">
+      Documents
+    </p>
     <ul class="list">
       <li>
         <sidebar-button
           class="option-button"
           icon="/images/dashboard/all-folders.png"
           label="All"
-          iconSize="16"
+          icon-size="16"
           row
           block
         />
@@ -17,8 +19,8 @@
           class="option-button imported"
           icon="folder"
           label="Imported documents"
-          fontAwesome
-          iconSize="16"
+          font-awesome
+          icon-size="16"
           row
           block
         />
@@ -30,8 +32,8 @@
           class="option-button"
           icon="folder-plus"
           label="Adicionar uma pasta"
-          fontAwesome
-          iconSize="16"
+          font-awesome
+          icon-size="16"
           row
           block
         />
@@ -42,7 +44,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import SidebarButton from '@/layouts/Dashboard/Sidebar/SidebarButton.vue';
+import SidebarButton from '@/layouts/System/Sidebar/SidebarButton.vue';
 
 export default defineComponent({
   components: { SidebarButton },

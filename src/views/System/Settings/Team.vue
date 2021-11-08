@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>aqui esta dentro do team</div>
 </template>
 
 <script lang="ts">

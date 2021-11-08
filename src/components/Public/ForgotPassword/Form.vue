@@ -1,5 +1,8 @@
 <template>
-  <form @submit.prevent class="form">
+  <form
+    class="form"
+    @submit.prevent
+  >
     <div class="form-content">
       <div class="inputs">
         <base-input
@@ -12,10 +15,10 @@
       <div class="buttons">
         <div>
           <base-button
-            @click="handleForgotPassword"
             :disabled="v$.$invalid"
             block
             primary
+            @click="handleForgotPassword"
           >
             {{ t(`ForgotPassword.form.sendMailButton`) }}
           </base-button>
@@ -64,7 +67,7 @@ export default defineComponent({
             router.push({ name: 'Login' });
             store.dispatch('auth/resetForgotPasswordData');
           }
-        } catch (err) {
+        } catch (err: any) {
           toast.open({ mesage: err?.response?.data?.message });
         }
 

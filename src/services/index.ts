@@ -8,21 +8,26 @@ const BASE_URL = JURIDOC_API;
 const api = Axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
-  // xsrfCookieName: 'token',
 });
 
-// api.interceptors.response.use(
-//   (response) => response,
-//   (error) => {
-//     const canThrowAnError = error.request.status === 0 || error.request.status === 500;
+api.interceptors.response.use(
+  (response) => response,
+  (error) => ({
+    error: error.response.data.message,
+  })
+  // (error) => {
+  //   throw new Error(error.response.data.message);
+  // }
 
-//     if (canThrowAnError) {
-//       throw new Error(error.message);
-//     }
+  // const canThrowAnError = error.request.status === 0 || error.request.status === 500;
 
-//     return error;
-//   },
-// );
+  // if (canThrowAnError) {
+  //   throw new Error(error.message);
+  // }
+
+  // return error;
+  ,
+);
 
 export default {
   auth: AuthService(api),

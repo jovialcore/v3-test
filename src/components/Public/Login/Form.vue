@@ -99,15 +99,14 @@ export default defineComponent({
       const isValidate = await v$.value.$validate();
 
       if (isValidate) {
-        try {
-          const response = await store.dispatch('auth/submitLogin', form);
+        const { data, error } = await store.dispatch('auth/submitLogin', form);
 
-          if (response.data) {
-            router.push({ name: 'Dashboard' });
-            store.dispatch('auth/resetLoginData');
-          }
-        } catch (err) {
-          toast.open({ mesage: err?.response?.data?.message });
+        if (data) {
+          router.push({ name: 'Dashboard' });
+        }
+
+        if (error) {
+          toast.open({ mesage: error });
         }
       }
     }
@@ -116,14 +115,13 @@ export default defineComponent({
       const auth = await GoogleAuth();
       const user = await auth.signIn();
       const tokenId = user.getAuthResponse().id_token;
-      try {
-        const response = await store.dispatch('auth/submitGoogleLogin', tokenId);
+      const { data, errors } = await store.dispatch('auth/submitGoogleLogin', tokenId);
 
-        if (response.data) {
-          router.push({ name: 'Dashboard' });
-        }
-      } catch (err) {
-        toast.open({ mesage: err?.response?.data?.message });
+      if (data) {
+        router.push({ name: 'Dashboard' });
+      }
+      if (errors) {
+        toast.open({ mesage: errors });
       }
     }
 

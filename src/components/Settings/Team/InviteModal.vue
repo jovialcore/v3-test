@@ -29,12 +29,16 @@
           :placeholder="t(`InviteModal.languagePlaceholder`)"
           :options="options.languages"
         />
-        <base-input
+        <base-select
           v-model="v$.company.$model"
           :error="v$.company.$errors[0]?.$message"
           :placeholder="t(`InviteModal.companyPlaceholder`)"
+          :options="companies"
+          value="_id"
+          text="companyName"
         />
       </div>
+      {{ invite }}
       <base-input-radio
         v-model="v$.role.$model"
         :error="v$.role.$errors[0]?.$message"
@@ -98,6 +102,8 @@ export default defineComponent({
     });
 
     const invite = computed<InviteType>(() => store.getters['team/getInvite']);
+    store.dispatch('companies/getCompanies');
+    const companies = computed<any>(() => store.getters['companies/get']);
 
     const rules = computed(() => ({
       firstName: { required },
@@ -120,7 +126,7 @@ export default defineComponent({
           if (response.data) {
             toast.open({ mesage: response.data.msg });
           }
-        } catch (err) {
+        } catch (err: any) {
           toast.open({ mesage: err?.response?.data?.message });
         }
 
@@ -139,7 +145,7 @@ export default defineComponent({
     onBeforeMount(getOptions);
 
     return {
-      options, v$, handleSubmit, t,
+      options, v$, handleSubmit, t, companies, invite,
     };
   },
 });

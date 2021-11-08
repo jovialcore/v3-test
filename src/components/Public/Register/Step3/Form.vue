@@ -144,7 +144,7 @@ export default defineComponent({
             router.push({ name: 'RegisterFinished' });
             store.dispatch('auth/resetRegister');
           }
-        } catch (err) {
+        } catch (err: any) {
           toast.open({ mesage: err?.response?.data?.message });
         }
       }

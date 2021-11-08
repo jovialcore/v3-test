@@ -1,5 +1,9 @@
 <template>
-  <div class="profile-menu" :class="{ active: state.active }" @click="openMenu">
+  <div
+    class="profile-menu"
+    :class="{ active: state.active }"
+    @click="openMenu"
+  >
     <div class="profile-image-container">
       <div class="profile-image">
         <img
@@ -7,31 +11,48 @@
           width="48"
           height="48"
           alt="profile image"
-        />
+        >
       </div>
     </div>
     <div class="profile-open-menu">
       <div class="profile-open-options">
         <div class="profile-chevron">
-          <font-awesome-icon icon="caret-down"></font-awesome-icon>
+          <font-awesome-icon icon="caret-down" />
         </div>
       </div>
-      <div class="border-fixer"></div>
+      <div class="border-fixer" />
     </div>
-    <div class="navbar-dropdown-content" v-show="state.active">
-      <base-button block navbar
-        ><font-awesome-icon icon="user" />Meu perfil</base-button
+    <div
+      v-show="state.active"
+      class="navbar-dropdown-content"
+    >
+      <base-button
+        block
+        navbar
       >
-      <base-button block navbar
-        ><font-awesome-icon icon="street-view" />Onboarding</base-button
+        <font-awesome-icon icon="user" />Meu perfil
+      </base-button>
+      <base-button
+        block
+        navbar
       >
-      <base-button block navbar @click="openInviteModal"
-        ><font-awesome-icon icon="plus" />Enviar convites para membros da
-        equipe</base-button
+        <font-awesome-icon icon="street-view" />Onboarding
+      </base-button>
+      <base-button
+        block
+        navbar
+        @click="openInviteModal"
       >
-      <base-button block navbar logout
-        ><font-awesome-icon icon="sign-out-alt" />Sair</base-button
+        <font-awesome-icon icon="plus" />Enviar convites para membros da
+        equipe
+      </base-button>
+      <base-button
+        block
+        navbar
+        logout
       >
+        <font-awesome-icon icon="sign-out-alt" />Sair
+      </base-button>
     </div>
   </div>
 </template>

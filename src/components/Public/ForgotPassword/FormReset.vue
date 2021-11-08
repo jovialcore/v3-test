@@ -1,17 +1,20 @@
 <template>
-  <form @submit.prevent class="form">
+  <form
+    class="form"
+    @submit.prevent
+  >
     <div class="form-content">
       <div class="inputs">
         <base-input
-          type="password"
           v-model="v$.newPassword.$model"
+          type="password"
           :error="v$.newPassword.$errors[0]?.$message"
           :label="t(`ForgotPassword.formReset.newPassword`)"
           :placeholder="t(`ForgotPassword.formReset.newPasswordPlaceholder`)"
         />
         <base-input
-          type="password"
           v-model="v$.passwordConfirm.$model"
+          type="password"
           :error="v$.passwordConfirm.$errors[0]?.$message"
           :label="t(`ForgotPassword.formReset.passwordConfirm`)"
           :placeholder="t(`ForgotPassword.formReset.passwordConfirmPlaceholder`)"
@@ -20,12 +23,12 @@
       <div class="buttons">
         <div>
           <base-button
-            @click="handleResetPassword"
             :disabled="v$.$invalid"
             block
             primary
+            @click="handleResetPassword"
           >
-          {{ t(`ForgotPassword.formReset.submitButton`) }}
+            {{ t(`ForgotPassword.formReset.submitButton`) }}
           </base-button>
         </div>
       </div>
@@ -83,7 +86,7 @@ export default defineComponent({
             router.push({ name: 'Login' });
             store.dispatch('auth/resetPasswordData');
           }
-        } catch (err) {
+        } catch (err: any) {
           toast.open({ mesage: err?.response?.data?.message });
         }
 

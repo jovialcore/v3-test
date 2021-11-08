@@ -71,7 +71,7 @@ export default defineComponent({
           if (response.data) {
             emit('setCompleted', true);
           }
-        } catch (err) {
+        } catch (err: any) {
           toast.open({ mesage: err?.response?.data?.message });
         }
       }

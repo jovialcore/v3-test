@@ -8,20 +8,31 @@
       <div class="folder-icon">
         <font-awesome-icon icon="folder" />
       </div>
-      <h1>Here you'll find the documents <br />you've created</h1>
+      <h1>Here you'll find the documents <br>you've created</h1>
       <p>
-        Send interactive PandaDocs to your contractors <br />and prospects to
+        Send interactive PandaDocs to your contractors <br>and prospects to
         more close deals.
       </p>
-      <base-button primary dashboard>SEND A NEW DOCUMENT</base-button>
+      <base-button
+        primary
+        dashboard
+      >
+        SEND A NEW DOCUMENT
+      </base-button>
+      {{ route }}
     </main>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
+  setup() {
+    const route = useRoute();
+    return { route };
+  },
 });
 </script>
 

@@ -5,14 +5,14 @@
         <div class="jd-logo-container">
           <img
             v-lazy="{ src: '/images/mini-logo-white.png' }"
-            alt="JD"
+            alt="JD icon"
             width="48"
             height="48"
           >
         </div>
         <img
           v-lazy="{ src: '/images/logo.png' }"
-          alt="logo juridoc"
+          alt="logo Juridoc"
           width="180"
           class="main-logo"
         >
@@ -45,7 +45,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
-import NavbarProfile from '@/layouts/Dashboard/Navbar/NavbarMenu.vue';
+import NavbarProfile from '@/layouts/System/Navbar/NavbarMenu.vue';
 import useModal from '@/hooks/useModal';
 
 export default defineComponent({

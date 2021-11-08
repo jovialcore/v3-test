@@ -107,7 +107,7 @@ export default defineComponent({
             toast.open({ mesage: response.data.msg });
             router.push({ name: 'CheckEmail' });
           }
-        } catch (err) {
+        } catch (err: any) {
           toast.open({ mesage: err?.response?.data?.message });
         }
       }

@@ -1,5 +1,6 @@
 import { RouteLocationNormalized, NavigationGuardNext } from 'vue-router';
-import $api from '../services';
+// import $api from '../services';
+import AuthService from '@/services/NewAuth';
 
 const AUTH_ROUTES_NAMES = [
   'Activation',
@@ -16,8 +17,8 @@ const AUTH_ROUTES_NAMES = [
 ];
 
 async function isAuthenticated(): Promise<boolean | string> {
-  const response = await $api.auth.currentUser();
-
+  // const response = await $api.auth.currentUser();
+  const response = await AuthService.currentUser();
   if (!response.errors) {
     return !!response.data;
   }

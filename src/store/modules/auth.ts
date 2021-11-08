@@ -1,5 +1,6 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex';
 import $api from '@/services';
+import AuthService from '@/services/NewAuth';
 
 export type LoginDataType = {
   email: string;
@@ -51,7 +52,7 @@ type GlobalType = {
   checkEmail: CheckEmailType;
 };
 
-export const state: GlobalType = {
+export const state = {
   login: {
     email: '',
     password: '',
@@ -104,7 +105,7 @@ export const mutations: MutationTree<GlobalType> = {
   RESET_LOGIN_DATA(state) {
     state.login = {
       email: '',
-      password: ''
+      password: '',
     };
   },
   RESET_FORGOT_PASSWORD_DATA(state) {
@@ -152,9 +153,9 @@ export const mutations: MutationTree<GlobalType> = {
 };
 
 export const actions: ActionTree<GlobalType, void> = {
-  setLoginData: ({ commit }, data: LoginDataType) => commit('SET_LOGIN_DATA', data),
+  setLoginData: ({ commit }, { email, password }: {email:string, password: string}) => commit('SET_LOGIN_DATA', { email, password }),
   setCheckEmailData: ({ commit }, data: CheckEmailType) => commit('SET_CHECK_EMAIL_DATA', data),
-  setRegisterAccessData: ({ commit }, data: LoginDataType & { language: string }) => commit('SET_REGISTER_ACCESS_DATA', data),
+  setRegisterAccessData: ({ commit }, { email, password }: { email:string, password: string } & { language: string }) => commit('SET_REGISTER_ACCESS_DATA', { email, password }),
   setForgotPasswordData: ({ commit }, data: { email: string }) => commit('SET_FORGOT_PASSWORD_DATA', data),
   resetLoginData: ({ commit }) => commit('RESET_LOGIN_DATA'),
   resetCheckEmailData: ({ commit }) => commit('RESET_CHECK_EMAIL_DATA'),
@@ -164,8 +165,9 @@ export const actions: ActionTree<GlobalType, void> = {
   resetRegister: ({ commit }) => commit('RESET_REGISTER'),
   async submitLogin({ state }) {
     const body = state.login;
-    const response = await $api.auth.login(body);
-
+    // const response = await $api.auth.login(body);
+    const response = await AuthService.login(body);
+    console.log('response', response);
     return response;
   },
   async submitGoogleLogin(_, tokenId: string) {
@@ -220,7 +222,7 @@ export const actions: ActionTree<GlobalType, void> = {
 };
 
 export const getters: GetterTree<GlobalType, void> = {
-  getLoginData: (state):LoginDataType => state.login,
+  getLoginData: (state): {email:string, password: string} => state.login,
   getRegisterAccessData: (state):RegisterAccessDataType => state.register.accessData,
   getRegisterActivationData: (state):RegisterActivationDataType => state.register.data,
   getRegisterData: (state): RegisterType => state.register,

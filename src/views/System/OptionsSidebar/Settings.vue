@@ -1,6 +1,8 @@
 <template>
   <div class="options-sidebar">
-    <p class="sidebar-options-title">GENERAL</p>
+    <p class="sidebar-options-title">
+      GENERAL
+    </p>
     <ul class="list">
       <li>
         <sidebar-button
@@ -8,8 +10,19 @@
           block
           label="Profile"
           icon="user"
-          fontAwesome
-          iconSize="16"
+          font-awesome
+          icon-size="16"
+          class="option-button"
+        />
+      </li>
+      <li>
+        <sidebar-button
+          row
+          block
+          label="Companies"
+          icon="wallet"
+          font-awesome
+          icon-size="16"
           class="option-button"
         />
       </li>
@@ -19,8 +32,8 @@
           block
           label="Account"
           icon="wallet"
-          fontAwesome
-          iconSize="16"
+          font-awesome
+          icon-size="16"
           class="option-button"
         />
       </li>
@@ -30,13 +43,15 @@
           block
           label="Preferences"
           icon="cog"
-          fontAwesome
-          iconSize="16"
+          font-awesome
+          icon-size="16"
           class="option-button"
         />
       </li>
     </ul>
-    <p class="sidebar-options-title secondary">WORKSPACE SETTINGS</p>
+    <p class="sidebar-options-title secondary">
+      WORKSPACE SETTINGS
+    </p>
     <ul class="list">
       <li>
         <router-link :to="{ name: 'Team' }">
@@ -45,7 +60,7 @@
             block
             label="Team"
             icon="users"
-            fontAwesome
+            font-awesome
             class="option-button"
           />
         </router-link>
@@ -56,7 +71,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import SidebarButton from '@/layouts/Dashboard/Sidebar/SidebarButton.vue';
+import SidebarButton from '@/layouts/System/Sidebar/SidebarButton.vue';
 
 export default defineComponent({
   components: { SidebarButton },
