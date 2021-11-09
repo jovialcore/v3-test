@@ -15,10 +15,14 @@ import {
   reactive, onMounted, onBeforeUnmount, defineComponent,
 } from 'vue';
 import useModal, { ModalData } from '@/hooks/useModal';
+import AddCompanyModal from '@/components/Settings/Companies/AddCompanyModal.vue';
+import AddWorkspaceModal from '@/components/Settings/Workspaces/AddWorkspaceModal.vue';
 import InviteModal from '@/components/Settings/Team/InviteModal.vue';
 
 export default defineComponent({
   components: {
+    AddCompanyModal,
+    AddWorkspaceModal,
     InviteModal,
   },
   setup() {

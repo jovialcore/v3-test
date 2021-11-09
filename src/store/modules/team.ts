@@ -46,6 +46,13 @@ export const actions: ActionTree<GlobalType, void> = {
 
     return response;
   },
+  async getTeam({ state }) {
+    const body = state.invite;
+    const response = await $api.team.invite(body);
+
+    return response;
+  },
+
 };
 
 export const getters: GetterTree<GlobalType, void> = {

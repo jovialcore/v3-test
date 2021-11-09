@@ -3,7 +3,12 @@ import $api from '@/services';
 import CompaniesService from '@/services/Companies';
 
 export const state: any = {
-  companies: undefined,
+  companies: [],
+  company: {
+    companyName: '',
+    description: '',
+    subsidiary: '',
+  },
 };
 
 export const mutations: MutationTree<any> = {
@@ -14,10 +19,8 @@ export const mutations: MutationTree<any> = {
 };
 
 export const actions: ActionTree<any, void> = {
-  async getUser({ commit }) {
-    const response = await $api.auth.currentUser();
-
-    commit('SET_CURRENT_USER', response.data);
+  async create({ state }) {
+    const response = await CompaniesService.create(state.company);
 
     return response;
   },
@@ -29,4 +32,5 @@ export const actions: ActionTree<any, void> = {
 
 export const getters: GetterTree<any, void> = {
   get: (state) => state.companies,
+  getCompany: (state) => state.company,
 };

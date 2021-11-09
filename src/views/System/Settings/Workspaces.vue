@@ -1,7 +1,16 @@
 <template>
+  <div class="content-header">
+    <base-button
+      dashboard
+      neutral
+      @click="openWorkspaceModal"
+    >
+      Novo Workspace
+    </base-button>
+  </div>
   <base-table
     :columns="columns"
-    :data="companies"
+    :data="workspaces"
     :total-items="16"
     :start-items="1"
     @next-page="nextPage"
@@ -14,8 +23,14 @@
     <template v-slot:body-select="row">
       <base-checkbox :id="`checkbox-${row.item.name}`" />
     </template>
-    <template v-slot:body-stage="row">
-      <base-tag :status="row.item.stage" />
+    <template v-slot:body-team="row">
+      {{ row.item.team.length }}
+    </template>
+    <template v-slot:body-createdAt="row">
+      {{ new Date(row.item.createdAt).toLocaleDateString() }}
+    </template>
+    <template v-slot:body-updatedAt="row">
+      {{ new Date(row.item.updatedAt).toLocaleDateString() }}
     </template>
   </base-table>
 </template>
@@ -24,6 +39,7 @@
 import { computed, defineComponent, reactive } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
+import useModal from '@/hooks/useModal';
 
 export default defineComponent({
   setup() {
@@ -31,37 +47,28 @@ export default defineComponent({
     const store = useStore();
     const columns = reactive([
       {
-        id: 'companyName',
+        id: 'workspaceName',
         name: 'Name',
       },
       {
-        id: 'description',
-        name: 'Description',
+        id: 'team',
+        name: 'Usuários',
       },
       {
-        id: 'subsidiary',
-        name: 'Subsidiary',
+        id: 'createdAt',
+        name: 'Criado',
+      },
+      {
+        id: 'updatedAt',
+        name: 'Última Atualização',
       },
     ]);
 
     const data = reactive([
     ]);
 
-    store.dispatch('companies/getCompanies');
-    // const companies = computed<any>(() => store.getters['companies/get']);
-    const companies = [
-      {
-        companyName: 'tilit',
-        description: 'testing',
-        subsidiary: 'test',
-      },
-      {
-        companyName: 'tilit 2',
-        description: 'testing 2',
-        subsidiary: 'test',
-      },
-    ];
-
+    store.dispatch('workspaces/getWorkspaces');
+    const workspaces = computed<any>(() => store.getters['workspaces/get']);
     function setPage(page: number) {
       console.log('set-page: ', page);
     }
@@ -74,8 +81,14 @@ export default defineComponent({
       console.log('back-page');
     }
 
+    function openWorkspaceModal() {
+      const modal = useModal();
+      modal.open({ component: 'AddWorkspaceModal' });
+    }
+
     return {
-      companies,
+      workspaces,
+      openWorkspaceModal,
       columns,
       data,
       nextPage,
@@ -87,6 +100,5 @@ export default defineComponent({
 });
 </script>
 
-<style>
-
+<style lang="scss" scoped>
 </style>

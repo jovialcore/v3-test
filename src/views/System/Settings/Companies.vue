@@ -1,4 +1,13 @@
 <template>
+  <div class="content-header">
+    <base-button
+      dashboard
+      neutral
+      @click="openCompanyModal"
+    >
+      Nova empresa
+    </base-button>
+  </div>
   <base-table
     :columns="columns"
     :data="companies"
@@ -24,6 +33,7 @@
 import { computed, defineComponent, reactive } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
+import useModal from '@/hooks/useModal';
 
 export default defineComponent({
   setup() {
@@ -48,19 +58,12 @@ export default defineComponent({
     ]);
 
     store.dispatch('companies/getCompanies');
-    // const companies = computed<any>(() => store.getters['companies/get']);
-    const companies = [
-      {
-        companyName: 'tilit',
-        description: 'testing',
-        subsidiary: 'test',
-      },
-      {
-        companyName: 'tilit 2',
-        description: 'testing 2',
-        subsidiary: 'test',
-      },
-    ];
+    const companies = computed<any>(() => store.getters['companies/get']);
+
+    function openCompanyModal() {
+      const modal = useModal();
+      modal.open({ component: 'AddCompanyModal' });
+    }
 
     function setPage(page: number) {
       console.log('set-page: ', page);
@@ -78,6 +81,7 @@ export default defineComponent({
       companies,
       columns,
       data,
+      openCompanyModal,
       nextPage,
       setPage,
       backPage,

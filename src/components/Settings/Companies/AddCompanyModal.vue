@@ -1,50 +1,32 @@
 <template>
   <base-modal
     :is-opened="open"
-    class="invite-modal"
+    class="company-modal"
   >
     <template v-slot:header>
-      <h3>{{ t(`InviteModal.title`) }}</h3>
+      <h3>{{ t(`AddCompanyModal.title`) }}</h3>
     </template>
     <template v-slot:body>
       <div class="base-info">
         <base-input
-          v-model="v$.firstName.$model"
-          :error="v$.firstName.$errors[0]?.$message"
-          :placeholder="t(`InviteModal.firstNamePlaceholder`)"
+          v-model="v$.companyName.$model"
+          :error="v$.companyName.$errors[0]?.$message"
+          :placeholder="t(`AddCompanyModal.companyPlaceholder`)"
         />
         <base-input
-          v-model="v$.lastName.$model"
-          :error="v$.lastName.$errors[0]?.$message"
-          :placeholder="t(`InviteModal.lastNamePlaceholder`)"
-        />
-        <base-input
-          v-model="v$.email.$model"
-          :error="v$.email.$errors[0]?.$message"
-          :placeholder="t(`InviteModal.emailPlaceholder`)"
+          v-model="v$.description.$model"
+          :error="v$.description.$errors[0]?.$message"
+          :placeholder="t(`AddCompanyModal.descriptionPlaceholder`)"
         />
         <base-select
-          v-model="v$.language.$model"
-          :error="v$.language.$errors[0]?.$message"
-          :placeholder="t(`InviteModal.languagePlaceholder`)"
-          :options="options.languages"
-        />
-        <base-select
-          v-model="v$.company.$model"
-          :error="v$.company.$errors[0]?.$message"
-          :placeholder="t(`InviteModal.companyPlaceholder`)"
+          v-model="v$.subsidiary.$model"
+          :error="v$.subsidiary.$errors[0]?.$message"
+          :placeholder="t(`AddCompanyModal.subsidiaryPlaceholder`)"
           :options="companies"
           value="_id"
           text="companyName"
         />
       </div>
-      <base-input-radio
-        v-model="v$.role.$model"
-        :error="v$.role.$errors[0]?.$message"
-        :label="t(`InviteModal.teamRoles.title`)"
-        :options="options.teamRoles"
-        orientation="column"
-      />
     </template>
     <template v-slot:footer>
       <div>
@@ -54,7 +36,7 @@
           neutral
           @click="handleSubmit"
         >
-          Invite
+          {{ t(`AddCompanyModal.submit`) }}
         </base-button>
       </div>
     </template>
@@ -68,9 +50,8 @@ import {
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import useVuelidate from '@vuelidate/core';
-import { InviteType } from '@/store/modules/team';
 import { RulesType } from '@/types/Vuelidate';
-import { required, email } from '@/utils/I18nValidators';
+import { required } from '@/utils/I18nValidators';
 import useToast from '@/hooks/useToast';
 import { TeamRolesOptions } from '@/utils/options/Invite';
 import { LanguagesOptions } from '@/utils/options/Global';
@@ -100,27 +81,25 @@ export default defineComponent({
       languages: [],
     });
 
-    const invite = computed<InviteType>(() => store.getters['team/getInvite']);
+    const company = computed<any>(() => store.getters['companies/getCompany']);
+
     store.dispatch('companies/getCompanies');
     const companies = computed<any>(() => store.getters['companies/get']);
 
     const rules = computed(() => ({
-      firstName: { required },
-      lastName: { required },
-      company: { required },
-      email: { required, email },
-      role: { required },
-      language: { },
+      companyName: { required },
+      description: { required },
+      subsidiary: { required },
     } as RulesType));
 
-    const v$ = useVuelidate(rules, invite.value);
+    const v$ = useVuelidate(rules, company.value);
 
     async function handleSubmit() {
       const isValidate = await v$.value.$validate();
 
       if (isValidate) {
         try {
-          const response = await store.dispatch('team/submitInvite');
+          const response = await store.dispatch('companies/create');
 
           if (response.data) {
             toast.open({ mesage: response.data.msg });
@@ -129,8 +108,8 @@ export default defineComponent({
           toast.open({ mesage: err?.response?.data?.message });
         }
 
-        modal.close({ component: 'InviteModal' });
-        store.dispatch('team/resetInvite');
+        modal.close({ component: 'AddCompanyModal' });
+        store.dispatch('companies/clear');
       }
     }
 
@@ -144,7 +123,7 @@ export default defineComponent({
     onBeforeMount(getOptions);
 
     return {
-      options, v$, handleSubmit, t, companies, invite,
+      options, v$, handleSubmit, t, company, companies,
     };
   },
 });

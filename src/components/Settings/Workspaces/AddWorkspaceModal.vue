@@ -1,50 +1,27 @@
 <template>
   <base-modal
     :is-opened="open"
-    class="invite-modal"
+    class="workspace-modal"
   >
     <template v-slot:header>
-      <h3>{{ t(`InviteModal.title`) }}</h3>
+      <h3>{{ t(`AddWorkspaceModal.title`) }}</h3>
     </template>
     <template v-slot:body>
       <div class="base-info">
         <base-input
-          v-model="v$.firstName.$model"
-          :error="v$.firstName.$errors[0]?.$message"
-          :placeholder="t(`InviteModal.firstNamePlaceholder`)"
-        />
-        <base-input
-          v-model="v$.lastName.$model"
-          :error="v$.lastName.$errors[0]?.$message"
-          :placeholder="t(`InviteModal.lastNamePlaceholder`)"
-        />
-        <base-input
-          v-model="v$.email.$model"
-          :error="v$.email.$errors[0]?.$message"
-          :placeholder="t(`InviteModal.emailPlaceholder`)"
-        />
-        <base-select
-          v-model="v$.language.$model"
-          :error="v$.language.$errors[0]?.$message"
-          :placeholder="t(`InviteModal.languagePlaceholder`)"
-          :options="options.languages"
+          v-model="v$.workspaceName.$model"
+          :error="v$.workspaceName.$errors[0]?.$message"
+          :placeholder="t(`AddWorkspaceModal.workspaceNamePlaceholder`)"
         />
         <base-select
           v-model="v$.company.$model"
           :error="v$.company.$errors[0]?.$message"
-          :placeholder="t(`InviteModal.companyPlaceholder`)"
+          :placeholder="t(`AddWorkspaceModal.companyPlaceholder`)"
           :options="companies"
           value="_id"
           text="companyName"
         />
       </div>
-      <base-input-radio
-        v-model="v$.role.$model"
-        :error="v$.role.$errors[0]?.$message"
-        :label="t(`InviteModal.teamRoles.title`)"
-        :options="options.teamRoles"
-        orientation="column"
-      />
     </template>
     <template v-slot:footer>
       <div>
@@ -54,7 +31,7 @@
           neutral
           @click="handleSubmit"
         >
-          Invite
+          {{ t(`AddWorkspaceModal.submit`) }}
         </base-button>
       </div>
     </template>
@@ -68,7 +45,6 @@ import {
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import useVuelidate from '@vuelidate/core';
-import { InviteType } from '@/store/modules/team';
 import { RulesType } from '@/types/Vuelidate';
 import { required, email } from '@/utils/I18nValidators';
 import useToast from '@/hooks/useToast';
@@ -100,27 +76,24 @@ export default defineComponent({
       languages: [],
     });
 
-    const invite = computed<InviteType>(() => store.getters['team/getInvite']);
+    const workspace = computed<any>(() => store.getters['workspaces/getWorkspace']);
+
     store.dispatch('companies/getCompanies');
     const companies = computed<any>(() => store.getters['companies/get']);
 
     const rules = computed(() => ({
-      firstName: { required },
-      lastName: { required },
       company: { required },
-      email: { required, email },
-      role: { required },
-      language: { },
+      workspaceName: { required },
     } as RulesType));
 
-    const v$ = useVuelidate(rules, invite.value);
+    const v$ = useVuelidate(rules, workspace.value);
 
     async function handleSubmit() {
       const isValidate = await v$.value.$validate();
 
       if (isValidate) {
         try {
-          const response = await store.dispatch('team/submitInvite');
+          const response = await store.dispatch('workspaces/create');
 
           if (response.data) {
             toast.open({ mesage: response.data.msg });
@@ -129,8 +102,8 @@ export default defineComponent({
           toast.open({ mesage: err?.response?.data?.message });
         }
 
-        modal.close({ component: 'InviteModal' });
-        store.dispatch('team/resetInvite');
+        modal.close({ component: 'AddWorkspaceModal' });
+        store.dispatch('workspaces/clear');
       }
     }
 
@@ -144,7 +117,7 @@ export default defineComponent({
     onBeforeMount(getOptions);
 
     return {
-      options, v$, handleSubmit, t, companies, invite,
+      options, v$, handleSubmit, t, workspace, companies,
     };
   },
 });

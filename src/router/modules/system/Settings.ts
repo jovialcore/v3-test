@@ -39,5 +39,18 @@ export default {
         group: 'workspace settings',
       },
     },
+    {
+      path: 'worspace',
+      name: 'Workspace',
+      components: {
+        default: () => import('@/views/System/Settings/Workspaces.vue'),
+      },
+      meta: {
+        icon: 'buffer',
+        prefix: 'fab',
+        fontAwesome: true,
+        group: 'workspace settings',
+      },
+    },
   ],
 };

@@ -7,7 +7,7 @@
     <div class="profile-image-container">
       <div class="profile-image">
         <img
-          v-lazy="{ src: '/images/login/Felipe-Novak-juridoc-socio.png' }"
+          :src="user.picture"
           width="48"
           height="48"
           alt="profile image"
@@ -50,6 +50,7 @@
         block
         navbar
         logout
+        @click="handleLogout"
       >
         <font-awesome-icon icon="sign-out-alt" />Sair
       </base-button>
@@ -58,14 +59,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { computed, defineComponent, reactive } from 'vue';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 import useModal from '@/hooks/useModal';
 
 export default defineComponent({
   setup() {
+    const router = useRouter();
+    const store = useStore();
     const state = reactive({
       active: false,
     });
+
+    const user = computed<any>(() => store.getters['auth/getCurrentUser']);
+
     function openMenu() {
       state.active = !state.active;
     }
@@ -73,7 +81,14 @@ export default defineComponent({
       const modal = useModal();
       modal.open({ component: 'InviteModal' });
     }
-    return { state, openMenu, openInviteModal };
+
+    async function handleLogout() {
+      await store.dispatch('auth/submitLogout');
+      router.push({ name: 'Login' });
+    }
+    return {
+      state, handleLogout, openMenu, openInviteModal, user,
+    };
   },
 });
 </script>

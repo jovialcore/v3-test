@@ -5,10 +5,10 @@ import $api from '@/services/api';
 const BASE_PATH = 'company';
 
 export default class CompaniesService extends BaseService {
-  static create({ name, description, subsidiaryId }:
-    {name: string, description: string, subsidiaryId: string}) {
+  static create({ companyName, description, subsidiary }:
+    {companyName: string, description: string, subsidiary: string}) {
     return CompaniesService.consume(
-      $api.post(`${BASE_PATH}`, { name, description, subsidiaryId }),
+      $api.post(`${BASE_PATH}`, { companyName, description, subsidiary }),
     );
   }
 

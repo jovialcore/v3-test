@@ -12,6 +12,7 @@
     >
     <font-awesome-icon
       v-if="icon && fontAwesome"
+      :prefix="prefix"
       :icon="icon"
       :style="{ width: iconSize, height: iconSize }"
     />
@@ -31,6 +32,7 @@ export default defineComponent({
     label: { type: String, default: undefined },
     row: { type: Boolean },
     submenu: { type: Boolean, default: false },
+    prefix: { type: String, default: 'fas' },
     block: { type: Boolean },
   },
   setup(props) {

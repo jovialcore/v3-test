@@ -84,9 +84,26 @@ export const state = {
     newPassword: '',
     passwordConfirm: '',
   },
+  currentUser: {
+    createdAt: '',
+    email: '',
+    firstName: '',
+    job: '',
+    language: '',
+    lastName: '',
+    phone: '',
+    picture: '',
+    role: '',
+    updatedAt: '',
+    _id: '',
+  },
 };
 
-export const mutations: MutationTree<GlobalType> = {
+export const mutations: MutationTree<any> = {
+  SET_CURRENT_USER(state, data) {
+    console.log(data);
+    state.currentUser = data;
+  },
   SET_LOGIN_DATA(state, data) {
     state.login = data;
   },
@@ -152,7 +169,7 @@ export const mutations: MutationTree<GlobalType> = {
   },
 };
 
-export const actions: ActionTree<GlobalType, void> = {
+export const actions: ActionTree<any, void> = {
   setLoginData: ({ commit }, { email, password }: {email:string, password: string}) => commit('SET_LOGIN_DATA', { email, password }),
   setCheckEmailData: ({ commit }, data: CheckEmailType) => commit('SET_CHECK_EMAIL_DATA', data),
   setRegisterAccessData: ({ commit }, { email, password }: { email:string, password: string } & { language: string }) => commit('SET_REGISTER_ACCESS_DATA', { email, password }),
@@ -163,11 +180,16 @@ export const actions: ActionTree<GlobalType, void> = {
   resetPasswordData: ({ commit }) => commit('RESET_PASSWORD_DATA'),
   resetRegisterAccessData: ({ commit }) => commit('RESET_REGISTER_ACCESS_DATA'),
   resetRegister: ({ commit }) => commit('RESET_REGISTER'),
-  async submitLogin({ state }) {
+  async submitLogin({ commit, state }) {
     const body = state.login;
-    // const response = await $api.auth.login(body);
     const response = await AuthService.login(body);
-    console.log('response', response);
+    commit('SET_CURRENT_USER', response.data);
+    // console.log('response', response);
+
+    return response;
+  },
+  async submitLogout() {
+    const response = await AuthService.logout();
     return response;
   },
   async submitGoogleLogin(_, tokenId: string) {
@@ -221,7 +243,8 @@ export const actions: ActionTree<GlobalType, void> = {
   },
 };
 
-export const getters: GetterTree<GlobalType, void> = {
+export const getters: GetterTree<any, void> = {
+  getCurrentUser: (state): any => state.currentUser,
   getLoginData: (state): {email:string, password: string} => state.login,
   getRegisterAccessData: (state):RegisterAccessDataType => state.register.accessData,
   getRegisterActivationData: (state):RegisterActivationDataType => state.register.data,
