@@ -3,34 +3,17 @@
   <table class="base-table">
     <thead>
       <tr>
-        <th
-          v-for="(column, i) in columns"
-          :key="`column_${column.id}`"
-        >
-          <slot
-            :item="column"
-            :index="i"
-            :name="`header-${column.id}`"
-          >
+        <th v-for="(column, i) in columns" :key="`column_${column.id}`">
+          <slot :item="column" :index="i" :name="`header-${column.id}`">
             {{ column.name }}
           </slot>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr
-        v-for="(item, i) in data"
-        :key="`row_${i}`"
-      >
-        <td
-          v-for="(column, j) in columns"
-          :key="`row_${i}_column_${j}`"
-        >
-          <slot
-            :item="item"
-            :index="i"
-            :name="`body-${column.id}`"
-          >
+      <tr v-for="(item, i) in data" :key="`row_${i}`">
+        <td v-for="(column, j) in columns" :key="`row_${i}_column_${j}`">
+          <slot :item="item" :index="i" :name="`body-${column.id}`">
             <template v-if="item[column.id]">
               {{ item[column.id] }}
             </template>
@@ -144,23 +127,19 @@ export default defineComponent({
   display: table;
   background-color: $white-bg-elements;
 
-  td, th {
-
-  }
-
   tr {
-    border-bottom: 1px solid $text-soft-grey;
-
-    &:first-child {
-      border-top: 1px solid $heading-grey;
-    }
+    border-top: 1px solid $border-neutral;
+  }
+  th {
+    text-align: left;
+    padding: 1rem 0.5rem;
   }
 
   thead {
     color: var(--primary);
 
     th {
-      .content{
+      .content {
         font-weight: bold;
         color: $heading-grey;
         padding: 1.5rem;
@@ -168,10 +147,11 @@ export default defineComponent({
     }
   }
 
-  tbody {
-    td {
-      padding: 1rem;
-      text-align: center;
+  tbody tr td {
+    padding: 1rem 0.5rem;
+    border-top: 1px solid $border-neutral;
+    &:hover {
+      background-color: $neutral-2;
     }
   }
 
@@ -180,7 +160,7 @@ export default defineComponent({
       border: 0;
     }
     td {
-      .navigation{
+      .navigation {
         padding: 0.5rem;
         justify-content: end;
         gap: 4px;
