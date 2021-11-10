@@ -1,134 +1,48 @@
 <template>
-  <base-table
-    :columns="columns"
-    :data="data"
-    :total-items="16"
-    :start-items="1"
-    @next-page="nextPage"
-    @back-page="backPage"
-    @set-page="setPage"
-  >
-    <template v-slot:header-select="row">
-      <base-checkbox :id="`checkbox-${row.item.id}`"  />
-    </template>
-    <template v-slot:body-select="row">
-      <base-checkbox :id="`checkbox-${row.item.name}`" />
-    </template>
-    <template v-slot:body-stage="row">
-      <base-tag :status="row.item.stage" />
-    </template>
-  </base-table>
+  <div class="test-area">
+    {{ optionSelected }}
+    <base-dropdown
+      v-model="optionSelected"
+      :options="dropdownOptions"
+    >
+      <font-awesome-icon icon="ellipsis-v" />
+    </base-dropdown>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { defineComponent, reactive, ref } from 'vue';
 
 export default defineComponent({
   setup() {
-    const {t} = useI18n();
-    const columns = reactive([
-        {
-          id: 'select',
-          name: '',
-        },
-        {
-          id: 'name',
-          name: 'Nome',
-        },
-        {
-          id: 'experience',
-          name: 'Experiência',
-        },
-        {
-          id: 'stage',
-          name: 'Estágio',
-        },
-        {
-          id: 'people',
-          name: 'Pessoas',
-        },
-        {
-          id: 'update',
-          name: 'Atualização',
-        },
-        {
-          id: 'create',
-          name: 'Criado',
-        },
-        {
-          id: 'sign',
-          name: 'Assinatura',
-        },
-        {
-          id: 'pdf',
-          name: 'PDF',
-        },
-      ]);
-
-    const data = reactive([
-      {
-        name: "Teste1",
-        experience: "Teste1",
-        stage: "draft",
-        people: "Teste1",
-        update: "Teste1",
-        create: "31/12/2000",
-        pdf: "https://google.com",
-      },
-      {
-        name: "Teste1",
-        experience: "Teste1",
-        stage: "approval",
-        people: "Teste1",
-        update: "Teste1",
-        create: "31/12/2000",
-        pdf: "https://google.com",
-      },
-      {
-        name: "Teste1",
-        experience: "Teste1",
-        stage: "finished",
-        people: "Teste1",
-        update: "Teste1",
-        create: "31/12/2000",
-        pdf: "https://google.com",
-      },
-      {
-        name: "Teste1",
-        experience: "Teste1",
-        stage: "finished",
-        people: "Teste1",
-        update: "Teste1",
-        create: "31/12/2000",
-        pdf: "https://google.com",
-      },
+    const optionSelected = ref('');
+    const dropdownOptions = reactive([
+      { key: 'edit', value: 'Editar', icon: 'pen' },
+      { key: 'move', value: 'Mover', icon: 'exchange-alt' },
+      { key: 'share', value: 'Comparilhar', icon: 'share-alt' },
+      { key: 'remove', value: 'Remover', icon: 'trash-alt' },
     ]);
 
-    function setPage(page: number) {
-      console.log('set-page: ', page);
-    }
-
-    function nextPage() {
-      console.log('next-page');
-    }
-
-    function backPage() {
-      console.log('back-page');
-    }
-
     return {
-      columns,
-      data,
-      nextPage,
-      setPage,
-      backPage,
-      t
+      optionSelected,
+      dropdownOptions,
     };
   },
 });
 </script>
 
-<style>
+<style lang="scss" scoped>
+.test-area{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  svg{
+    color: #000;
+  }
+}
 
 </style>

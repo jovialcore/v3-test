@@ -8,31 +8,36 @@
             alt="JD"
             width="48"
             height="48"
-          />
+          >
         </div>
         <img
           v-lazy="{ src: '/images/logo.png' }"
           alt="logo juridoc"
           width="180"
           class="main-logo"
-        />
+        >
       </div>
       <p>Current plan: Professional</p>
     </div>
     <div class="nav-group">
-      <base-button v-if="routeName === 'Documents'" dashboard neutral
-        ><font-awesome-icon icon="file-alt" />Novo documento</base-button
+      <base-button
+        v-if="routeName === 'Documents'"
+        dashboard
+        neutral
       >
+        <font-awesome-icon icon="file-alt" />Novo documento
+      </base-button>
       <base-button
         v-else-if="routeName === 'Team'"
         dashboard
         neutral
         @click="openInviteModal"
-        ><font-awesome-icon icon="user-plus" />Novo convite</base-button
       >
-      <font-awesome-icon icon="bell"></font-awesome-icon>
-      <font-awesome-icon icon="graduation-cap"></font-awesome-icon>
-      <navbar-profile></navbar-profile>
+        <font-awesome-icon icon="user-plus" />Novo convite
+      </base-button>
+      <font-awesome-icon icon="bell" />
+      <font-awesome-icon icon="graduation-cap" />
+      <navbar-profile />
     </div>
   </nav>
 </template>
