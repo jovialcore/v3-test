@@ -65,14 +65,14 @@ export default defineComponent({
 
       if (isValidate) {
         form.value.language = window.localStorage.getItem('lang') || 'us';
-        try {
-          const response = await store.dispatch('auth/submitCheckEmail');
+        const {data, error} = await store.dispatch('auth/submitCheckEmail');
 
-          if (response.data) {
-            emit('setCompleted', true);
-          }
-        } catch (err: any) {
-          toast.open({ mesage: err?.response?.data?.message });
+        if (data) {
+          emit('setCompleted', true);
+        }
+
+        if (error) {
+          toast.open({ mesage: error });
         }
       }
     }

@@ -3,7 +3,7 @@ import { RouteLocationNormalized, NavigationGuardNext } from 'vue-router';
 import AuthService from '@/services/NewAuth';
 
 const AUTH_ROUTES_NAMES = [
-  'Activation',
+  'ActivateRegistration',
   'CheckEmail',
   'ForgotPassword',
   'Login',

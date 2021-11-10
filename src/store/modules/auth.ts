@@ -1,6 +1,7 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex';
 import $api from '@/services';
 import AuthService from '@/services/NewAuth';
+//* TODO: remove these reset methods *//
 
 export type LoginDataType = {
   email: string;
@@ -184,7 +185,6 @@ export const actions: ActionTree<any, void> = {
     const body = state.login;
     const response = await AuthService.login(body);
     commit('SET_CURRENT_USER', response.data);
-    // console.log('response', response);
 
     return response;
   },
@@ -192,20 +192,25 @@ export const actions: ActionTree<any, void> = {
     const response = await AuthService.logout();
     return response;
   },
-  async submitGoogleLogin(_, tokenId: string) {
-    const response = await $api.auth.googleLogin(tokenId);
 
-    return response;
-  },
-  async submitCheckEmail({ state }) {
-    const body = state.checkEmail;
-    const response = await $api.auth.resendActivation(body);
-
-    return response;
-  },
   async submitRegister({ state }) {
     const body = state.register.accessData;
-    const response = await $api.auth.register(body);
+    const response = await AuthService.register(body);
+    return response;
+  },
+
+  async submitCheckEmail({ state }) {
+    const body = state.checkEmail;
+    const response = await AuthService.resendActivation(body);
+
+    return response;
+  },
+
+
+
+
+  async submitGoogleLogin(_, tokenId: string) {
+    const response = await $api.auth.googleLogin(tokenId);
 
     return response;
   },

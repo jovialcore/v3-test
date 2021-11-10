@@ -97,18 +97,18 @@ export default defineComponent({
 
       if (isValidate) {
         form.value.language = window.localStorage.getItem('lang') || 'us';
-        try {
-          const response = await store.dispatch('auth/submitRegister');
+        const { data, error } = await store.dispatch('auth/submitRegister');
 
-          checkEmail.value.email = form.value.email;
-          checkEmail.value.language = form.value.language;
+        checkEmail.value.email = form.value.email;
+        checkEmail.value.language = form.value.language;
 
-          if (response.data) {
-            toast.open({ mesage: response.data.msg });
-            router.push({ name: 'CheckEmail' });
-          }
-        } catch (err: any) {
-          toast.open({ mesage: err?.response?.data?.message });
+        if (data) {
+          toast.open({ mesage: data.msg });
+          router.push({ name: 'CheckEmail' });
+        }
+
+        if (error) {
+          toast.open({ mesage: error });
         }
       }
     }
