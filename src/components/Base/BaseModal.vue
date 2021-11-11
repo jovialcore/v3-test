@@ -7,7 +7,9 @@
     <div class="base-modal">
       <header>
         <slot name="header"></slot>
-        <button class="close-button" @click="$emit('close')">x</button>
+        <button class="close-button" @click="$emit('close')">
+          <font-awesome-icon icon="times" />
+        </button>
       </header>
       <main>
         <slot name="body"></slot>
