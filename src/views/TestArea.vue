@@ -12,6 +12,18 @@
       label="Data"
       required
     />
+    <base-multiple-select
+      label="Testando"
+      :options="options"
+      :model-value="selected"
+      key-name="_id"
+      value-name="firstName"
+      @change:model-value="selected = $event"
+    >
+      <template v-slot:option="row">
+        {{ row.item.firstName + ' ' + row.item.lastName }}
+      </template>
+    </base-multiple-select>
   </div>
 </template>
 
@@ -29,10 +41,20 @@ export default defineComponent({
     ]);
     const data = reactive({ date: new Date().toISOString() });
 
+    const selected = ref(['1', '2']);
+    const options = reactive([
+      { _id: '1', firstName: 'Luciano', lastName: 'Weslen da Silva' },
+      { _id: '2', firstName: 'Gilson', lastName: 'Doi Junior' },
+      { _id: '3', firstName: 'Eduardo', lastName: 'Odelon Wagner' },
+      { _id: '4', firstName: 'Samuel', lastName: 'Eduardo da Silva' },
+    ]);
+
     return {
       optionSelected,
       dropdownOptions,
-      data,
+      data, 
+      options, 
+      selected 
     };
   },
 });
