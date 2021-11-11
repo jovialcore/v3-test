@@ -147,11 +147,13 @@ export default defineComponent({
     }
   }
 
-  tbody tr td {
-    padding: 1rem 0.5rem;
-    border-top: 1px solid $border-neutral;
+  tbody tr {
     &:hover {
       background-color: $neutral-2;
+    }
+    td {
+      padding: 1rem 0.5rem;
+      border-top: 1px solid $border-neutral;
     }
   }
 
