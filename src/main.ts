@@ -9,6 +9,7 @@ import VueLazyLoad from 'vue3-lazyload';
 import Maska from 'maska';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App.vue';
 import { setupBaseComponents } from './configs/BaseComponents';
@@ -22,6 +23,7 @@ async function main() {
   const app = createApp(App);
 
   library.add(fas);
+  library.add(far);
   app.component('font-awesome-icon', FontAwesomeIcon);
 
   setupGoogleAPI();
