@@ -7,6 +7,11 @@
     >
       <font-awesome-icon icon="ellipsis-v" />
     </base-dropdown>
+    <base-datepicker
+      v-model="data.date"
+      label="Data"
+      required
+    />
   </div>
 </template>
 
@@ -22,10 +27,12 @@ export default defineComponent({
       { key: 'share', value: 'Comparilhar', icon: 'share-alt' },
       { key: 'remove', value: 'Remover', icon: 'trash-alt' },
     ]);
+    const data = reactive({ date: new Date().toISOString() });
 
     return {
       optionSelected,
       dropdownOptions,
+      data,
     };
   },
 });
