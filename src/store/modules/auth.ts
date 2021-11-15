@@ -1,6 +1,6 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex';
 import $api from '@/services';
-import AuthService from '@/services/NewAuth';
+import AuthService from '@/services/Auth';
 //* TODO: remove these reset methods *//
 
 export type LoginDataType = {
@@ -20,12 +20,13 @@ export type RegisterActivationDataType ={
   language?: string;
 };
 
-export type RegisterAccessDataType = LoginDataType & { language: string };
+export type RegisterAccessDataType = LoginDataType & { language: string, inviteToken?: string };
 
 export type RegisterType = {
   accessData: RegisterAccessDataType;
   data: RegisterActivationDataType;
   activationToken?: string;
+  inviteToken?: string;
   tokenId?: string;
 };
 
@@ -181,6 +182,11 @@ export const actions: ActionTree<any, void> = {
   resetPasswordData: ({ commit }) => commit('RESET_PASSWORD_DATA'),
   resetRegisterAccessData: ({ commit }) => commit('RESET_REGISTER_ACCESS_DATA'),
   resetRegister: ({ commit }) => commit('RESET_REGISTER'),
+  async submitInviteRegister({ state }) {
+    const body = state.register.accessData;
+    const response = await AuthService.inviteRegister(body);
+    return response;
+  },
   async submitLogin({ commit, state }) {
     const body = state.login;
     const response = await AuthService.login(body);
@@ -199,6 +205,17 @@ export const actions: ActionTree<any, void> = {
     return response;
   },
 
+  async submitActivation({ state }) {
+    const body = state.register.data;
+
+    const response = await AuthService.activation({
+      activationToken: state.register.activationToken || '',
+      ...body,
+    });
+
+    return response;
+  },
+
   async submitCheckEmail({ state }) {
     const body = state.checkEmail;
     const response = await AuthService.resendActivation(body);
@@ -206,28 +223,16 @@ export const actions: ActionTree<any, void> = {
     return response;
   },
 
-
-
-
   async submitGoogleLogin(_, tokenId: string) {
-    const response = await $api.auth.googleLogin(tokenId);
+    const response = await AuthService.googleLogin(tokenId);
 
     return response;
   },
-  async submitActivation({ state }) {
-    const body = state.register.data;
 
-    const response = await $api.auth.activation({
-      activationToken: state.register.activationToken || '',
-      ...body,
-    });
-
-    return response;
-  },
   async submitGoogleActivation({ state }) {
     const body = state.register.data;
 
-    const response = await $api.auth.googleRegister({
+    const response = await AuthService.googleRegister({
       tokenId: state.register.tokenId || '',
       ...body,
     });
@@ -236,13 +241,13 @@ export const actions: ActionTree<any, void> = {
   },
   async submitForgotPassword({ state }) {
     const body = state.forgotPassword;
-    const response = await $api.auth.forgotPassword(body);
+    const response = await AuthService.forgotPassword(body);
 
     return response;
   },
   async submitResetPassword({ state }) {
     const body = state.resetPassword;
-    const response = await $api.auth.resetPassword(body);
+    const response = await AuthService.resetPassword(body);
 
     return response;
   },

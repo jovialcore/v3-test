@@ -17,6 +17,7 @@
           </base-link>
         </p>
       </div>
+
       <div class="inputs">
         <base-input
           v-model="v$.email.$model"
@@ -64,7 +65,7 @@
 import useVuelidate from '@vuelidate/core';
 import { defineComponent, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import {
   required, email, minLength, upperCase,
@@ -80,8 +81,15 @@ export default defineComponent({
     const store = useStore();
     const router = useRouter();
     const toast = useToast();
+    const route = useRoute();
 
+    const { query } = route
     const form = computed<RegisterAccessDataType>(() => store.getters['auth/getRegisterAccessData']);
+    
+    form.value.email = query.email? String(query.email) : '';
+    form.value.inviteToken = String(query.inviteToken);
+
+    
     const register = computed<RegisterType>(() => store.getters['auth/getRegisterData']);
     const checkEmail = computed<CheckEmailType>(() => store.getters['auth/getCheckEmailData']);
 
@@ -97,14 +105,18 @@ export default defineComponent({
 
       if (isValidate) {
         form.value.language = window.localStorage.getItem('lang') || 'us';
-        const { data, error } = await store.dispatch('auth/submitRegister');
+        
+        const endpoint = form.value.inviteToken ? 'auth/submitInviteRegister' : 'auth/submitRegister'
+        const next = form.value.inviteToken ? 'Login' : 'CheckEmail'
+        console.log('endpoint', endpoint)
+        const { data, error } = await store.dispatch(endpoint);
 
-        checkEmail.value.email = form.value.email;
-        checkEmail.value.language = form.value.language;
 
         if (data) {
           toast.open({ mesage: data.msg });
-          router.push({ name: 'CheckEmail' });
+          checkEmail.value.email = form.value.email;
+          checkEmail.value.language = form.value.language;
+          router.push({ name: next });
         }
 
         if (error) {
@@ -131,7 +143,7 @@ export default defineComponent({
     }
 
     return {
-      v$, t, handleRegister, handleGoogleRegister,
+      v$, t, handleRegister, handleGoogleRegister, query
     };
   },
 });

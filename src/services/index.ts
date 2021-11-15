@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { JURIDOC_API } from '../configs/Environment';
-import AuthService from './Auth';
+// import AuthService from './Auth';
 import TeamService from './Team';
 
 const BASE_URL = JURIDOC_API;
@@ -30,6 +30,6 @@ api.interceptors.response.use(
 );
 
 export default {
-  auth: AuthService(api),
+  // auth: AuthService(api),
   team: TeamService(api),
 };

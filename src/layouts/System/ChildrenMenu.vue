@@ -43,7 +43,7 @@ export default defineComponent({
   components: { SidebarButton },
   props: {
     title: { type: String || null, default: null },
-    children: { type: Array as PropType<Array<RouteRecordRaw>>, default: () => [] },
+    children: { type: Object, default: () => [] },
   },
   setup(props) {
     return { props };

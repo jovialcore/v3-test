@@ -1,6 +1,6 @@
 import { RouteLocationNormalized, NavigationGuardNext } from 'vue-router';
 // import $api from '../services';
-import AuthService from '@/services/NewAuth';
+import AuthService from '@/services/Auth';
 
 const AUTH_ROUTES_NAMES = [
   'ActivateRegistration',
@@ -12,6 +12,7 @@ const AUTH_ROUTES_NAMES = [
   'RegisterStep1',
   'RegisterStep2',
   'RegisterStep3',
+  'ResetPassword',
   'Settings',
   'TestArea',
 ];

@@ -1,180 +1,99 @@
-import { AxiosInstance } from 'axios';
-import { RequestError, ServiceBasicReturn } from '@/types/services';
-import {
-  ActivationParams,
-  AuthServiceInterface,
-  ForgotPasswordParams,
-  GoogleRegisterParams,
-  LoginParams,
-  RegisterParams,
-  ResendActivationParams,
-  ResetPasswordParams,
-  ServiceReturnMsgAndUser,
-  ServiceReturnUser,
-} from '@/types/services/Auth';
-import { getRequestError } from '@/utils/Services';
+import BaseService from '@/services/Base';
 
-const BASE_ENDPOINT = '/auth';
+import $api from '@/services/api';
 
-function AuthService(api: AxiosInstance):AuthServiceInterface {
-  async function register(body: RegisterParams): Promise<ServiceBasicReturn> {
-    const response = await api.post(`${BASE_ENDPOINT}/register`, body);
+const BASE_PATH = 'auth';
 
-    let errors: RequestError;
-
-    if (!response.data) {
-      errors = getRequestError(response);
-    }
-
-    return {
-      data: response.data || undefined,
-      errors,
-    };
-  }
-  async function activation(body: ActivationParams): Promise<ServiceReturnMsgAndUser> {
-    const response = await api.patch(`${BASE_ENDPOINT}/activation`, body);
-
-    let errors: RequestError;
-
-    if (!response.data) {
-      errors = getRequestError(response);
-    }
-
-    return {
-      data: response.data || undefined,
-      errors,
-    };
-  }
-  async function login(body: LoginParams): Promise<ServiceReturnUser> {
-    const response = await api.post(`${BASE_ENDPOINT}/login`, body);
-
-    let errors: RequestError;
-
-    if (!response.data) {
-      errors = getRequestError(response);
-    }
-
-    return {
-      data: response.data || undefined,
-      errors,
-    };
-  }
-  async function currentUser(): Promise<ServiceReturnUser> {
-    const response = await api.get(`${BASE_ENDPOINT}/currentUser`);
-
-    let errors: RequestError;
-
-    if (!response.data) {
-      errors = getRequestError(response);
-    }
-
-    return {
-      data: response.data || undefined,
-      errors,
-    };
-  }
-
-  async function forgotPassword(body: ForgotPasswordParams): Promise<ServiceBasicReturn> {
-    const response = await api.post(`${BASE_ENDPOINT}/forgotPassword`, body);
-
-    let errors: RequestError;
-
-    if (!response.data) {
-      errors = getRequestError(response);
-    }
-
-    return {
-      data: response.data || undefined,
-      errors,
-    };
-  }
-
-  async function resendActivation(body: ResendActivationParams): Promise<ServiceBasicReturn> {
-    const response = await api.post(`${BASE_ENDPOINT}/resendActivation`, body);
-
-    let errors: RequestError;
-
-    if (!response.data) {
-      errors = getRequestError(response);
-    }
-
-    return {
-      data: response.data || undefined,
-      errors,
-    };
-  }
-
-  async function resetPassword(body: ResetPasswordParams): Promise<ServiceBasicReturn> {
-    const response = await api.post(`${BASE_ENDPOINT}/resetPassword`, body);
-
-    let errors: RequestError;
-
-    if (!response.data) {
-      errors = getRequestError(response);
-    }
-
-    return {
-      data: response.data || undefined,
-      errors,
-    };
-  }
-
-  async function logout(): Promise<ServiceBasicReturn> {
-    const response = await api.get(`${BASE_ENDPOINT}/logout`);
-
-    let errors: RequestError;
-
-    if (!response.data) {
-      errors = getRequestError(response);
-    }
-
-    return {
-      data: response.data || undefined,
-      errors,
-    };
-  }
-
-  async function googleLogin(tokenId: string): Promise<ServiceReturnUser> {
-    const response = await api.post(`${BASE_ENDPOINT}/googleLogin`, { tokenId });
-
-    let errors: RequestError;
-
-    if (!response.data) {
-      errors = getRequestError(response);
-    }
-
-    return {
-      data: response.data || undefined,
-      errors,
-    };
-  }
-  async function googleRegister(body: GoogleRegisterParams): Promise<ServiceReturnMsgAndUser> {
-    const response = await api.post(`${BASE_ENDPOINT}/googleRegister`, body);
-
-    let errors: RequestError;
-
-    if (!response.data) {
-      errors = getRequestError(response);
-    }
-
-    return {
-      data: response.data || undefined,
-      errors,
-    };
-  }
-
-  return {
-    register,
-    activation,
-    login,
-    currentUser,
-    forgotPassword,
-    resendActivation,
-    resetPassword,
-    logout,
-    googleLogin,
-    googleRegister,
-  };
+type UserRegistrationData = {
+  firstName: string;
+  lastName: string;
+  job?: string;
+  whatBringsYouHere?: string;
+  phone?: string;
+  company: string;
+  size?: string;
+  industry?: string;
+  crm?: string;
+  language?: string;
 }
 
-export default AuthService;
+export default class AuthService extends BaseService {
+  static activation(body: {
+    activationToken: string;
+  } & UserRegistrationData) {
+    return AuthService.consume(
+      $api.post(`${BASE_PATH}/activation`, body),
+    );
+  }
+
+  static currentUser() {
+    return AuthService.consume(
+      $api.get(`${BASE_PATH}/currentUser`),
+    );
+  }
+
+  static forgotPassword({email, language}: {
+    email: string;
+    language: string;
+  }) {
+    return AuthService.consume(
+      $api.post(`${BASE_PATH}/forgotPassword`, {email, language})
+    );
+  }
+
+  static googleLogin(tokenId: string) {
+    return AuthService.consume(
+      $api.post(`${BASE_PATH}/googleLogin`, { tokenId })
+    );
+  }
+
+  static googleRegister(body: {
+    tokenId: string;
+  } & UserRegistrationData) {
+    return AuthService.consume(
+      $api.post(`${BASE_PATH}/googleRegister`, body),
+    );
+  }
+
+  static inviteRegister({ email, password, inviteToken, language }:
+    { email: string, password: string, inviteToken: string, language: string }) {
+    return AuthService.consume(
+      $api.post(`${BASE_PATH}/inviteRegister`, { email, password, inviteToken, language }),
+    );
+  }
+
+  static login({ email, password }: {email: string, password: string}) {
+    return AuthService.consume(
+      $api.post(`${BASE_PATH}/login`, { email, password }),
+    );
+  }
+
+  static logout() {
+    return AuthService.consume(
+      $api.get(`${BASE_PATH}/logout`),
+    );
+  }
+
+  static register({ email, password, language }:
+    { email: string, password: string, language: string }) {
+    return AuthService.consume(
+      $api.post(`${BASE_PATH}/register`, { email, password, language }),
+    );
+  }
+
+  static resendActivation({ email } : {email: string }) {
+    return AuthService.consume(
+      $api.post(`${BASE_PATH}/resendActivation`, {email}),
+    );
+  }
+
+  static resetPassword({ token, newPassword, passwordConfirm } : {
+    token: string;
+    newPassword: string;
+    passwordConfirm: string;
+  }) {
+    return AuthService.consume(
+      $api.post(`${BASE_PATH}/resetPassword`, { token, newPassword, passwordConfirm }),
+    );
+  }  
+}

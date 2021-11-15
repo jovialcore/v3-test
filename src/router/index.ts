@@ -17,7 +17,7 @@ export async function setupRouter() {
     routes,
   });
 
-  //router.beforeEach(beforeEachRoute);
+  router.beforeEach(beforeEachRoute);
 
   return router;
 }

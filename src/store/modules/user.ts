@@ -21,13 +21,13 @@ export const mutations: MutationTree<GlobalType> = {
 };
 
 export const actions: ActionTree<GlobalType, void> = {
-  async getUser({ commit }) {
-    const response = await $api.auth.currentUser();
+  // async getUser({ commit }) {
+  //   const response = await $api.auth.currentUser();
 
-    commit('SET_CURRENT_USER', response.data);
+  //   commit('SET_CURRENT_USER', response.data);
 
-    return response;
-  },
+  //   return response;
+  // },
   async setUser({ commit }, user: UserType) {
     commit('SET_CURRENT_USER', user);
   },
