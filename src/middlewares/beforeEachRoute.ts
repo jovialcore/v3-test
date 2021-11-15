@@ -12,6 +12,7 @@ const AUTH_ROUTES_NAMES = [
   'RegisterStep2',
   'RegisterStep3',
   'Settings',
+  'TestArea',
 ];
 
 async function isAuthenticated(): Promise<boolean | string> {

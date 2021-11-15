@@ -1,20 +1,16 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true,
+    es2021: true,
   },
   extends: [
     'plugin:vue/vue3-recommended',
     'plugin:vue/vue3-essential',
     'plugin:vue/essential',
-    'airbnb-base'
+    'airbnb-base',
   ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
   parserOptions: {
-    ecmaVersion: 2021,
+    ecmaVersion: 13,
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
   },
@@ -41,7 +37,7 @@ module.exports = {
     'no-shadow': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     'linebreak-style': 0,
-    'no-unused-vars':'off',
+    'no-unused-vars': 'off',
     'no-undef': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
