@@ -3,7 +3,7 @@
     <base-button
       dashboard
       neutral
-      @click="openCompanyModal"
+      @click="newCompany"
     >
       Nova empresa
     </base-button>
@@ -24,14 +24,14 @@
       <base-checkbox :id="`checkbox-${row.item.name}`" />
     </template>
     <template v-slot:body-subsidiary="row">
-      {{row.item.companyName}}
+      {{ row.item.companyName }}
     </template>
     <template v-slot:body-actions="row">
       <span class="centered">
         <base-dropdown
-          v-model="optionSelected"
+          v-model="dropdown.value"
           :options="dropdownOptions"
-          @clicked="(value:string) => action(value, row.index, row.item._id)"
+          @clicked="action(row.index, row.item)"
         >
           <font-awesome-icon icon="ellipsis-v" />
         </base-dropdown>
@@ -41,14 +41,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { computed, defineComponent, reactive } from 'vue';
 import { useStore } from 'vuex';
 import useModal from '@/hooks/useModal';
 
 export default defineComponent({
   setup() {
-    const { t } = useI18n();
     const store = useStore();
     const columns = reactive([
       {
@@ -68,32 +66,44 @@ export default defineComponent({
         name: '',
       },
     ]);
-    const optionSelected = ref('');
+
+    const dropdown = reactive({
+      value: '',
+    });
+
     const dropdownOptions = reactive([
-      { key: 'edit', value: 'Editar', icon: 'pen' },
       { key: 'remove', value: 'Remover', icon: 'trash-alt' },
-    ]);
-    const data = reactive([
+      { key: 'edit', value: 'Editar', icon: 'pen' },
     ]);
 
     store.dispatch('companies/getCompanies');
     const companies = computed<any>(() => store.getters['companies/get']);
 
-    function action(action:string, index: number, _id: string) {
-      if(action === 'edit') {
-        store.dispatch('companies/select', index);
-        openCompanyModal()
-      } else {
-        remove(_id)
-      }
-    }
-    async function remove(_id: string) {
-        await store.dispatch('companies/remove', _id);
-        await store.dispatch('companies/getCompanies');
-    }
     function openCompanyModal() {
       const modal = useModal();
       modal.open({ component: 'AddCompanyModal' });
+    }
+
+    function newCompany() {
+      store.dispatch('companies/clearCurrent');
+      openCompanyModal();
+    }
+
+    async function remove(_id: string) {
+      await store.dispatch('companies/remove', _id);
+      await store.dispatch('companies/getCompanies');
+    }
+
+    function action(index: number, item: any) {
+      store.dispatch('companies/clearCurrent');
+
+      if (dropdown.value === 'edit') {
+        store.dispatch('companies/select', index);
+
+        openCompanyModal();
+      } else if (dropdown.value === 'remove' && item._id) {
+        remove(item._id);
+      }
     }
 
     function setPage(page: number) {
@@ -109,17 +119,15 @@ export default defineComponent({
     }
 
     return {
-      action,
       companies,
       columns,
-      data,
+      dropdown,
       dropdownOptions,
-      openCompanyModal,
-      optionSelected,
-      nextPage,
-      setPage,
+      action,
       backPage,
-      t,
+      nextPage,
+      newCompany,
+      setPage,
     };
   },
 });

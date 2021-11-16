@@ -51,7 +51,7 @@ export default defineComponent({
       isOpen.value = false;
 
       emit('update:modelValue', optionKey);
-      emit('clicked', optionKey)
+      emit('clicked', optionKey);
     }
 
     return {
