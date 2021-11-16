@@ -132,3 +132,39 @@ export default defineComponent({
 });
 </script>
 ```
+
+## BASE SWITCH
+
+**Props**
+name      | description | default | required
+--------- | --------- | ------- | --------
+v-model   | Directive used to get the value selected in the menu | '' | Yes
+on-text   | Text that appears on the switch if it is true | '' | No
+off-text   | Text that appears on the switch if it is false | '' | No
+
+**Basic Usage**
+```html
+<template>
+  <div class="test-area-view">
+    <base-switch
+      v-model="data.isChecked"
+      on-text="Oui"
+      off-text="Pas"
+    />
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, reactive } from 'vue';
+
+export default defineComponent({
+  setup() {
+    const data = reactive({ isChecked: true });
+
+    return {
+      data,
+    };
+  },
+});
+</script>
+```

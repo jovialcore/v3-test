@@ -12,6 +12,12 @@
       label="Data"
       required
     />
+    <base-switch
+      v-model="data.isChecked"
+      on-text="Oui"
+      off-text="Pas"
+      ball-color="primary"
+    />
     <base-multiple-select
       label="Testando"
       :options="options"
@@ -39,7 +45,7 @@ export default defineComponent({
       { key: 'share', value: 'Comparilhar', icon: 'share-alt' },
       { key: 'remove', value: 'Remover', icon: 'trash-alt' },
     ]);
-    const data = reactive({ date: new Date().toISOString() });
+    const data = reactive({ date: new Date().toISOString(), isChecked: true });
 
     const selected = ref(['1', '2']);
     const options = reactive([
