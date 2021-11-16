@@ -1,29 +1,35 @@
-import { AxiosInstance } from 'axios';
-import { RequestError, ServiceBasicReturn } from '@/types/services';
-import { InviteParams, TeamServiceInterface } from '@/types/services/Team';
-import { getRequestError } from '@/utils/Services';
+import BaseService from '@/services/Base';
 
-const BASE_ENDPOINT = '/team';
+import $api from '@/services/api';
 
-function TeamService(api: AxiosInstance):TeamServiceInterface {
-  async function invite(body: InviteParams): Promise<ServiceBasicReturn> {
-    const response = await api.post(`${BASE_ENDPOINT}/invite`, body);
+const BASE_PATH = 'team';
 
-    let errors: RequestError;
-
-    if (!response.data) {
-      errors = getRequestError(response);
-    }
-
-    return {
-      data: response.data || undefined,
-      errors,
-    };
+export default class TeamService extends BaseService {
+  static get() {
+    return TeamService.consume(
+      $api.get(`${BASE_PATH}/`),
+    );
   }
-
-  return {
-    invite,
-  };
+  static getByCompanyId(companyId: string) {
+    return TeamService.consume(
+      $api.get(`${BASE_PATH}/${companyId}`),
+    );
+  }
+  static delete(_id: string) {
+    return TeamService.consume(
+      $api.delete(`${BASE_PATH}/${_id}`),
+    );
+  }
+  static invite({ firstName, lastName, company, email, role, language }: {
+    firstName: string;
+    lastName: string;
+    company: string;
+    email: string;
+    role: string;
+    language: string;
+  }) {
+    return TeamService.consume(
+      $api.post(`${BASE_PATH}/invite`, { firstName, lastName, company, email, role, language }),
+    );
+  }
 }
-
-export default TeamService;

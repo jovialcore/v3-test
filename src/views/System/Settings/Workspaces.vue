@@ -132,6 +132,7 @@ export default defineComponent({
       openWorkspaceModal,
       columns,
       data,
+      action,
       nextPage,
       setPage,
       backPage,

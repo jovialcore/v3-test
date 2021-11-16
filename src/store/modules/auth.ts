@@ -1,5 +1,4 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex';
-import $api from '@/services';
 import AuthService from '@/services/Auth';
 //* TODO: remove these reset methods *//
 

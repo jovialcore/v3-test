@@ -20,7 +20,19 @@
           :options="companies"
           value="_id"
           text="companyName"
+          @changed="(val:string ) => changeTeam(val)"
         />
+        <base-multiple-select
+          :options="testing"
+          :model-value="v$.team"
+          key-name="_id"
+          value-name="firstName"
+          @change:model-value="selected = $event"
+        >
+        <template v-slot:option="row">
+          {{ row.item.firstName + ' ' + row.item.lastName }}
+        </template>
+      </base-multiple-select>
       </div>
     </template>
     <template v-slot:footer>
@@ -40,7 +52,7 @@
 
 <script lang="ts">
 import {
-  computed, defineComponent, onBeforeMount, reactive, watch,
+  computed, defineComponent, onBeforeMount, reactive, ref, watch,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
@@ -77,6 +89,7 @@ export default defineComponent({
     });
 
     const workspace = computed<any>(() => store.getters['workspaces/getWorkspace']);
+    // const team = computed<any>(() => store.getters['team/getTeam']);
 
     store.dispatch('companies/getCompanies');
     const companies = computed<any>(() => store.getters['companies/get']);
@@ -84,10 +97,10 @@ export default defineComponent({
     const rules = computed(() => ({
       company: { required },
       workspaceName: { required },
+      team: {}
     } as RulesType));
-
+    const testing = ref([ { "_id": "61898a26a1266a0edf04f18a", "firstName": "Gilson", "lastName": "Doi", "email": "gilson@tilit.com.br", "company": "6188743c6d11156dd7193b86", "role": "collaborator", "owner": "617942fcf230ed8890e49a95", "status": "pending", "__v": 0 }, { "_id": "618990faa1266a0edf04f1a0", "firstName": "Gilson 2", "lastName": "Testing", "email": "doijunior+12@gmail.com", "company": "6188743c6d11156dd7193b86", "role": "collaborator", "owner": "617942fcf230ed8890e49a95", "status": "pending", "__v": 0 } ])
     const v$ = useVuelidate(rules, workspace.value);
-
     async function handleSubmit() {
       const isValidate = await v$.value.$validate();
 
@@ -107,6 +120,10 @@ export default defineComponent({
       }
     }
 
+    function changeTeam(companyId: string) {
+      store.dispatch('team/fetchTeam', companyId);
+    }
+
     function getOptions() {
       options.teamRoles = TeamRolesOptions();
       options.languages = LanguagesOptions();
@@ -117,7 +134,7 @@ export default defineComponent({
     onBeforeMount(getOptions);
 
     return {
-      options, v$, handleSubmit, t, workspace, companies,
+      testing, options, changeTeam, v$, handleSubmit, t, workspace, companies
     };
   },
 });

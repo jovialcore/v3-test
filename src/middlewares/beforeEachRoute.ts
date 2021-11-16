@@ -19,12 +19,11 @@ const AUTH_ROUTES_NAMES = [
   'TestArea',
 ];
 
-async function isAuthenticated(): Promise<boolean | string> {
-  // const response = await $api.auth.currentUser();
-  // const store = await setupStore();
+async function isAuthenticated(): Promise<boolean | string> {  const store = await setupStore();
   const response = await AuthService.currentUser();
   if (!response.errors) {
-    // store.dispatch('auth/setCurrentUser', response.data)
+    store.dispatch('auth/setCurrentUser', response.data)
+    window.localStorage.setItem('lang', response.data.language)
     return !!response.data;
   }
 

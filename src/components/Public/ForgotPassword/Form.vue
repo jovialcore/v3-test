@@ -58,7 +58,7 @@ export default defineComponent({
       const isValidate = await v$.value.$validate();
 
       if (isValidate) {
-        form.value.language = window.localStorage.getItem('lang') || 'us';
+        form.value.language = window.localStorage.getItem('lang') || 'en-US';
 
         try {
           const response = await store.dispatch('auth/submitForgotPassword', form);

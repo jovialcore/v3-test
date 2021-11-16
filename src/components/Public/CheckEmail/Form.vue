@@ -64,7 +64,7 @@ export default defineComponent({
       const isValidate = await v$.value.$validate();
 
       if (isValidate) {
-        form.value.language = window.localStorage.getItem('lang') || 'us';
+        form.value.language = window.localStorage.getItem('lang') || 'en-US';
         const {data, error} = await store.dispatch('auth/submitCheckEmail');
 
         if (data) {

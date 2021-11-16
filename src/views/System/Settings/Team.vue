@@ -6,15 +6,12 @@
     :data="teams"
     :total-items="16"
     :start-items="1"
-    @next-page="nextPage"
-    @back-page="backPage"
-    @set-page="setPage"
   >
     <template v-slot:body-firstName="row">
       {{row.item.firstName}} {{row.item.lastName}}
     </template>
     <template v-slot:body-company="row">
-      {{row.item.company.companyName}}
+      {{row.item.company?.companyName}}
     </template>
     <template v-slot:body-actions="row">
       <span class="centered">
@@ -88,25 +85,10 @@ export default defineComponent({
         await store.dispatch('team/getTeams');
     }
 
-    function setPage(page: number) {
-      console.log('set-page: ', page);
-    }
-
-    function nextPage() {
-      console.log('next-page');
-    }
-
-    function backPage() {
-      console.log('back-page');
-    }
-
     return {
       action,
       teams,
       columns,
-      nextPage,
-      setPage,
-      backPage,
       optionSelected,
       dropdownOptions,
       t,

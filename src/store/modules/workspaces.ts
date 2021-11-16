@@ -1,12 +1,11 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex';
-import $api from '@/services';
 import WorkspacesService from '@/services/Workspaces';
 
 export const state: any = {
   workspace: {
     company: '',
     workspaceName: '',
-    team: ['617942fcf230ed8890e49a95'],
+    team: [],
   },
   workspaces: [],
 };
@@ -22,17 +21,27 @@ export const mutations: MutationTree<any> = {
 
 export const actions: ActionTree<any, void> = {
   clear({ commit }) {
-    commit('SET_WORKSPACE', undefined);
+    commit('SET_WORKSPACE', {
+      company: '',
+      workspaceName: '',
+      team: [],
+    });
   },
+  
   async create({ state }) {
     const response = await WorkspacesService.create(state.workspace);
-
     return response;
   },
+
   async getWorkspaces({ commit }) {
     const { data } = await WorkspacesService.get();
     commit('SET_WORKSPACES', data);
   },
+
+  select({ commit, state }, index) {
+    commit('SET_WORKSPACE', state.workspaces[index]);
+  },  
+
 };
 
 export const getters: GetterTree<any, void> = {

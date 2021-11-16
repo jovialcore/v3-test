@@ -104,9 +104,9 @@ export default defineComponent({
       const isValidate = await v$.value.$validate();
 
       if (isValidate) {
-        form.value.language = window.localStorage.getItem('lang') || 'us';
+        form.value.language = window.localStorage.getItem('lang') || 'en-US';
         
-        const endpoint = form.value.inviteToken ? 'auth/submitInviteRegister' : 'auth/submitRegister'
+        const endpoint = form.value.inviteToken !== '' ? 'auth/submitInviteRegister' : 'auth/submitRegister'
         const next = form.value.inviteToken ? 'Login' : 'CheckEmail'
         console.log('endpoint', endpoint)
         const { data, error } = await store.dispatch(endpoint);

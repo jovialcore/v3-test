@@ -12,7 +12,6 @@
     >
     <font-awesome-icon
       v-if="icon && fontAwesome"
-      :prefix="prefix"
       :icon="icon"
       :style="{ width: iconSize, height: iconSize }"
     />
@@ -21,11 +20,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   props: {
-    icon: { type: String || Array, default: undefined },
+    icon: { type: [String, Array] as PropType<String | String[]>, default: [] },
     fontAwesome: { type: Boolean },
     iconSize: { type: String || Number, default: '24' },
     alt: { type: String, default: 'sidebar item' },

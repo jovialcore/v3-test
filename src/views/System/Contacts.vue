@@ -1,6 +1,6 @@
 <template>
   <div class="content-header">
-    <base-button
+    <!-- <base-button
       dashboard
       neutral
       @click="openCompanyModal"
@@ -13,9 +13,9 @@
       @click="openCompanyModal"
     >
       Import contacts
-    </base-button>
+    </base-button> -->
   </div>
-  <base-table
+  <!-- <base-table
     :columns="columns"
     :data="companies"
     :total-items="16"
@@ -33,7 +33,7 @@
     <template v-slot:body-stage="row">
       <base-tag :status="row.item.stage" />
     </template>
-  </base-table>
+  </base-table> -->
 </template>
 
 <script lang="ts">

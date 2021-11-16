@@ -8,7 +8,6 @@
       :disabled="disable"
       :class="classes"
       @input="updateValue"
-      @change="$emit('change')"
     >
       <option
         value=""
@@ -61,6 +60,7 @@ export default defineComponent({
       default: 'text',
     },
   },
+  emits: ['changed', 'update:modelValue'],
   setup(props, { emit }) {
     const classes = computed(() => ({
       block: props.block,
@@ -70,7 +70,8 @@ export default defineComponent({
 
     function updateValue(event: Event) {
       const { value } = event.target as HTMLInputElement;
-
+      console.log(value)
+      emit('changed', value);
       emit('update:modelValue', value);
     }
     return { classes, updateValue };

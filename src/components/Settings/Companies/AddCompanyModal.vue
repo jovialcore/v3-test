@@ -7,7 +7,6 @@
       <h3>{{ t(`AddCompanyModal.title`) }}</h3>
     </template>
     <template v-slot:body>
-      {{company}}
       <div class="base-info">
         <base-input
           v-model="v$.companyName.$model"

@@ -42,11 +42,9 @@ export default {
     const route = useRoute();
     const submenu = reactive({
       title: route.name,
-      // children: route.matched[0].children,
       children: getCurrentRouteChildren(route),
     });
     onUpdated(() => {
-      // submenu.children = route.matched[0].children;
       submenu.children = getCurrentRouteChildren(route);
       submenu.title = route.name;
     });
