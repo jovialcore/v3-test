@@ -81,7 +81,7 @@ export default defineComponent({
       languages: [],
     });
 
-    const company = computed<any>(() => store.getters['companies/getCompany']);
+    const company = computed(() => store.getters['companies/getCompany']);
 
     store.dispatch('companies/getCompanies');
     const companies = computed<any>(() => store.getters['companies/get']);
@@ -92,7 +92,7 @@ export default defineComponent({
       subsidiary: { },
     } as RulesType));
 
-    let v$ = useVuelidate(rules, company.value);
+    const v$ = useVuelidate(rules, company);
 
     async function handleSubmit() {
       const isValidate = await v$.value.$validate();

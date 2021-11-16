@@ -12,7 +12,7 @@ export const state: any = {
 
 export const mutations: MutationTree<any> = {
   SET_COMPANY(state, data) {
-    state.company = data; 
+    state.company = data;
   },
   SET_COMPANIES(state, data) {
     state.companies = data;
@@ -20,7 +20,7 @@ export const mutations: MutationTree<any> = {
 };
 
 export const actions: ActionTree<any, void> = {
-  clearCurrent({ commit }){
+  clearCurrent({ commit }) {
     commit('SET_COMPANY', {
       companyName: '',
       description: '',
@@ -44,9 +44,14 @@ export const actions: ActionTree<any, void> = {
   },
 
   async select({ commit, state }, index) {
-    const selected = state.companies[index]
-    console.log(selected)
-    selected.subsidiary = selected.subsidiary?._id
+    const selected = state.companies[index];
+
+    console.log(state.companies);
+
+    selected.subsidiary = selected.subsidiary?._id;
+
+    console.log(selected.subsidiary);
+
     commit('SET_COMPANY', selected);
   },
   
