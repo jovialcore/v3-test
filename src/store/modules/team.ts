@@ -52,6 +52,10 @@ export const actions: ActionTree<any, void> = {
     console.log(data)
     commit('SET_TEAMS', data)
   },
+  async remove(_, _id) {
+    const {data} = await TeamService.delete(_id);
+  },
+
 
 };
 

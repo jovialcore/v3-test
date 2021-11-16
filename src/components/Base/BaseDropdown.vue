@@ -43,7 +43,7 @@ export default defineComponent({
     valueName: { type: String, default: 'value' },
     modelValue: { type: String, default: '' },
   },
-  emits: ['update:modelValue'],
+  emits: ['clicked', 'update:modelValue'],
   setup(_, { emit }) {
     const isOpen = ref();
 
@@ -51,6 +51,7 @@ export default defineComponent({
       isOpen.value = false;
 
       emit('update:modelValue', optionKey);
+      emit('clicked', optionKey)
     }
 
     return {
@@ -82,7 +83,7 @@ export default defineComponent({
     box-shadow: 0px 8px 16px 0px #00000034;
 
     transition: all 0.2s ease-in-out;
-
+    z-index: $second-layer;
     &.active {
       display: flex;
       flex-direction: column;

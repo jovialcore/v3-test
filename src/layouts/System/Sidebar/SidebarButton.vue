@@ -25,14 +25,13 @@ import { computed, defineComponent } from 'vue';
 
 export default defineComponent({
   props: {
-    icon: { type: String, default: undefined },
+    icon: { type: String || Array, default: undefined },
     fontAwesome: { type: Boolean },
     iconSize: { type: String || Number, default: '24' },
     alt: { type: String, default: 'sidebar item' },
     label: { type: String, default: undefined },
     row: { type: Boolean },
     submenu: { type: Boolean, default: false },
-    prefix: { type: String, default: 'fas' },
     block: { type: Boolean },
   },
   setup(props) {

@@ -1,4 +1,20 @@
 <template>
+  <div class="content-header">
+    <base-button
+      dashboard
+      neutral
+      @click="openCompanyModal"
+    >
+      New contact
+    </base-button>
+    <base-button
+      dashboard
+      neutral
+      @click="openCompanyModal"
+    >
+      Import contacts
+    </base-button>
+  </div>
   <base-table
     :columns="columns"
     :data="companies"

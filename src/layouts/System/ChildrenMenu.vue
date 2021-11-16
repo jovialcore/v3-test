@@ -18,7 +18,11 @@
             <router-link :to="{ name: child.name }">
               <sidebar-button
                 class="option-button"
-                :icon="String(child.meta?.icon)"
+                :icon="
+                  child.meta?.prefix
+                    ? [String(child.meta?.prefix), String(child.meta?.icon)]
+                    : String(child.meta?.icon)
+                "
                 :font-awesome="Boolean(child.meta?.fontAwesome)"
                 :label="String(child.name)"
                 icon-size="16"

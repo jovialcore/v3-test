@@ -182,6 +182,11 @@ export const actions: ActionTree<any, void> = {
   resetPasswordData: ({ commit }) => commit('RESET_PASSWORD_DATA'),
   resetRegisterAccessData: ({ commit }) => commit('RESET_REGISTER_ACCESS_DATA'),
   resetRegister: ({ commit }) => commit('RESET_REGISTER'),
+  setCurrentUser({ commit }, data) {
+    console.log('setting', data)
+    commit('SET_CURRENT_USER', data);
+  },
+  
   async submitInviteRegister({ state }) {
     const body = state.register.accessData;
     const response = await AuthService.inviteRegister(body);

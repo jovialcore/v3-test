@@ -126,7 +126,7 @@ export default defineComponent({
   width: 100%;
   display: table;
   background-color: $white-bg-elements;
-
+  font-size: 14px;
   tr {
     border-top: 1px solid $border-neutral;
   }
@@ -139,11 +139,9 @@ export default defineComponent({
     color: var(--primary);
 
     th {
-      .content {
-        font-weight: bold;
-        color: $heading-grey;
-        padding: 1.5rem;
-      }
+      font-weight: bold;
+      color: $text-dark-grey;
+      padding: 1rem;
     }
   }
 
@@ -162,6 +160,7 @@ export default defineComponent({
       border: 0;
     }
     td {
+      padding: 0 5rem;
       .navigation {
         padding: 0.5rem;
         justify-content: end;

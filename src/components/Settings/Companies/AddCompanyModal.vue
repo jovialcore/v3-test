@@ -7,6 +7,7 @@
       <h3>{{ t(`AddCompanyModal.title`) }}</h3>
     </template>
     <template v-slot:body>
+      {{company}}
       <div class="base-info">
         <base-input
           v-model="v$.companyName.$model"
@@ -45,7 +46,7 @@
 
 <script lang="ts">
 import {
-  computed, defineComponent, onBeforeMount, reactive, watch,
+  computed, defineComponent, onBeforeMount, onMounted, reactive, watch,
 } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
@@ -89,27 +90,28 @@ export default defineComponent({
     const rules = computed(() => ({
       companyName: { required },
       description: { required },
-      subsidiary: { required },
+      subsidiary: { },
     } as RulesType));
 
-    const v$ = useVuelidate(rules, company.value);
+    let v$ = useVuelidate(rules, company.value);
 
     async function handleSubmit() {
       const isValidate = await v$.value.$validate();
 
       if (isValidate) {
-        try {
-          const response = await store.dispatch('companies/create');
+        const endpoint = company.value._id ? 'update' : 'create';
+        const response = await store.dispatch(`companies/${endpoint}`);
+        store.dispatch('companies/getCompanies');
 
-          if (response.data) {
-            toast.open({ mesage: response.data.msg });
-          }
-        } catch (err: any) {
-          toast.open({ mesage: err?.response?.data?.message });
+        if (response.data) {
+          toast.open({ mesage: response.data.msg });
+        }
+        if (response.error) {
+          toast.open({ mesage: response.error.msg });
         }
 
         modal.close({ component: 'AddCompanyModal' });
-        store.dispatch('companies/clear');
+        store.dispatch('companies/clearCurrent');
       }
     }
 

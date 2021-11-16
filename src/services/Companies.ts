@@ -12,6 +12,12 @@ export default class CompaniesService extends BaseService {
     );
   }
 
+  static delete(_id: string) {
+    return CompaniesService.consume(
+      $api.delete(`${BASE_PATH}/${_id}`),
+    );
+  }
+
   static get() {
     return CompaniesService.consume(
       $api.get(`${BASE_PATH}`),
@@ -23,4 +29,12 @@ export default class CompaniesService extends BaseService {
       $api.get(`${BASE_PATH}/${id}`),
     );
   }
+
+  static patch(_id: string, { companyName, description, subsidiary }:
+    {companyName: string, description: string, subsidiary: string}) {
+    return CompaniesService.consume(
+      $api.patch(`${BASE_PATH}/${_id}`, { companyName, description, subsidiary } ),
+    );
+  }
+
 }

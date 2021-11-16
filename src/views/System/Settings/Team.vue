@@ -16,14 +16,24 @@
     <template v-slot:body-company="row">
       {{row.item.company.companyName}}
     </template>
+    <template v-slot:body-actions="row">
+      <span class="centered">
+        <base-dropdown
+          v-model="optionSelected"
+          :options="dropdownOptions"
+          @clicked="(value:string) => action(value, row.index, row.item._id)"
+        >
+          <font-awesome-icon icon="ellipsis-v" />
+        </base-dropdown>
+      </span>
+    </template>
   </base-table>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from 'vue';
+import { computed, defineComponent, reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
-import useModal from '@/hooks/useModal';
 
 export default defineComponent({
   setup() {
@@ -50,6 +60,10 @@ export default defineComponent({
         id: 'status',
         name: 'Status',
       },
+      {
+        id: 'actions',
+        name: '',
+      },
     ]);
 
     const data = reactive([
@@ -57,10 +71,21 @@ export default defineComponent({
 
     store.dispatch('team/getTeams');
     const teams = computed<any>(() => store.getters['team/get']);
+    const optionSelected = ref('');
+    const dropdownOptions = reactive([
+      { key: 'resend', value: 'Resend invitation', icon: 'pen' },
+      { key: 'remove', value: 'Remove', icon: 'trash-alt' },
+    ]);
 
-    function openCompanyModal() {
-      const modal = useModal();
-      modal.open({ component: 'AddCompanyModal' });
+    function action(action:string, index: number, _id: string) {
+      if(action === 'resend') {
+      } else {
+        remove(_id)
+      }
+    }
+    async function remove(_id: string) {
+        await store.dispatch('team/remove', _id);
+        await store.dispatch('team/getTeams');
     }
 
     function setPage(page: number) {
@@ -76,13 +101,14 @@ export default defineComponent({
     }
 
     return {
+      action,
       teams,
       columns,
-      data,
-      openCompanyModal,
       nextPage,
       setPage,
       backPage,
+      optionSelected,
+      dropdownOptions,
       t,
     };
   },
@@ -90,5 +116,9 @@ export default defineComponent({
 </script>
 
 <style>
-
+span.centered {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
 </style>

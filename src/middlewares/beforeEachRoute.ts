@@ -1,5 +1,7 @@
 import { RouteLocationNormalized, NavigationGuardNext } from 'vue-router';
 // import $api from '../services';
+
+import { setupStore } from '../store'
 import AuthService from '@/services/Auth';
 
 const AUTH_ROUTES_NAMES = [
@@ -19,8 +21,10 @@ const AUTH_ROUTES_NAMES = [
 
 async function isAuthenticated(): Promise<boolean | string> {
   // const response = await $api.auth.currentUser();
+  // const store = await setupStore();
   const response = await AuthService.currentUser();
   if (!response.errors) {
+    // store.dispatch('auth/setCurrentUser', response.data)
     return !!response.data;
   }
 

@@ -10,6 +10,11 @@ export default class TeamService extends BaseService {
       $api.get(`${BASE_PATH}/`),
     );
   }
+  static delete(_id: string) {
+    return TeamService.consume(
+      $api.delete(`${BASE_PATH}/${_id}`),
+    );
+  }
 
   // static login({ email, password }: {email: string, password: string}) {
   //   return AuthService.consume(
