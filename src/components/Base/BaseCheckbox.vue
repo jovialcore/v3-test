@@ -3,10 +3,11 @@
     class="input-container"
     :class="classes"
   >
-    <input
-      type="checkbox"
-      :id="id"
-    >
+    <label class="checkbox">
+        <input type="checkbox" :id="id"
+        @input="updateValue"/>
+        <span></span>
+    </label>
     <label :for="id" v-if="label">{{ label }}</label>
     <span>
       {{ error }}
@@ -24,7 +25,7 @@ export default defineComponent({
   props: {
     id: { type: String, required: true },
     label: { type: String, required: false, default: '' },
-    modelValue: { type: [Number, String], default: '' },
+    modelValue: { type: Boolean, default: false },
     error: { type: String, default: '' },
     block: { type: Boolean },
   },
@@ -35,9 +36,9 @@ export default defineComponent({
     }));
 
     function updateValue(event: Event) {
-      const { value } = event.target as HTMLInputElement;
+      const { checked } = event.target as HTMLInputElement;
 
-      emit('update:modelValue', value);
+      emit('update:modelValue', checked);
     }
 
     return {
@@ -52,35 +53,72 @@ export default defineComponent({
 .input-container {
   display: flex;
   align-items: center;
-  gap: 15px;
   margin-left: 3px;
 
-  input {
-    border: 1px solid $border-neutral;
-    -ms-transform: scale(1.5); /* IE */
-    -moz-transform: scale(1.5); /* FF */
-    -webkit-transform: scale(1.5); /* Safari and Chrome */
-    -o-transform: scale(1.5); /* Opera */
-    transform: scale(1.5);
-    outline: none !important;
-    border-radius: 5px;
-    &::placeholder {
-      /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: $text-soft-grey;
-      opacity: 1; /* Firefox */
+  .checkbox {
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+    margin-left: 0px;
+    & > span {
+      color: $text-dark-contrast;
+      padding: 0.5rem 0.20rem;
     }
 
-    &:-ms-input-placeholder {
-      /* Internet Explorer 10-11 */
-      color: $text-soft-grey;
+    & > input {
+      height: 25px;
+      width: 25px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -o-appearance: none;
+      appearance: none;
+      border: 1px solid $border-neutral;
+      border-radius: 4px;
+      outline: none;
+      transition-duration: 0.3s;
+      background-color: $white-bg-elements;
+      cursor: pointer;
+    }
+    & > input:checked {
+        background-color: $primary-bg-elements;
     }
 
-    &::-ms-input-placeholder {
-      /* Microsoft Edge */
-      color: $text-soft-grey;
+    & > input:checked + span::before {
+      content: '\2713';
+      display: block;
+      text-align: center;
+      color: $text-dark-contrast;
+      position: absolute;
+      left: 0.2rem;
+      top: 0.2rem;
+    }
+
+    & > input:active {
+        border: 2px solid #34495E;
     }
   }
+  // .custom-checkbox {
+  // input {
+  //   display: none;
+  //   width: 25px;
+  //   height: 25px;
+  // }
+  // span {
+  //   width: 25px;
+  //   height: 25px;
+  //   display: block;
+  //   background-color: #fff;
+  //   border: 1px solid #DDD;
+  // }
+  // input:checked + span {
+  //     background-color: #c03;
+  // }
 
+  // }
+  label {
+    font-size: 12px;
+    margin-left: 15px;
+  }
   span {
     color: $error;
     padding-left: 8px;

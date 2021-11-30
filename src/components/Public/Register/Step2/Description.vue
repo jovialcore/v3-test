@@ -10,7 +10,7 @@
       />
       <div class="legend">
         <span>Felipe Novak</span>
-        <span>{{ t(`Step2.description.lawyer_sub`) }}</span>
+        <span>{{ t(`Step2.description.lawyerSub`) }}</span>
       </div>
     </div>
   </div>
@@ -22,24 +22,32 @@ import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup() {
-    const i18n = useI18n();
+    const { t } = useI18n();
 
-    return { t: i18n.t };
+    return { t };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-div.description img.descriptive {
-  width: 100px;
+div.description {
+  h1 {
+    flex-grow: 1;
+  }
+  img.descriptive {
+    width: 100px;
+  }
 }
 .lawyer-image-container {
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-.lawyer-image-container .legend {
-  display: flex;
-  flex-direction: column;
+  .legend {
+    display: flex;
+    flex-direction: column;
+    span {
+      color: $text-dark-grey;
+    }
+  }
 }
 </style>

@@ -1,0 +1,24 @@
+{
+    "description": {
+        "main": "Compruebe su e-mail",
+        "sub": "Acabamos de enviarle un correo electrónico con un enlace para activar su cuenta en ",
+        "hasAccount": "¿Ya tiene una cuenta? ",
+        "hasAccountLink": "Acceder ahora"
+    },
+    "form": {
+        "email": "Email",
+        "emailPlaceholder": "name{'@'}email.com",
+        "sendMailButton": "À envoyer"
+    },
+    "completed": {
+        "title": "¿No ha recibido un e-mail?",
+        "sub": "Si no ha recibido un correo electrónico nuestro en unos minutos, hay varias razones:",
+        "items": {
+            "spamFolder": "El e-mail está en su carpeta de spam.",
+            "mistakeEmail": "El e-mail que has introducido contiene un error o una errata.",
+            "anotherEmail": "Accidentalmente nos diste otro e-mail.",
+            "cantDeliver": "No podemos enviar el e-mail a esta dirección."
+        },
+        "reenterEmail": "Por favor, introduzca de nuevo su dirección de e-mail e inténtelo de nuevo"
+    }
+}

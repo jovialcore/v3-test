@@ -1,0 +1,24 @@
+{
+  "description": {
+    "main": "Vérifiez votre e-mail",
+    "sub": "Nous venons de vous envoyer un e-mail avec un lien pour activer votre compte à ",
+    "hasAccount": "Vous avez déjà un compte ? ",
+    "hasAccountLink": "Connectez-vous"
+  },
+  "form": {
+    "email": "Email",
+    "emailPlaceholder": "name{'@'}email.com",
+    "sendMailButton": "À envoyer"
+  },
+  "completed": {
+    "title": "Vous n'avez pas reçu d'e-mail ?",
+    "sub": "Si vous ne recevez pas d'e-mail de notre part dans les minutes qui suivent, il peut se passer plusieurs choses:",
+    "items": {
+      "spamFolder": "L'e-mail se trouve dans votre dossier de spam.",
+      "mistakeEmail": "L'e-mail que vous avez saisie comporte une erreur ou une faute de frappe.",
+      "anotherEmail": "Vous nous avez accidentellement donné un autre e-mail.",
+      "cantDeliver": "Nous ne pouvons pas livrer l'e-mail à cette adresse."
+    },
+    "reenterEmail": "Saisissez à nouveau votre adresse électronique et réessayez"
+  }
+}

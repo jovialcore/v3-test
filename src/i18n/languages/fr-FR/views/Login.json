@@ -1,0 +1,18 @@
+{
+  "description": {
+    "main": "Bienvenue à nouveau",
+    "sub": "Pour rester en contact avec nous, veuillez vous connecter avec vos informations personnelles (adresse e-mail et mot de passe)."
+  },
+  "form": {
+    "title": "Connexion",
+    "subtitle": "Vous êtes nouveau ici? ",
+    "subtitleLink": "S'inscrire",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "emailPlaceholder": "name{'@'}email.com",
+    "passwordPlaceholder": "Entrez votre mot de passe",
+    "loginButton": "Entrez",
+    "loginWithGoogle": "S'inscrire avec Google",
+    "forgotPassword": "Mot de passe oublié?"
+  }
+}

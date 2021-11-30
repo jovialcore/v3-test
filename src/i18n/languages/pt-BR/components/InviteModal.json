@@ -1,0 +1,29 @@
+{
+    "title": "Convidar membro da equipe",
+    "firstNamePlaceholder": "Nome",
+    "lastNamePlaceholder": "Sobrenome",
+    "emailPlaceholder": "Email",
+    "languagePlaceholder": "Selecionar",
+    "companyPlaceholder": "Empresa",
+    "teamRoles": {
+        "title": "Função na equipe",
+        "options": [
+            {
+                "value": "creator",
+                "title": "Creator",
+                "subtitle": "Has access to automate templates and share it. Can set up approval/negotiation workflows and send documents."
+            },
+            {
+                "value": "collaborator",
+                "title": "Collaborator",
+                "subtitle": "Can use automated templates made by creators, set up approval/negotiation workflows and send documents."
+            },
+            {
+                "value": "observer",
+                "title": "Observer",
+                "subtitle": "Can see all documents, approval and negoatiation workflows to which he has been invited but cannot intervene on the documents, only add comments."
+            }
+        ]
+    },
+    "inviteButton": "Convidar"
+}

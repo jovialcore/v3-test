@@ -1,0 +1,18 @@
+{
+  "description": {
+    "main": "Bem-vindo de volta",
+    "sub": "Para manter-se em contato conosco, faça o login com suas informações pessoais (endereço de e-mail e senha)."
+  },
+  "form": {
+    "title": "Login",
+    "subtitle": "novo aqui? ",
+    "subtitleLink": "cadastre-se",
+    "email": "E-mail",
+    "password": "Senha",
+    "emailPlaceholder": "name{'@'}email.com",
+    "passwordPlaceholder": "Digite sua senha",
+    "loginButton": "Entrar",
+    "loginWithGoogle": "Entrar com o Google",
+    "forgotPassword": "Esqueceu sua senha?"
+  }
+}

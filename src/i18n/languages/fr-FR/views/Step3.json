@@ -1,0 +1,86 @@
+{
+  "form": {
+    "title": "Vous avez presque terminé.",
+    "companyName": "Nom de l'entreprise",
+    "companyNamePlaceholder": "Juridoc",
+    "returnButton": "Précédent",
+    "companySize": "Taille de l'entreprise",
+    "nextButton": "Suivant",
+    "defaultSelectPlaceholder": "Sélectionner",
+    "industry": "Secteur d'activité",
+    "crm": "CRM",
+    "options": {
+      "industry": [
+        "Services administratifs",
+        "Avocat",
+        "Architecture",
+        "Arts",
+        "Bloggers/Youtube",
+        "Conseil en affaires",
+        "Studio cinématographique",
+        "Représentation commerciale",
+        "Dentiste",
+        "Design en général",
+        "Agence de marketing numérique",
+        "Médecins",
+        "Enseignement général",
+        "Design graphique",
+        "Ressources humaines",
+        "Courtier en assurances",
+        "Design d'intérieur",
+        "Intermédiation",
+        "Services informatiques",
+        "Journalisme et conseil",
+        "Marketing",
+        "Marketing et propagande",
+        "Place de marché",
+        "Musique",
+        "Nutrition",
+        "Organisation d'événements",
+        "Photo",
+        "Éducation physique",
+        "Physiothérapie",
+        "Psychologie",
+        "Courtage en immobilier",
+        "Conseil en technologie",
+        "Tourisme",
+        "Traduction",
+        "Vétérinaire",
+        "Développement web",
+        "Autres"
+      ],
+      "companySize": [
+        "Solo",
+        "2 - 5",
+        "6 - 10",
+        "11 - 25",
+        "26 - 50",
+        "51 - 200",
+        "201 - 1.000",
+        "1.001 - 10.000",
+        "10.000 +"
+      ],
+      "crm": [
+        "Hubspot",
+        "Insightly",
+        "Pipedrive",
+        "Salesforce",
+        "SugarCRM",
+        "ZohoCRM",
+        "Rien"
+      ]
+    },
+    "confirmTerms": "Je confirme que j'ai lu, consenti et accepté les conditions d'utilisation et la politique de confidentialité de Juridoc, et que je suis majeur."
+  },
+  "description": {
+    "main": "Vous avez presque terminé",
+    "sub": "Encore quelques détails sur votre entreprise et vous serez prêt à commencer",
+    "itemsBrand": "Développez votre entreprise avec nous!",
+    "items": {
+      "saveTime": "Economisez du temps et de l'argent",
+      "teamwork": "Facilitez le travail d'équipe",
+      "dealsFaster": "Concluez des affaires plus rapidement",
+      "productivity": "Augmentez votre productivité"
+    }
+  }
+}

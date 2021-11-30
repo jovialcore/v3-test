@@ -1,0 +1,87 @@
+{
+  "form": {
+    "prelude": "Etapa 3 de 3",
+    "title": "Parabéns, estamos preparando seu teste gratuito.",
+    "companyName": "Nome da empresa",
+    "companyNamePlaceholder": "Juridoc",
+    "returnButton": "Anterior",
+    "companySize": "Tamanho da empresa",
+    "nextButton": "Próximo",
+    "defaultSelectPlaceholder": "Selecionar",
+    "industry": "Setor industrial",
+    "crm": "CRM",
+    "options": {
+      "companySize": [
+          "Solo",
+          "2 - 5",
+          "6 - 10",
+          "11 - 25",
+          "26 - 50",
+          "51 - 200",
+          "201 - 1.000",
+          "1.001 - 10.000",
+          "10.000 +"
+      ],
+      "industry": [
+        "Serviços administrativos",
+        "Advogado",
+        "Arquitetura",
+        "Artes",
+        "Bloggers/Youtube",
+        "Consultoria empresarial",
+        "Estúdio Cinematográfico",
+        "Representação comercial",
+        "Dentista",
+        "Design em geral",
+        "Agência de Marketing Digital",
+        "Médicos",
+        "Educação em geral",
+        "Projeto gráfico",
+        "Recursos Humanos",
+        "Corretora de Seguros",
+        "Design de interiores",
+        "Intermediação",
+        "Serviços de TI",
+        "Jornalismo e Assessoria",
+        "Marketing",
+        "Marketing e Propaganda",
+        "Mercado",
+        "Música",
+        "Nutrição",
+        "Organização de eventos",
+        "Foto",
+        "Educação Física",
+        "Fisioterapia",
+        "Psicologia",
+        "Corretora de Imóveis",
+        "Consultoria Tecnológica",
+        "Turismo",
+        "Tradução",
+        "Veterinário",
+        "Desenvolvimento Web",
+        "Outros"
+      ],
+      "crm": [
+          "Hubspot",
+          "Insightly",
+          "Pipedrive",
+          "Salesforce",
+          "SugarCRM",
+          "ZohoCRM",
+          "Nenhum"
+      ]
+    },
+    "confirmTerms": "Confirmo que li, consenti e aceitei os Termos de Uso e a Política de Privacidade da Juridoc, e que sou maior de idade legal."
+  },
+  "description": {
+    "main": "Você está quase terminando.",
+    "sub": "Apenas mais alguns detalhes sobre seu negócio e você está pronto para ir.",
+    "itemsBrand": "Construa seu negócio conosco!",
+    "items": {
+        "saveTime": "Economize tempo e dinheiro",
+        "teamwork": "Facilite o trabalho em equipe",
+        "dealsFaster": "Feche os negócios mais rápido",
+        "productivity": "Aumente sua produtividade"
+    }
+  }
+}

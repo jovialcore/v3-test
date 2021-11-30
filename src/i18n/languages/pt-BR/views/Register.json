@@ -1,0 +1,18 @@
+{
+  "description": {
+    "main": "Bem vindo à Juridoc - Piloto automático para seus documentos legais",
+    "sub": "Use nossa plataforma para gerenciar todo o ciclo de vida de seus contratos em um único fluxo de trabalho."
+  },
+  "form": {
+    "prelude": "Comece gratuitamente",
+    "title": "Registre-se na Juridoc",
+    "subtitle": "Já é um membro? ",
+    "subtitleLink": "Entre agora",
+    "email": "E-mail",
+    "password": "Senha",
+    "emailPlaceholder": "name{'@'}email.com",
+    "passwordPlaceholder": "6+ caracteres, 1 letra maiúscula",
+    "registerButton": "Criar conta",
+    "registerWithGoogle": "Cadastre-se no Google"
+  }
+}

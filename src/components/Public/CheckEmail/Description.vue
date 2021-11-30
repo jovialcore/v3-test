@@ -1,7 +1,10 @@
 <template>
   <div class="description">
     <h1>{{ t(`CheckEmail.description.main`) }}</h1>
-    <p>{{ t(`CheckEmail.description.sub`, { email }) }}</p>
+    <p v-if="email && isCompleted">
+      {{ t(`CheckEmail.description.sub`) }}
+      <span class="highlight">{{email}}</span>
+    </p>
     <img
       class="descriptive"
       v-lazy="{ src: '/images/login/check-email.png' }"
@@ -9,9 +12,9 @@
     />
     <div class="description-footer">
       <p>
-        {{ t('CheckEmail.description.has_account') }}
+        {{ t('CheckEmail.description.hasAccount') }}
         <base-link :to="{ name: 'Login' }">
-          {{ t('CheckEmail.description.has_account_link') }}
+          {{ t('CheckEmail.description.hasAccountLink') }}
         </base-link>
       </p>
     </div>
@@ -19,21 +22,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+import { defineComponent } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
+  props: {
+    email: { type: String, default: '' },
+    isCompleted: { type: Boolean, default: false },
+  },
   setup() {
-    const langStorage = localStorage.getItem('lang');
-    const currentLang = ref(langStorage || 'br');
-    const i18n = useI18n();
+    const { t } = useI18n();
 
-    watch(currentLang, (newValue) => {
-      window.localStorage.setItem('lang', newValue);
-      i18n.locale.value = newValue;
-    });
-
-    return { currentLang, email: 'flyingtotees@gmail.com', t: i18n.t };
+    return { t };
   },
 });
 </script>
@@ -41,12 +41,15 @@ export default defineComponent({
 <style lang="scss" scoped>
 .description {
   h1 {
-    color: #404446;
+    color: $text-dark-grey-4;
     font-weight: bold;
     font-size: 32px;
   }
+  p {
+    color: $text-dark-grey-5;
+  }
   a {
-    color: #1f78de;
+    color: $link-color;
   }
   .description-footer p {
     margin-bottom: 0;

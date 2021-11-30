@@ -6,14 +6,19 @@ div.description {
   display: flex;
   flex-direction: column;
   h1 {
+    color: $text-dark-grey;
     font-size: 25px;
     font-weight: normal;
     margin-bottom: 25px;
   }
   p {
+    color: $text-dark-grey;
     font-size: 16px;
     line-height: 22px;
     margin-bottom: 3rem;
+    span.highlight {
+      color: $text-green;
+    }
   }
   img.descriptive {
     width: 100%;

@@ -1,21 +1,48 @@
 // $primary: #333983;
 $primary: #000d2b;
+$background-gray: hsl(215,30%,17.5%);
+$background-light-gray: rgb(242, 242, 242);
+
 // $secondary: #1ADC77;
 $secondary: #06e7cd;
 $neutral-1: #ffffff;
 $neutral-2: #f9f9f9;
+$neutral-3: #fefefe;
 $border-neutral: #dedede;
 $orange: #ff9002;
 $yellow-orange: #ffaa00;
 $primary-button: #06e7cd;
 $button-gray-color: #ababab;
+$button-neutral-dashboard: #f2f2f2;
+$dark-grey-4: #333F54;
+$white-grey: #f0f0f0;
+
+$primary-bg-elements: #06e7cd;
+$white-bg-elements: #fff;
+$transparent-focus-bg-elements: rgba(6,231,205,0.05);
 
 $text-color: black;
+$heading-grey: #303136;
 $link-color: #1f78de;
 $error: red;
 
+// Text variables
 $text-dark-grey: #344055;
+$text-dark-grey-2: #3A485F;
+$text-dark-grey-3: #404446;
+$text-dark-grey-4: #333F54;
+$text-dark-grey-5: #39475F;
+$text-dark-grey-6: #3B4960;
+$text-green: #05EAD3;
 $text-soft-grey: #aeb0b7;
+$text-soft-grey-2: #C7C8D0;
+$input-labels: #72819D;
+$text-dark-contrast: #ffffff;
 
 $neutral-bg: #fafbfc;
 $white: #ffffff;
+
+
+//z-index layers
+
+$second-layer: 10;

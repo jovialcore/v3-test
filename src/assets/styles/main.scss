@@ -1,11 +1,18 @@
 @font-face {
-  font-family: 'SF UI Display Ultralight';
+  font-family: 'SF UI Display';
   font-style: normal;
   font-weight: normal;
   src: url('../fonts/sf-ui-display-ultralight-58646b19bf205.woff')
     format('woff');
 }
 
+@font-face {
+  font-family: 'SF UI Display Light';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/sf-ui-display-light-58646b33e0551.woff')
+    format('woff');
+}
 // @font-face {
 //   font-family: 'SF UI Display Thin';
 //   font-style: normal;
@@ -14,20 +21,18 @@
 //     url('sf-ui-display-thin-58646e9b26e8b.woff') format('woff');
 // }
 
-// @font-face {
-//   font-family: 'SF UI Display Light';
-//   font-style: normal;
-//   font-weight: normal;
-//   src: local('SF UI Display Light'),
-//     url('sf-ui-display-light-58646b33e0551.woff') format('woff');
-// }
-
 @font-face {
-  font-family: 'SF UI Display Medium';
+  font-family: 'SF UI Display';
   font-style: normal;
   font-weight: normal;
-  src: local('SF UI Display Medium'),
-    url('../fonts/sf-ui-display-medium-58646be638f96.woff') format('woff');
+  src: url('../fonts/sf-ui-display-light-58646b33e0551.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'SF UI Display';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/sf-ui-display-medium-58646be638f96.woff') format('woff');
 }
 
 // @font-face {
@@ -38,13 +43,12 @@
 //     url('sf-ui-display-semibold-58646eddcae92.woff') format('woff');
 // }
 
-// @font-face {
-//   font-family: 'SF UI Display Bold';
-//   font-style: normal;
-//   font-weight: normal;
-//   src: local('SF UI Display Bold'),
-//     url('sf-ui-display-bold-58646a511e3d9.woff') format('woff');
-// }
+@font-face {
+  font-family: 'SF UI Display';
+  font-style: bold;
+  font-weight: bold;
+  src: url('../fonts/sf-ui-display-bold-58646a511e3d9.woff') format('woff');
+}
 
 // @font-face {
 //   font-family: 'SF UI Display Heavy';
@@ -62,23 +66,26 @@
 //     url('sf-ui-display-black-58646a6b80d5a.woff') format('woff');
 // }
 
-* {
+*:not(path) {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'SF UI Display Medium';
+  font-family: 'SF UI Display';
   color: $text-soft-grey;
   font-size: 17px;
 }
+
 html,
 body {
   min-height: 100vh;
   height: fit-content;
+  font-family: 'SF UI Display Medium';
+  color: $text-soft-grey;
+  font-size: 17px;
 }
 
 #app {
-  min-height: 100%;
-  height: fit-content;
+  min-height: 100vh;
 }
 .login-page {
   display: flex;
@@ -90,9 +97,9 @@ body {
   background-color: $primary;
 }
 
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 960px) {
   .login-page {
-    padding: 50px 0px;
+    padding: 50px 50px;
     height: fit-content;
   }
 }

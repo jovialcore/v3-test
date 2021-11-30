@@ -1,0 +1,18 @@
+{
+  "description": {
+    "main": "Welcome to Juridoc - Autopilot for your legal document",
+    "sub": "Use our digital platform to manage the entire lifecycle of your contracts in one flow."
+  },
+  "form": {
+    "prelude": "Start for free",
+    "title": "Sign up to Juridoc",
+    "subtitle": "Already a member? ",
+    "subtitleLink": "Log in",
+    "email": "E-mail",
+    "password": "Password",
+    "emailPlaceholder": "name{'@'}email.com",
+    "passwordPlaceholder": "6+ characters, 1 Capital letter",
+    "registerButton": "Create an account",
+    "registerWithGoogle": "Signup with Google"
+  }
+}

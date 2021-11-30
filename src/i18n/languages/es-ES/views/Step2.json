@@ -1,0 +1,50 @@
+{
+    "description": {
+        "main": "Comience por crear su perfil",
+        "sub": "Juridoc nos ayudó a ser más eficientes, nos dio una mejor visión de conjunto y nos permitió maximizar el valor de nuestro trabajo legal, para conseguir mejores contratos. No puedo recomendarlos lo suficiente.",
+        "lawyerSub": "Abogado"
+    },
+    "form": {
+        "prelude": "Paso 2 de 3",
+        "title": "Cree su perfil",
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "jobTitle": "Posición",
+        "whatBroughtToJuridoc": "¿Qué le llevó a Juridoc?",
+        "phone": "Teléfono",
+        "firstNamePlaceholder": "Bill",
+        "lastNamePlaceholder": "Gates",
+        "jobTitlePlaceholder": "CEO",
+        "whatBroughtToJuridocPlaceholder": "Seleccione",
+        "phonePlaceholder": "+55 11 98 198 7898",
+        "nextButton": "Siguiente",
+        "options": {
+            "whatBrought": [
+                "Propuesta",
+                "Contratos",
+                "Presupuestos",
+                "Colaboración en ventas y marketing",
+                "Consolidación de herramientas",
+                "Firmas electrónicas",
+                "API",
+                "Seguimiento/Análisis",
+                "Almacenamiento de documentos",
+                "Documentos de RRHH",
+                "Socios/revendedores",
+                "Otros"
+
+            ],
+            "eSignature": [
+                "Adobesign",
+                "Clicksign",
+                "D4sign",
+                "Docusign",
+                "Hellosign",
+                "Signaturely",
+                "SignEasy",
+                "SignNow",
+                "Signrequest"
+            ]
+        }
+    }
+}

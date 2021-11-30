@@ -3,26 +3,30 @@
     <h1>{{ t(`Login.description.main`) }}</h1>
     <p>{{ t(`Login.description.sub`) }}</p>
     <img
+      v-lazy="{ src: '/images/login/login.png' }"
       class="descriptive"
       alt="Four people celebrating"
-      v-lazy="{ src: '/images/login/login.png' }"
-    />
+    >
   </div>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent, ref,
-} from 'vue';
+import { defineComponent } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup() {
-    const langStorage = localStorage.getItem('lang');
-    const currentLang = ref(langStorage || 'br');
-    const i18n = useI18n();
+    const { t } = useI18n();
 
-    return { currentLang, t: i18n.t };
+    return { t };
   },
 });
 </script>
+
+<style lang="scss" scoped>
+div.description {
+  p {
+    flex-grow: 1;
+  }
+}
+</style>

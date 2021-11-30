@@ -1,13 +1,21 @@
 <template>
-  <div class="input-container" :class="classes">
+  <div
+    class="input-container"
+    :class="classes"
+  >
     <label v-if="label">{{ label }}</label>
     <input
       :class="classes"
       :type="type"
       :value="modelValue"
       :placeholder="placeholder"
+      :required="required"
       @input="updateValue"
-    />
+    >
+    <span
+      v-if="required"
+      class="required"
+    >*</span>
     <span>
       {{ error }}
     </span>
@@ -28,11 +36,14 @@ export default defineComponent({
     placeholder: { type: String, default: '' },
     error: { type: String, default: '' },
     block: { type: Boolean },
+    required: { type: Boolean },
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
     const classes = computed(() => ({
       block: props.block,
+      error: props.error,
+      hasData: props.modelValue,
     }));
 
     function updateValue(event: Event) {
@@ -51,14 +62,19 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .input-container {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   gap: 4px;
+
   &.block {
     width: 100%;
   }
 
   label {
+    color: $input-labels;
+    font-size: 14px;
     font-weight: 700;
     margin-bottom: 5px;
   }
@@ -67,10 +83,20 @@ export default defineComponent({
     border: 1px solid $border-neutral;
     padding: 1rem;
     height: 3rem;
+    color: $text-dark-grey-2;
     outline: none !important;
     border-radius: 5px;
-    &::placeholder {
-      /* Chrome, Firefox, Opera, Safari 10.1+ */
+    font-size: 14px;
+    &.error {
+      border-color: $error;
+    }
+
+    &:focus, &.hasData{ /* Microsoft Edge */
+      border-color: $primary-button;
+      background-color: $transparent-focus-bg-elements;
+    }
+
+    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
       color: $text-soft-grey;
       opacity: 1; /* Firefox */
     }
@@ -95,22 +121,21 @@ export default defineComponent({
 
     // border: 1px solid #cecece;
 
-    // &:focus{
-    //   outline: none;
-    // }
-
     // &.block {
     //   width: 100%;
     // }
 
-    // &.error {
-    //   border: 2px solid $error;
-    // }
   }
 
   span {
     color: $error;
     padding-left: 8px;
+    &.required {
+      position: absolute;
+      top: 32px;
+      right: 8px;
+    }
   }
+
 }
 </style>

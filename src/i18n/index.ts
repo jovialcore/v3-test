@@ -1,33 +1,33 @@
-const files: __WebpackModuleApi.RequireContext = require.context('./languages', true, /\.json$/);
+import { createI18n } from 'vue-i18n';
 
 type MessagesType = {
   [key: string]: MessagesType,
 }
 
 const messages: MessagesType = {
-  br: {},
-  es: {},
-  fr: {},
-  us: {},
+  'pt-BR': {},
+  'es-ES': {},
+  'fr-FR': {},
+  'en-US': {},
 };
 
-const languages = ['br', 'es', 'fr', 'us'];
+const languages = ['pt-BR', 'es-ES', 'fr-FR', 'en-US'];
 
-files.keys().forEach((filePath) => {
-  const filePathReplace = filePath.replace('./', '');
-  const nameFoldersAndFiles = filePathReplace.split('/');
-  const languageFolder = nameFoldersAndFiles[0];
+const files = import.meta.glob('./languages/**/*.json');
 
-  if (languages.includes(languageFolder)) {
-    const fileName = nameFoldersAndFiles[nameFoldersAndFiles.length - 1];
-    const fileNameWithoutExtension = fileName.replace('.json', '');
+Object.keys(files).forEach(async (file) => {
+  const structures = file.split('/');
 
-    messages[`${languageFolder}`][fileNameWithoutExtension] = files(filePath);
+  const language = structures[2];
+
+  if (languages.includes(language)) {
+    const fileName = structures[structures.length - 1].replace('.json', '');
+
+    messages[`${language}`][fileName] = await files[file]();
   }
 });
 
-export const Messages = messages;
-
-export default {
-  Messages: messages,
-};
+export const i18n = createI18n({
+  locale: window.localStorage.getItem('lang') || 'pt-BR',
+  messages,
+});

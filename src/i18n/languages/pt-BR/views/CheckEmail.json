@@ -1,0 +1,24 @@
+{
+    "description": {
+        "main": "Verifique seu email",
+        "sub": "Acabamos de lhe enviar um e-mail com um link para ativar sua conta em ",
+        "hasAccount": "Já tem uma conta?",
+        "hasAccountLink": "Entre agora"
+    },
+    "form": {
+        "email": "Email",
+        "emailPlaceholder": "name{'@'}email.com",
+        "sendMailButton": "Enviar"
+    },
+    "completed": {
+        "title": "Não recebeu o e-mail?",
+        "sub": "Se você não receber um e-mail nosso em poucos minutos, há verifique se:",
+        "items": {
+            "spamFolder": "O e-mail está em sua pasta de spam.",
+            "mistakeEmail": "O e-mail que você entrou contém um erro ou um erro de digitação.",
+            "anotherEmail": "Você nos deu acidentalmente outro e-mail.",
+            "cantDeliver": "Não podemos entregar o e-mail para este endereço."
+        },
+        "reenterEmail": "Digite seu endereço de e-mail novamente e tente novamente"
+    }
+}

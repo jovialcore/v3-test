@@ -1,0 +1,18 @@
+{
+  "errors": {
+    "required": "Este campo es obligatorio",
+    "email": "Email inválido",
+    "minLength": "Este campo necesita de más caracteres",
+    "maxLength": "Este campo necesita de menos caracteres",
+    "upperCase": "Este campo debe contener al menos una letra mayúscula.",
+    "sameAsPassword": "Las contraseñas no coinciden"
+  },
+  "options": {
+    "languages": [
+      { "value": "pt-BR", "text": "Portugués (Brasil)"},
+      { "value": "fr-FR", "text": "Francês"},
+      { "value": "en-US", "text": "Inglés (EE.UU.)"},
+      { "value": "es-ES", "text": "Español"}
+    ]
+  }
+}

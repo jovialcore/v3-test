@@ -12,26 +12,22 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "resolveJsonModule": true,
+    "isolatedModules": true,
+    "allowJs": true,
     "baseUrl": ".",
     "allowJs": true,
     "types": [
-      "webpack-env"
+      "vite/client",
+      "gapi",
+      "gapi.auth2"
     ],
     "typeRoots": [
-      "src/@types",
-      "./node_modules/@types"
+      "./src/types",
+      "./node_modules/@types",
     ],
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
   },
   "include": [
     "src/**/*.ts",
