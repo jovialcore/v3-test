@@ -12,6 +12,12 @@ export default class WorkspacesService extends BaseService {
     );
   }
 
+  static delete(id: string) {
+    return WorkspacesService.consume(
+      $api.delete(`${BASE_PATH}/${id}`),
+    );
+  }
+
   static get() {
     return WorkspacesService.consume(
       $api.get(`${BASE_PATH}`),

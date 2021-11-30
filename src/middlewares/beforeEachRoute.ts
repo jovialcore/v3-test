@@ -4,6 +4,13 @@ import { RouteLocationNormalized, NavigationGuardNext } from 'vue-router';
 import { setupStore } from '../store'
 import AuthService from '@/services/Auth';
 
+function getLang(backendLang: string) {
+  if(backendLang === 'br')
+    return 'pt-BR'
+
+  return 'en-US'
+}
+
 const AUTH_ROUTES_NAMES = [
   'ActivateRegistration',
   'CheckEmail',
@@ -23,7 +30,7 @@ async function isAuthenticated(): Promise<boolean | string> {  const store = awa
   const response = await AuthService.currentUser();
   if (!response.errors) {
     store.dispatch('auth/setCurrentUser', response.data)
-    window.localStorage.setItem('lang', response.data.language)
+    window.localStorage.setItem('lang', getLang(response.data.language))
     return !!response.data;
   }
 

@@ -7,6 +7,8 @@
       <h3>{{ t(`AddWorkspaceModal.title`) }}</h3>
     </template>
     <template v-slot:body>
+
+      {{workspace}}
       <div class="base-info">
         <base-input
           v-model="v$.workspaceName.$model"
@@ -22,13 +24,15 @@
           text="companyName"
           @changed="(val:string ) => changeTeam(val)"
         />
+        <!-- {{workspace.team}} -->
+        {{team}}
         <base-multiple-select
-          :options="testing"
-          :model-value="v$.team"
+          :options="team.options"
+          :model-value="team.selected"
           key-name="_id"
           value-name="firstName"
-          @change:model-value="selected = $event"
-        >
+          @change:model-value="(val:string[] ) => addPeople(val)"
+        > 
         <template v-slot:option="row">
           {{ row.item.firstName + ' ' + row.item.lastName }}
         </template>
@@ -83,24 +87,25 @@ export default defineComponent({
     const toast = useToast();
     const modal = useModal();
 
-    const options: OptionsType = reactive({
-      teamRoles: [],
-      languages: [],
-    });
-
     const workspace = computed<any>(() => store.getters['workspaces/getWorkspace']);
-    // const team = computed<any>(() => store.getters['team/getTeam']);
-
+    
     store.dispatch('companies/getCompanies');
     const companies = computed<any>(() => store.getters['companies/get']);
-
+    const team = ref({
+      options: [],
+      selected: []
+    });
+    changeTeam(workspace.value.company)
+    // team.value.selected = workspace.value.team.map((member: any) => member._id);
+    
     const rules = computed(() => ({
       company: { required },
       workspaceName: { required },
       team: {}
     } as RulesType));
-    const testing = ref([ { "_id": "61898a26a1266a0edf04f18a", "firstName": "Gilson", "lastName": "Doi", "email": "gilson@tilit.com.br", "company": "6188743c6d11156dd7193b86", "role": "collaborator", "owner": "617942fcf230ed8890e49a95", "status": "pending", "__v": 0 }, { "_id": "618990faa1266a0edf04f1a0", "firstName": "Gilson 2", "lastName": "Testing", "email": "doijunior+12@gmail.com", "company": "6188743c6d11156dd7193b86", "role": "collaborator", "owner": "617942fcf230ed8890e49a95", "status": "pending", "__v": 0 } ])
+
     const v$ = useVuelidate(rules, workspace.value);
+
     async function handleSubmit() {
       const isValidate = await v$.value.$validate();
 
@@ -120,21 +125,19 @@ export default defineComponent({
       }
     }
 
+    function addPeople(peopleId: string[]) {
+      store.dispatch('workspaces/setTeam', peopleId)
+      console.log(workspace.value)
+    }
     function changeTeam(companyId: string) {
-      store.dispatch('team/fetchTeam', companyId);
+      store.dispatch('team/filterTeam', companyId);
+      const test = Object.assign(store.getters['team/getTeam'])
+
+      team.value.options = test
     }
-
-    function getOptions() {
-      options.teamRoles = TeamRolesOptions();
-      options.languages = LanguagesOptions();
-    }
-
-    watch(locale, getOptions);
-
-    onBeforeMount(getOptions);
 
     return {
-      testing, options, changeTeam, v$, handleSubmit, t, workspace, companies
+      team, addPeople, changeTeam, v$, handleSubmit, t, companies, workspace
     };
   },
 });

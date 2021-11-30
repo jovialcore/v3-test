@@ -250,10 +250,11 @@ export default defineComponent({
 
   .options{
     position: absolute;
-    top: 64px;
+    background-color: $white-bg-elements;
+    top: 52px;
     width: 100%;
     list-style: none;
-    z-index: 10;
+    z-index: $second-layer;
 
     -webkit-box-shadow: 0px 8px 16px 0px #00000034;
     box-shadow: 0px 8px 16px 0px #00000034;

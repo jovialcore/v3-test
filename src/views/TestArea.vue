@@ -18,6 +18,7 @@
       off-text="Pas"
       ball-color="primary"
     />
+    {{selected}}
     <base-multiple-select
       label="Testando"
       :options="options"

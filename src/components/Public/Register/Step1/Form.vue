@@ -87,7 +87,7 @@ export default defineComponent({
     const form = computed<RegisterAccessDataType>(() => store.getters['auth/getRegisterAccessData']);
     
     form.value.email = query.email? String(query.email) : '';
-    form.value.inviteToken = String(query.inviteToken);
+    form.value.inviteToken = query.inviteToken ? String(query.inviteToken) : '';
 
     
     const register = computed<RegisterType>(() => store.getters['auth/getRegisterData']);
@@ -105,10 +105,8 @@ export default defineComponent({
 
       if (isValidate) {
         form.value.language = window.localStorage.getItem('lang') || 'en-US';
-        
-        const endpoint = form.value.inviteToken !== '' ? 'auth/submitInviteRegister' : 'auth/submitRegister'
-        const next = form.value.inviteToken ? 'Login' : 'CheckEmail'
-        console.log('endpoint', endpoint)
+        const endpoint = !!form.value.inviteToken ? 'auth/submitInviteRegister' : 'auth/submitRegister'
+        const next = !!form.value.inviteToken ? 'Login' : 'CheckEmail'
         const { data, error } = await store.dispatch(endpoint);
 
 

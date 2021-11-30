@@ -6,7 +6,7 @@ export const state: any = {
   company: {
     companyName: '',
     description: '',
-    subsidiary: '',
+    subsidiary: undefined,
   },
 };
 
@@ -24,7 +24,7 @@ export const actions: ActionTree<any, void> = {
     commit('SET_COMPANY', {
       companyName: '',
       description: '',
-      subsidiary: '',
+      subsidiary: undefined,
     });
   },
 
@@ -44,14 +44,10 @@ export const actions: ActionTree<any, void> = {
   },
 
   async select({ commit, state }, index) {
-    const selected = state.companies[index];
-
-    console.log(state.companies);
+    //needed to clone the object to avoid changing the array object while editing
+    const selected = Object.assign({}, state.companies[index]);
 
     selected.subsidiary = selected.subsidiary?._id;
-
-    console.log(selected.subsidiary);
-
     commit('SET_COMPANY', selected);
   },
   

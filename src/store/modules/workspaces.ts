@@ -38,10 +38,21 @@ export const actions: ActionTree<any, void> = {
     commit('SET_WORKSPACES', data);
   },
 
+
+  async remove(_, _id) {
+    const response = await WorkspacesService.delete(_id);
+    return response;
+  },
+
   select({ commit, state }, index) {
-    commit('SET_WORKSPACE', state.workspaces[index]);
+    const workspace = Object.assign({}, state.workspaces[index]);
+    workspace.company = workspace.company._id;
+    commit('SET_WORKSPACE', workspace);
   },  
 
+  setTeam({ commit, state }, team) {
+    commit('SET_WORKSPACE', Object.assign(state.workspace, {team}));
+  },
 };
 
 export const getters: GetterTree<any, void> = {

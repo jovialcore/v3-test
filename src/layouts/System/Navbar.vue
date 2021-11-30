@@ -20,7 +20,10 @@
       <p>Current plan: Professional</p>
     </div>
     <div class="nav-group">
-      <base-button
+      <div id="navbar-button">
+
+      </div>
+      <!-- <base-button
         v-if="routeName === 'Documents'"
         dashboard
         neutral
@@ -34,7 +37,7 @@
         @click="openInviteModal"
       >
         <font-awesome-icon icon="user-plus" />Novo convite
-      </base-button>
+      </base-button> -->
       <font-awesome-icon icon="bell" />
       <font-awesome-icon icon="graduation-cap" />
       <navbar-profile />

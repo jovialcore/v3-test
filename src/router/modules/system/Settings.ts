@@ -16,6 +16,18 @@ export default {
       },
     },
     {
+      path: '',
+      name: 'Preferences',
+      components: {
+        default: () => import('@/views/System/Settings/Preferences.vue'),
+      },
+      meta: {
+        icon: 'cog',
+        fontAwesome: true,
+        group: 'general',
+      },
+    },
+    {
       path: 'companies',
       name: 'Companies',
       components: {

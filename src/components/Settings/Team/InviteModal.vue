@@ -68,7 +68,6 @@ import {
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import useVuelidate from '@vuelidate/core';
-import { InviteType } from '@/store/modules/team';
 import { RulesType } from '@/types/Vuelidate';
 import { required, email } from '@/utils/I18nValidators';
 import useToast from '@/hooks/useToast';
@@ -100,7 +99,7 @@ export default defineComponent({
       languages: [],
     });
 
-    const invite = computed<InviteType>(() => store.getters['team/getInvite']);
+    const invite = computed<any>(() => store.getters['team/getInvite']);
     store.dispatch('companies/getCompanies');
     const companies = computed<any>(() => store.getters['companies/get']);
 

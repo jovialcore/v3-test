@@ -1,21 +1,20 @@
 <template>
-  <div class="content-header">
+  <teleport to="#navbar-button">
     <base-button
       dashboard
       neutral
-      @click="openWorkspaceModal"
+      @click="newWorkspace"
     >
       Novo Workspace
     </base-button>
+  </teleport>
+  <div class="content-header">
   </div>
   <base-table
     :columns="columns"
     :data="workspaces"
     :total-items="16"
     :start-items="1"
-    @next-page="nextPage"
-    @back-page="backPage"
-    @set-page="setPage"
   >
     <template v-slot:header-select="row">
       <base-checkbox :id="`checkbox-${row.item.id}`" />
@@ -87,13 +86,12 @@ export default defineComponent({
       },
     ]);
 
-    const data = reactive([
-    ]);
     const optionSelected = ref('');
     const dropdownOptions = reactive([
       { key: 'edit', value: 'Editar', icon: 'pen' },
       { key: 'remove', value: 'Remover', icon: 'trash-alt' },
     ]);
+
     store.dispatch('workspaces/getWorkspaces');
     const workspaces = computed<any>(() => store.getters['workspaces/get']);
 
@@ -105,37 +103,26 @@ export default defineComponent({
         remove(_id)
       }
     }
+
     async function remove(_id: string) {
         await store.dispatch('workspaces/remove', _id);
         await store.dispatch('workspaces/getWorkspaces');
-    }
-
-    function setPage(page: number) {
-      console.log('set-page: ', page);
-    }
-
-    function nextPage() {
-      console.log('next-page');
-    }
-
-    function backPage() {
-      console.log('back-page');
     }
 
     function openWorkspaceModal() {
       const modal = useModal();
       modal.open({ component: 'AddWorkspaceModal' });
     }
+    function newWorkspace() {
+      store.dispatch('workspaces/clear');
+      openWorkspaceModal()
+    }
 
     return {
       workspaces,
-      openWorkspaceModal,
+      newWorkspace,
       columns,
-      data,
       action,
-      nextPage,
-      setPage,
-      backPage,
       optionSelected,
       dropdownOptions,
       t,

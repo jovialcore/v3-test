@@ -11,7 +11,7 @@
     "languages": [
       { "value": "pt-BR", "text": "Portuguese (Brazil)"},
       { "value": "fr-FR", "text": "French"},
-      { "value": "en-US", "text": "French (USA)"},
+      { "value": "en-US", "text": "English (USA)"},
       { "value": "es-ES", "text": "Spanish"}
     ]
   }

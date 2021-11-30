@@ -31,9 +31,9 @@ export default class CompaniesService extends BaseService {
   }
 
   static patch(_id: string, { companyName, description, subsidiary }:
-    {companyName: string, description: string, subsidiary: string}) {
+    {companyName: string, description: string, subsidiary?: string}) {
     return CompaniesService.consume(
-      $api.patch(`${BASE_PATH}/${_id}`, { companyName, description, subsidiary } ),
+      $api.patch(`${BASE_PATH}/${_id}`, { companyName, description, subsidiary  } ),
     );
   }
 

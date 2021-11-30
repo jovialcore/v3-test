@@ -1,5 +1,5 @@
 <template>
-  <div class="content-header">
+  <teleport to="#navbar-button">
     <base-button
       dashboard
       neutral
@@ -7,15 +7,16 @@
     >
       Nova empresa
     </base-button>
+  </teleport>
+
+  <div class="content-header">
   </div>
+
   <base-table
     :columns="columns"
     :data="companies"
     :total-items="16"
     :start-items="1"
-    @next-page="nextPage"
-    @back-page="backPage"
-    @set-page="setPage"
   >
     <template v-slot:header-select="row">
       <base-checkbox :id="`checkbox-${row.item.id}`" />
@@ -24,7 +25,7 @@
       <base-checkbox :id="`checkbox-${row.item.name}`" />
     </template>
     <template v-slot:body-subsidiary="row">
-      {{ row.item.companyName }}
+      {{ row.item.subsidiary?.companyName }}
     </template>
     <template v-slot:body-actions="row">
       <span class="centered">

@@ -6,7 +6,7 @@ type OptionType = {
   [key: string]: string | number;
 }
 
-const QUANTITY_LANGUAGES = 3;
+const QUANTITY_LANGUAGES = 4;
 
 export const LanguagesOptions = ():OptionType[] => {
   const options = [];
