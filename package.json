@@ -7,7 +7,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "s3sync": "aws s3 sync ./dist s3://juridoc --profile tilit-stag",
-    "deploy": "npm run build && npm run s3sync",
+    "deploy": "yarn build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
