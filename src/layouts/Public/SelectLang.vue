@@ -80,5 +80,9 @@ select {
   &::-ms-expand {
     display: none;
   }
+
+  @media (orientation: portrait) {
+    font-size: 13px;
+   }
 }
 </style>
